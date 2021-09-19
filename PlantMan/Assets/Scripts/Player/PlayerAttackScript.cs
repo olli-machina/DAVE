@@ -125,6 +125,7 @@ public class PlayerAttackScript : MonoBehaviour
         {
             mainCam.SetActive(false);
             aimCam.SetActive(true);
+            //UpdateTrajectory();
         }
 
         if(context.canceled)
@@ -134,6 +135,9 @@ public class PlayerAttackScript : MonoBehaviour
         }
 
     }
+
+
+
 
     public void AddEnemyToTridentStab(GameObject obj)
     {
