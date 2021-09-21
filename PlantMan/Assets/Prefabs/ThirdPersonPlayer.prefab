@@ -831,6 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 250
+  maxVelocityChange: 10
 --- !u!136 &921413700
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -882,6 +883,11 @@ MonoBehaviour:
   throwableTrident: {fileID: 736393993251032194, guid: 7824cf1fb9d48934ab085133fa596b92, type: 3}
   tridentThrowForce: 2000
   tridentThrowDamage: 20
+  mainCam: {fileID: 0}
+  aimCam: {fileID: 0}
+  forceMultiplier: 2
+  aimMarker: {fileID: 0}
+  aimControls: {fileID: 0}
 --- !u!54 &7755306231224208538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -937,7 +943,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3382057841692706624}
-  m_LocalRotation: {x: 0.28366154, y: 0.38060042, z: -0.12389523, w: 0.8713951}
+  m_LocalRotation: {x: 0.28366154, y: 0.38060042, z: -0.123895235, w: 0.8713951}
   m_LocalPosition: {x: 3.6513584, y: 0.24879551, z: 0.11493063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1391,7 +1397,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7994842478474639078}
-  m_LocalRotation: {x: 0.296343, y: 0.37875256, z: -0.12943414, w: 0.86716443}
+  m_LocalRotation: {x: 0.296343, y: 0.3787526, z: -0.12943415, w: 0.86716443}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

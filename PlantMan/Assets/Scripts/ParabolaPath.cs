@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 //https://www.youtube.com/watch?v=13KrnisMf14
 
 public class ParabolaPath : MonoBehaviour
 {
-    private LineRenderer linerender;
+    public LineRenderer linerender;
 
     [SerializeField]
     [Range(5, 50)]
     private int lineSegmentCount = 20;
+    [SerializeField]
+    private CinemachineVirtualCamera aimCam;
 
     private List<Vector3> linePointList = new List<Vector3>();
 
@@ -38,17 +41,27 @@ public class ParabolaPath : MonoBehaviour
             float stepTimePassed = stepTime * i;
 
             Vector3 movementVector = new Vector3(velocity.x * stepTimePassed,
-                                                velocity.y * stepTimePassed - .5f * Physics.gravity.y * stepTimePassed * stepTimePassed,
+                                                velocity.y * stepTimePassed - 1.2f * Physics.gravity.y * stepTimePassed * stepTimePassed,
                                                 velocity.z * stepTimePassed);
-            RaycastHit hit;
-            if(Physics.Raycast(startingPoint, -movementVector, out hit, movementVector.magnitude))
-            {
-                break;
-            }
+
+            Vector3 cameraForward = Vector3.ProjectOnPlane(aimCam.transform.forward, Vector3.up);
+            Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
+
+            Vector3 rotateMovement = new Vector3(movementVector.x, 0.0f, movementVector.y); //seems wrong in this context, but changing to movementVector.z breaks it
+            rotateMovement = rotationToCamera * rotateMovement;
+
+            movementVector = new Vector3(rotateMovement.x, movementVector.y, -movementVector.z);
+
+
             linePointList.Add(-movementVector + startingPoint);
 
             linerender.positionCount = linePointList.Count;
             linerender.SetPositions(linePointList.ToArray());
         }
+    }
+
+    public void HideLine()
+    {
+        lineSegmentCount = 0;
     }
 }
