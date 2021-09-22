@@ -9,6 +9,8 @@ public class LightDetection : MonoBehaviour
 
     public bool isInLight = false;
 
+    public bool shouldUseSun;
+
     public float timeToGrow = 3.0f;
     public float timeToShrink = 2.0f;
     public float timeToPlatform = 2.0f;
@@ -30,6 +32,8 @@ public class LightDetection : MonoBehaviour
     private Vector3 growScale;
 
     private Vector3 platScale;
+
+    private int lightValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +41,8 @@ public class LightDetection : MonoBehaviour
         growingTimer = 0.0f;
         platformTimer = 0.0f;
         sun = GameObject.Find("Sun");
+
+        lightValue = 0;
 
         seedScale = stalk.transform.localScale;
 
@@ -69,12 +75,20 @@ public class LightDetection : MonoBehaviour
 
     void CheckIfInSun()
     {
-        int layerMask = 1 << 9;
+        if(shouldUseSun)
+        {
+            int layerMask = 1 << 9;
 
-        layerMask = ~layerMask;
+            layerMask = ~layerMask;
 
-        Vector3 directionTowardsSun = -sun.transform.forward;
-        isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
+            Vector3 directionTowardsSun = -sun.transform.forward;
+            isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
+        }
+        else
+        {
+            isInLight = lightValue > 0;
+        }
+        
     }
 
     void Grow()
@@ -140,5 +154,24 @@ public class LightDetection : MonoBehaviour
         platform.transform.localPosition = platPosition;
 
         growingTimer -= Time.deltaTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Light")
+        {
+            lightValue++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Light")
+        {
+            lightValue--;
+
+            if (lightValue < 0)
+                lightValue = 0;
+        }
     }
 }
