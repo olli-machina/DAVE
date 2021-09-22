@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\MeleeEnemyColliderScript.cs" />
+    <Compile Include="Assets\WallStick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
