@@ -28,7 +28,7 @@ public class ParabolaPath : MonoBehaviour
 
     #endregion
 
-    public void UpdateTrajectory(Vector3 force, Rigidbody rb, Vector3 startingPoint)
+    public void UpdateTrajectory(Vector3 force, Rigidbody rb, Vector3 startingPoint) //all below code is for the aim box ONLY- DOES NOT AFFECT PLAYER
     {
         Vector3 velocity = (force / rb.mass) * Time.fixedDeltaTime;
         float flightTime = (2 * velocity.y) / Physics.gravity.y;
@@ -51,7 +51,6 @@ public class ParabolaPath : MonoBehaviour
             rotateMovement = rotationToCamera * rotateMovement;
 
             movementVector = new Vector3(rotateMovement.x, movementVector.y, -movementVector.z);
-
 
             linePointList.Add(-movementVector + startingPoint);
 

@@ -41,7 +41,7 @@ public class NewInputLook : MonoBehaviour
         else
         {
             Vector2 aimMovement = context.ReadValue<Vector2>();//.normalized;
-            Vector3 cameraForward = Vector3.ProjectOnPlane(aimCam.transform.forward, Vector3.up);
+            Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
             Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
 
             Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.y);
@@ -49,7 +49,7 @@ public class NewInputLook : MonoBehaviour
 
             aimMovement = new Vector2(rotateMovement.x, rotateMovement.z);
 
-            aimTarget.transform.localPosition += (new Vector3(-aimMovement.x, 0, -aimMovement.y).normalized) * .25f;
+            aimTarget.transform.localPosition += (new Vector3(aimMovement.x, 0, aimMovement.y).normalized) * .25f;
         }
     }
 
