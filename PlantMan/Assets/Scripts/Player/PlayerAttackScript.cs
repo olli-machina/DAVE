@@ -31,6 +31,12 @@ public class PlayerAttackScript : MonoBehaviour
     private float animationTimer;
 
     public GameObject mainCam, aimCam;
+    public float forceMultiplier = 2;
+    private bool isShoot = false;
+    public GameObject aimMarker;
+    private Vector3 forceV;
+    [SerializeField]
+    private NewInputLook aimControls;
 
     // Start is called before the first frame update
     void Start()
@@ -51,22 +57,13 @@ public class PlayerAttackScript : MonoBehaviour
         if (animationTimer > 0)
             animationTimer -= Time.deltaTime;
 
-        //    else if(Input.GetMouseButtonDown(1) && tridentFree)
-        //    {
-        //        tridentFree = false;
-        //        tridentSwipe = true;
 
-        //        foreach (GameObject e in stabEnemiesInRange)
-        //        {
-        //            e.GetComponent<EnemyScript>().Damage(tridentSwipeDamage);
-        //        }
-
-        //        tridentSwipeModel.SetActive(true);
-
-        //        animationTimer = tridentSwipeAnimationTime;
-
-        //        timer = 0.0f;
-        //    }
+        if (!isShoot && aimCam.activeInHierarchy)
+        {
+            Vector3 forceInit = (aimMarker.transform.position - gameObject.transform.position) * 50f;
+            forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.z)) * forceMultiplier;
+            ParabolaPath.Instance.UpdateTrajectory(forceV, gameObject.GetComponent<Rigidbody>(), transform.position);
+        }
 
         if (tridentStab && timer > tridentStabCooldown ||
             tridentSwipe && timer > tridentSwipeCooldown)
@@ -108,6 +105,7 @@ public class PlayerAttackScript : MonoBehaviour
         if (tridentFree)
         {
             tridentFree = false;
+            //isShoot = true;
 
             GameObject trident = Instantiate(throwableTrident);
             trident.transform.position = transform.position + (2 * transform.forward);
@@ -117,6 +115,7 @@ public class PlayerAttackScript : MonoBehaviour
 
             trident.GetComponent<TridentPickupScript>().damageAmount = tridentThrowDamage;
         }
+       // isShoot = false;
     }
 
     public void OnAim(InputAction.CallbackContext context)
@@ -125,15 +124,23 @@ public class PlayerAttackScript : MonoBehaviour
         {
             mainCam.SetActive(false);
             aimCam.SetActive(true);
+            aimControls.aiming = true;
+
+            //UpdateTrajectory();
         }
 
         if(context.canceled)
         {
             mainCam.SetActive(true);
             aimCam.SetActive(false);
+            aimControls.aiming = false;
+            ParabolaPath.Instance.HideLine();
         }
 
     }
+
+
+
 
     public void AddEnemyToTridentStab(GameObject obj)
     {
