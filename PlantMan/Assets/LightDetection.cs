@@ -14,6 +14,7 @@ public class LightDetection : MonoBehaviour
     public float timeToGrow = 3.0f;
     public float timeToShrink = 2.0f;
     public float timeToPlatform = 2.0f;
+    public float timeToDeath = 5.0f;
 
     public float growHeight = 10.0f;
 
@@ -25,6 +26,7 @@ public class LightDetection : MonoBehaviour
     private float timer;
     private float growingTimer;
     private float platformTimer;
+    private float deathTimer;
 
     private GameObject sun;
 
@@ -103,6 +105,7 @@ public class LightDetection : MonoBehaviour
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
             platform.transform.localScale = pScale;
+            platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
             
         }
         else
@@ -135,10 +138,21 @@ public class LightDetection : MonoBehaviour
             platformTimer -= Time.deltaTime;
             return;
         }
-        
+
 
         if (growingTimer < 0.0f)
+        {
+
+            deathTimer += Time.deltaTime;
+
+            if (deathTimer > timeToDeath)
+                Destroy(gameObject);
+
             return;
+        }
+        else
+            deathTimer = 0.0f;
+            
         
         Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
         Vector3 position = stalk.transform.localPosition;
