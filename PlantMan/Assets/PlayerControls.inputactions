@@ -189,22 +189,22 @@
                 },
                 {
                     "name": "",
-                    "id": "4c86e278-dec4-4c92-9653-01f2fcea3494",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "ac345081-4878-4eb7-a8c2-ed306d9055af",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller",
+                    "groups": "Keyboard",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "ac345081-4878-4eb7-a8c2-ed306d9055af",
-                    "path": "<Mouse>/leftButton",
+                    "id": "af334d8e-6226-4379-a6a5-4045b0586c9d",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Controller",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false

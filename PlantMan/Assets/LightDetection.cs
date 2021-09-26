@@ -104,6 +104,7 @@ public class LightDetection : MonoBehaviour
 
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
+            platform.layer = 0;
             platform.transform.localScale = pScale;
             platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
             

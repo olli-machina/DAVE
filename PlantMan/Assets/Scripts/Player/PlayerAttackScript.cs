@@ -38,6 +38,8 @@ public class PlayerAttackScript : MonoBehaviour
     [SerializeField]
     private NewInputLook aimControls;
 
+    public GameObject seedToShoot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -102,6 +104,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+        /*
         if (tridentFree)
         {
             tridentFree = false;
@@ -114,8 +117,18 @@ public class PlayerAttackScript : MonoBehaviour
             trident.GetComponent<Rigidbody>().AddForce(tridentThrowForce * gameObject.transform.forward);
 
             trident.GetComponent<TridentPickupScript>().damageAmount = tridentThrowDamage;
+        }*/
+        // isShoot = false;
+
+        if(context.started)
+        {
+            GameObject seed = Instantiate(seedToShoot);
+            SeedParabola pathScript = seed.GetComponent<SeedParabola>();
+
+            seed.transform.position = gameObject.transform.position;
+            pathScript.end = GameObject.Find("Aimer").transform.position;
         }
-       // isShoot = false;
+        
     }
 
     public void OnAim(InputAction.CallbackContext context)

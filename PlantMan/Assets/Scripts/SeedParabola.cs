@@ -16,17 +16,26 @@ public class SeedParabola : MonoBehaviour
     void Start()
     {
         start = transform.position;
+        //end = new Vector3(9999, 9999, 9999);
+        animTime = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         animTime += Time.deltaTime;
+        if (animTime > 5.0f)
+        {
+            Destroy(this);
+            return;
+        }
+            
         animTime = animTime % 5f;
 
         Vector3 pos = Vector3.Lerp(start, end, animTime);
         pos.y += animCurve.Evaluate(animTime);
         transform.position = pos;
+        
     }
 
     public void UpdateTrajectory()
