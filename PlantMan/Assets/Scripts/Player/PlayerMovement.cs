@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Rigidbody rb;
-    public float speed = 10, maxVelocityChange = 10.0f;
+    public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f;
     private Vector3 direction;
+    private bool isGrounded;
     //GameObject gameManager;
 
     private void Start()
@@ -29,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
         direction = new Vector3(inputVec.x, 0f, inputVec.y);
     }
 
+    public void Jump(InputAction.CallbackContext context)
+    {
+        if(isGrounded)
+            rb.AddForce(new Vector3(0, jumpForce, 0));
+    }
+
     public void OnMove()
     {
        
@@ -43,6 +50,22 @@ public class PlayerMovement : MonoBehaviour
         velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
         velocityChange.y = 0;
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+        }
     }
 
 }

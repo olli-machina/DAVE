@@ -147,6 +147,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a0997fac-69e9-410e-91a8-bfcde2c94802"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fc738d8d-e1a1-46ff-bf85-b630b20c9e4e"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
