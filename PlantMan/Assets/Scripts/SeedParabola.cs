@@ -23,19 +23,22 @@ public class SeedParabola : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animTime += Time.deltaTime;
-        if (animTime > 5.0f)
+        animTime += Time.deltaTime / .5f;
+        if (animTime > 1.0f)
         {
+            // transform.position = end;
+            Vector3 onePointBeforeFinal = Vector3.Lerp(start, end, 1.0f - Time.deltaTime / .5f);
+            onePointBeforeFinal.y += animCurve.Evaluate(1.0f - Time.deltaTime / .5f);
+            Vector3 finalVel = (end - onePointBeforeFinal) * 20f;
+            GetComponent<Rigidbody>().AddForce(finalVel);
             Destroy(this);
             return;
         }
-            
-        animTime = animTime % 5f;
 
         Vector3 pos = Vector3.Lerp(start, end, animTime);
         pos.y += animCurve.Evaluate(animTime);
         transform.position = pos;
-        
+        Debug.Log("New position set to: " + pos);
     }
 
     public void UpdateTrajectory()

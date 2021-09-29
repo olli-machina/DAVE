@@ -99,8 +99,10 @@ public class LightDetection : MonoBehaviour
 
         if(growingTimer > 1.0f)
         {
-            if(platformTimer < 1.0f)
+            if (platformTimer < 1.0f)
                 platformTimer += Time.deltaTime / timeToPlatform;
+            else
+                return;
 
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 

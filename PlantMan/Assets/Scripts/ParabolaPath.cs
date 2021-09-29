@@ -15,6 +15,10 @@ public class ParabolaPath : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera aimCam;
 
+    Vector3 rotateMovement;
+
+    public GameObject aimCube;
+
     private List<Vector3> linePointList = new List<Vector3>();
 
     #region Singleton
@@ -28,6 +32,7 @@ public class ParabolaPath : MonoBehaviour
 
     #endregion
 
+    //Something in here is absolute garbage........ It make me really angy. I wanna hunt it down and kill it. -Brandon
     public void UpdateTrajectory(Vector3 force, Rigidbody rb, Vector3 startingPoint) //all below code is for the aim box ONLY- DOES NOT AFFECT PLAYER
     {
         Vector3 velocity = (force / rb.mass) * Time.fixedDeltaTime;
@@ -47,10 +52,20 @@ public class ParabolaPath : MonoBehaviour
             Vector3 cameraForward = Vector3.ProjectOnPlane(aimCam.transform.forward, Vector3.up);
             Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
 
-            Vector3 rotateMovement = new Vector3(movementVector.x, 0.0f, movementVector.y); //seems wrong in this context, but changing to movementVector.z breaks it
-            rotateMovement = rotationToCamera * rotateMovement;
+            if (aimCube.GetComponent<AimBoxScript>().onWall)
+            {
+                //rotateMovement = new Vector3(movementVector.x, 0f, 0f); //seems wrong in this context, but changing to movementVector.z breaks it
+                //rotateMovement = rotationToCamera * rotateMovement;
+                //rotateMovement.y = movementVector.y;
+                //movementVector = new Vector3(rotateMovement.x, movementVector.y, -movementVector.z);
+            }
+            else
+            {
+                rotateMovement = new Vector3(movementVector.x, 0.0f, movementVector.y); //seems wrong in this context, but changing to movementVector.z breaks it
+                rotateMovement = rotationToCamera * rotateMovement;
+                movementVector = new Vector3(rotateMovement.x, movementVector.y, -movementVector.z);
+            }
 
-            movementVector = new Vector3(rotateMovement.x, movementVector.y, -movementVector.z);
 
             linePointList.Add(-movementVector + startingPoint);
 

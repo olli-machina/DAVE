@@ -2,25 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
 
     Rigidbody rb;
     public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f;
-    private Vector3 direction;
+    private Vector3 direction, aimMovement;
+    [SerializeField]
     private bool isGrounded;
+    public GameObject aimTarget;
+    bool changedInput;
+
+    bool isOnWall;
+
+    Vector2 rawInput;
     //GameObject gameManager;
 
     private void Start()
     {
         //gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
+        isOnWall = false;
     }
 
     void FixedUpdate()
     {
         OnMove();
+        MoveTarget();
+    }
+
+    public void SetAimDirection(Vector2 input)
+    {
+        changedInput = true;
+
+        rawInput = input;
+
+        if (aimTarget.GetComponent<AimBoxScript>().onWall)
+        {
+            aimMovement = new Vector3(rawInput.x, rawInput.y, 0);
+            isOnWall = true;
+        }
+        else
+        {
+            aimMovement = new Vector3(rawInput.x, 0, rawInput.y);
+            isOnWall = false;
+        }
+    }
+
+    public void OnQuit(InputAction.CallbackContext context)
+    {
+        Application.Quit();
+    }
+
+    public void OnRestart(InputAction.CallbackContext context)
+    {
+        SceneManager.LoadScene("MergeTesting");
     }
 
     public void Direction(InputAction.CallbackContext context)
@@ -68,4 +106,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    public void MoveTarget()
+    {
+
+        if(aimTarget.GetComponent<AimBoxScript>().onWall ^ isOnWall)
+        {
+            return;
+        }
+
+        Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
+        Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
+
+        Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
+        if (changedInput)
+        {
+            rotateMovement = rotationToCamera * rotateMovement;
+            changedInput = false;
+        }
+        aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
+        aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
+    }
+
+        //aimTarget.transform.localPosition += (new Vector3(aimMovement.x, 0, aimMovement.y).normalized) * 25f * Time.deltaTime;
 }

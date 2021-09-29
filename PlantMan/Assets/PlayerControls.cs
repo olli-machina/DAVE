@@ -65,6 +65,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""120c8774-4078-43bc-9938-a7ac0ae9d03b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f2e219c-9599-40a2-bc16-43b8f2db3e2a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -243,6 +259,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5e92bd7-3a6a-49f0-ae38-596db4907d60"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Controller"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee273b0b-584d-4a60-94c3-a3ab5abee8ef"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""341d0c7d-82df-4efe-827e-ac91836a3776"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Controller"",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b65d3a1b-a5ec-4043-9bfb-8a63e3693dbe"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -285,6 +345,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerControlScheme_Melee = m_PlayerControlScheme.FindAction("Melee", throwIfNotFound: true);
         m_PlayerControlScheme_Shoot = m_PlayerControlScheme.FindAction("Shoot", throwIfNotFound: true);
         m_PlayerControlScheme_Aim = m_PlayerControlScheme.FindAction("Aim", throwIfNotFound: true);
+        m_PlayerControlScheme_Quit = m_PlayerControlScheme.FindAction("Quit", throwIfNotFound: true);
+        m_PlayerControlScheme_Restart = m_PlayerControlScheme.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -340,6 +402,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControlScheme_Melee;
     private readonly InputAction m_PlayerControlScheme_Shoot;
     private readonly InputAction m_PlayerControlScheme_Aim;
+    private readonly InputAction m_PlayerControlScheme_Quit;
+    private readonly InputAction m_PlayerControlScheme_Restart;
     public struct PlayerControlSchemeActions
     {
         private @PlayerControls m_Wrapper;
@@ -350,6 +414,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Melee => m_Wrapper.m_PlayerControlScheme_Melee;
         public InputAction @Shoot => m_Wrapper.m_PlayerControlScheme_Shoot;
         public InputAction @Aim => m_Wrapper.m_PlayerControlScheme_Aim;
+        public InputAction @Quit => m_Wrapper.m_PlayerControlScheme_Quit;
+        public InputAction @Restart => m_Wrapper.m_PlayerControlScheme_Restart;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlScheme; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -377,6 +443,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnAim;
+                @Quit.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnQuit;
+                @Restart.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface = instance;
             if (instance != null)
@@ -399,6 +471,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -429,5 +507,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMelee(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

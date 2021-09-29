@@ -329,7 +329,7 @@ MonoBehaviour:
   timeToShrink: 1.5
   timeToPlatform: 2
   timeToDeath: 5
-  growHeight: 3
+  growHeight: 2
   platformDimentions: {x: 2, y: 2}
   stalk: {fileID: 7812825638619357302}
   platform: {fileID: 7812825638214993053}

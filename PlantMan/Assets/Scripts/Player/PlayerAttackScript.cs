@@ -38,7 +38,7 @@ public class PlayerAttackScript : MonoBehaviour
     [SerializeField]
     private NewInputLook aimControls;
 
-    public GameObject seedToShoot;
+    public GameObject seedToShoot, shootingLine;
 
     // Start is called before the first frame update
     void Start()
@@ -58,12 +58,19 @@ public class PlayerAttackScript : MonoBehaviour
 
         if (animationTimer > 0)
             animationTimer -= Time.deltaTime;
-
+        if (aimCam != null)
+            Debug.Log(aimCam.name);
 
         if (!isShoot && aimCam.activeInHierarchy)
         {
-            Vector3 forceInit = (aimMarker.transform.position - gameObject.transform.position) * 50f;
-            forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.z)) * forceMultiplier;
+            //Vector3 range = aimMarker.transform.position - gameObject.transform.position;
+            //range.y = 0;
+
+            //float InitialVelocity = Mathf.Sqrt(-Physics.gravity.y * range.magnitude);
+            //Debug.Log(InitialVelocity);
+            Vector3 forceInit = (aimMarker.transform.position - gameObject.transform.position) * forceMultiplier * 70;
+
+            forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.z));
             ParabolaPath.Instance.UpdateTrajectory(forceV, gameObject.GetComponent<Rigidbody>(), transform.position);
         }
 
@@ -126,7 +133,7 @@ public class PlayerAttackScript : MonoBehaviour
             SeedParabola pathScript = seed.GetComponent<SeedParabola>();
 
             seed.transform.position = gameObject.transform.position;
-            pathScript.end = GameObject.Find("Aimer").transform.position;
+            pathScript.end = GameObject.Find("Aim").transform.position;
         }
         
     }
@@ -138,7 +145,8 @@ public class PlayerAttackScript : MonoBehaviour
             mainCam.SetActive(false);
             aimCam.SetActive(true);
             aimControls.aiming = true;
-
+            shootingLine.SetActive(true);
+          //  aimCam.GetComponentInChildren<GameObject>().SetActive(true);
             //UpdateTrajectory();
         }
 
@@ -147,7 +155,8 @@ public class PlayerAttackScript : MonoBehaviour
             mainCam.SetActive(true);
             aimCam.SetActive(false);
             aimControls.aiming = false;
-            ParabolaPath.Instance.HideLine();
+            shootingLine.SetActive(false);
+         //   aimCam.GetComponentInChildren<GameObject>().SetActive(false);
         }
 
     }
