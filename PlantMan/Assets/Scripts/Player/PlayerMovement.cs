@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     Rigidbody rb;
-    public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f;
+    public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f, fallMultiplier = 2.5f;
     private Vector3 direction, aimMovement;
     [SerializeField]
     private bool isGrounded;
@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     {
         OnMove();
         MoveTarget();
+
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
     }
 
     public void SetAimDirection(Vector2 input)
