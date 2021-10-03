@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\ParabolaPath.cs" />
     <Compile Include="Assets\Scripts\TridentSwipeColliderScript.cs" />
+    <Compile Include="Assets\AimBoxScript.cs" />
     <Compile Include="Assets\Scripts\TridentStabColliderScript.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\TridentPickupScript.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Enemy\RangedEnemy.cs" />
     <Compile Include="Assets\Scripts\MeleeEnemyColliderScript.cs" />
+    <Compile Include="Assets\AIMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
