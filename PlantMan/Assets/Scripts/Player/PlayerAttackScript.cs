@@ -34,7 +34,7 @@ public class PlayerAttackScript : MonoBehaviour
     public GameObject mainCam, aimCam, wideCam;
     public float forceMultiplier = 2;
     private float startYValue;
-    private bool isShoot = false;
+    private bool isShoot = false, changeCam = false;
     public GameObject aimMarker;
     private Vector3 forceV;
     [SerializeField]
@@ -149,49 +149,39 @@ public class PlayerAttackScript : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext context)
     {
+        changeCam = true;
         aimControls.aiming = true;
-        CM_AimCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-        CM_MainCam.m_XAxis.m_MaxSpeed = 50;
-        CM_MainCam.m_YAxis.m_MaxValue = 0;
+        aimCam.SetActive(true);
+        wideCam.SetActive(false);
+        //CM_AimCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
+        //CM_MainCam.m_XAxis.m_MaxSpeed = 50;
+        //CM_MainCam.m_YAxis.m_MaxValue = 0;
 
         if (context.canceled)
         {
-            CM_WideCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-            CM_MainCam.m_XAxis.m_MaxSpeed = 450;
-            CM_MainCam.m_YAxis.m_MaxValue = 1;
-            CM_MainCam.m_YAxis.Value = startYValue;
+            changeCam = true;
+            //CM_WideCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
+            //CM_MainCam.m_XAxis.m_MaxSpeed = 450;
+            //CM_MainCam.m_YAxis.m_MaxValue = 1;
+            wideCam.SetActive(true);
+            aimCam.SetActive(false);
             aimControls.aiming = false;
+          //  aimCam.SetActive(false);
         }
     }
-
-    /* Previous Attempt
-     *        // if(!aimCam.activeInHierarchy)
-       // {
-            //mainCam.SetActive(false);
-            //aimCam.transform.rotation = mainCam.transform.rotation;
-            //aimCam.SetActive(true);
-            aimControls.aiming = true;
-            shootingLine.SetActive(true);
-        //mainCam.GetComponent<CinemachineFreeLook>().m_Orbits.CopyTo(tempCam.GetComponent<CinemachineFreeLook>().m_Orbits, 0);
-        aimCam.GetComponent<CinemachineFreeLook>().m_Orbits.CopyTo(mainCam.GetComponent<CinemachineFreeLook>().m_Orbits, 0);
-        mainCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 50;
-        //  aimCam.GetComponentInChildren<GameObject>().SetActive(true);
-        //UpdateTrajectory();
-        //}
-
-        if (context.canceled)
+    private void LateUpdate()
+    {
+        if (changeCam)
         {
-            //mainCam.transform.rotation = aimCam.transform.rotation;
-            //mainCam.transform.position = aimCam.transform.position;
-            //mainCam.SetActive(true);
-            //aimCam.SetActive(false);
-            wideCam.GetComponent<CinemachineFreeLook>().m_Orbits.CopyTo(mainCam.GetComponent<CinemachineFreeLook>().m_Orbits, 0);
-            mainCam.GetComponent<CinemachineFreeLook>().m_XAxis.m_MaxSpeed = 450;
-            aimControls.aiming = false;
-            shootingLine.SetActive(false);
-         //   aimCam.GetComponentInChildren<GameObject>().SetActive(false);
+            //CM_MainCam.m_YAxis.Value = startYValue;
+            CM_MainCam.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CM_MainCam.m_YAxis.Value, 0), Quaternion.Euler(0, startYValue, 0), 5 * Time.deltaTime).y;
+
+            if (Mathf.Abs(CM_MainCam.m_YAxis.Value - startYValue) < 0.1f)
+            {
+                changeCam = false;
+            }
         }
-     */
+    }
 
 
     /* Old Stuff
