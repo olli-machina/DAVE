@@ -5,32 +5,32 @@ using UnityEngine;
 public class TridentPickupScript : MonoBehaviour
 {
 
-    public float damageAmount;
-    // Start is called before the first frame update
-    void Start()
-    {
+    //public float damageAmount;
+    //// Start is called before the first frame update
+    //void Start()
+    //{
         
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
+    //private void OnCollisionEnter(Collision collision)
+    //{
 
-        if(collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerAttackScript>().returnTrident();
-            Destroy(gameObject);
-        }
+    //    if(collision.gameObject.tag == "Player")
+    //    {
+    //        collision.gameObject.GetComponent<PlayerAttackScript>().returnTrident();
+    //        Destroy(gameObject);
+    //    }
 
-        if(collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<EnemyScript>().Damage(damageAmount);
-        }
+    //    if(collision.gameObject.tag == "Enemy")
+    //    {
+    //        collision.gameObject.GetComponent<EnemyScript>().Damage(damageAmount);
+    //    }
             
-    }
+    //}
 }

@@ -119,30 +119,61 @@ public class PlayerMovement : MonoBehaviour
     public void MoveTarget()
     {
 
-        if(aimTarget.GetComponent<AimBoxScript>().onWall ^ isOnWall)
+        //Vector3 playerForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+        //Vector3 rotateMovement = new Vector3(aimMovement.x * playerForward.x, 0.0f, aimMovement.z * playerForward.z);
+        //Quaternion rotationToCamera = Quaternion.LookRotation(rotateMovement, Vector3.up);
+        //                                         //Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
+        //Vector3 moveDir = new Vector3(rotateMovement.x * aimMovement.normalized.x, 0, rotateMovement.z * aimMovement.normalized.z);
+
+        //if (changedInput)
+        //{
+        //    rotateMovement = rotationToCamera * rotateMovement;
+        //    changedInput = false;
+        //}
+
+        //                                     //aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
+
+        //                                     //aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
+
+        
+        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+        //Vector3 forward = Vector3.ProjectOnPlane(aimTarget.transform.forward, Vector3.up);
+        Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
+
+        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black; //ray facing forward
+        Gizmos.DrawRay(aimTarget.transform.position, aimTarget.transform.forward);
+
+    }
+
+
+    /* Old Attempt
+     *         if(aimTarget.GetComponent<AimBoxScript>().onWall ^ isOnWall)
         {
             return;
         }
 
-        Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
-        
-        //Vector3 rotateMovement = new Vector3(aimMovement.x * cameraForward.x, 0.0f, aimMovement.z * cameraForward.z);
-        //Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
-        //Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
-        Vector3 moveDir = new Vector3(cameraForward.x * aimMovement.x, 0, cameraForward.z * aimMovement.z);
+        //Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
+        Vector3 playerForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
+                                                 //Vector3 rotateMovement = new Vector3(aimMovement.x * cameraForward.x, 0.0f, aimMovement.z * cameraForward.z);
+                                                 //Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
+                                                 //Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
+       // Vector3 moveDir = new Vector3(playerForward.x * aimMovement.normalized.x, 0, playerForward.z * aimMovement.normalized.z);
 
         if (changedInput)
         {
-         //   rotateMovement = rotationToCamera * rotateMovement;
+                                               //   rotateMovement = rotationToCamera * rotateMovement;
             changedInput = false;
         }
 
-        //aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
+                                             //aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
 
-        //aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
+                                             //aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
 
-        aimTarget.transform.position += moveDir * Time.deltaTime * 10f;
-    }
-
-        //aimTarget.transform.localPosition += (new Vector3(aimMovement.x, 0, aimMovement.y).normalized) * 25f * Time.deltaTime;
+       // aimTarget.transform.position += moveDir * Time.deltaTime * 10f;
+     */
 }
