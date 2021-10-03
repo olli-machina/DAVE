@@ -45,21 +45,17 @@ public class PlayerAttackScript : MonoBehaviour
     {
         stabEnemiesInRange = new List<GameObject>();
         swipeEnemiesInRange = new List<GameObject>();
-        tridentFree = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         cleanupLists();
 
         timer += Time.deltaTime;
 
         if (animationTimer > 0)
             animationTimer -= Time.deltaTime;
-        if (aimCam != null)
-            Debug.Log(aimCam.name);
 
         if (!isShoot && aimCam.activeInHierarchy)
         {

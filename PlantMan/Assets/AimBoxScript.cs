@@ -17,14 +17,14 @@ public class AimBoxScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Wall")
-            onWall = true;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Wall")
+    //        onWall = true;
 
-        else if (other.gameObject.tag == "Ground")
-            onWall = false;
-    }
+    //    else if (other.gameObject.tag == "Ground")
+    //        onWall = false;
+    //}
 
     //private void OnTriggerStay(Collider other)
     //{
