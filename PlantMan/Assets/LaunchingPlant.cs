@@ -24,7 +24,7 @@ public class LaunchingPlant : PlantType
 
     public bool playerInRange;
     private bool fullGrown;
-    private bool launched;
+    private bool launching;
 
     private float timer;
 
@@ -38,19 +38,23 @@ public class LaunchingPlant : PlantType
             timer = 0.0f;
         }
 
-        if (isInLight)
+        if (playerInRange && fullGrown)
         {
-            Grow();
+            launching = true;
+            Hide();
+        }
+
+        else if (isInLight)
+        {
+            if(!fullGrown)
+                Grow();
         }
         else
         {
             Shrink();
         }
 
-        if(playerInRange && fullGrown)
-        {
-            Hide();
-        }
+
     }
 
     LaunchingPlant() : base() //???
@@ -140,7 +144,7 @@ public class LaunchingPlant : PlantType
             hideTimer = 0.0f;
 
 
-        Vector3 scale = Vector3.Lerp(growScale, hideScale, growingTimer);
+        Vector3 scale = Vector3.Lerp(hideScale, growScale, growingTimer);
         Vector3 position = foliage.transform.localPosition;
 
         float height = scale.y - seedScale.y;
@@ -154,8 +158,10 @@ public class LaunchingPlant : PlantType
 
     private void Launch()
     {
-        launched = true;
+        foliage.transform.localScale = growScale;
         Debug.Log("Hidden");
+        launching = false;
+        playerInRange = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -184,7 +190,8 @@ public class LaunchingPlant : PlantType
 
         if (other.gameObject.tag == "Player")
         {
-            playerInRange = false;
+            if(!launching)
+                playerInRange = false;
         }
     }
 }
