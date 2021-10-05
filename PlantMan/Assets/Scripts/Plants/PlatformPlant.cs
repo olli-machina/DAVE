@@ -2,70 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightDetection : MonoBehaviour
+class PlatformPlant : PlantType
 {
-    public float timeBetweenChecks = 1.0f;
-    public float maxRaycastDistance = 100.0f;
-
-    public bool isInLight = false;
-
-    public bool shouldUseSun;
-
-    public float timeToGrow = 3.0f;
-    public float timeToShrink = 2.0f;
     public float timeToPlatform = 2.0f;
-    public float timeToDeath = 5.0f;
-
     public float growHeight = 10.0f;
-
     public Vector2 platformDimentions;
-
     public GameObject stalk;
     public GameObject platform;
 
-    private float timer;
-    private float growingTimer;
     private float platformTimer;
+    private Vector3 growScale;
+    private Vector3 platScale;
+    private float timer;
+
+    private float growingTimer;
     private float deathTimer;
 
-    private GameObject sun;
-
-    private Vector3 seedScale;
-    private Vector3 growScale;
-
-    private Vector3 platScale;
-
-    private int lightValue;
-    // Start is called before the first frame update
-    void Start()
-    {
-        timer = 0.0f;
-        growingTimer = 0.0f;
-        platformTimer = 0.0f;
-        sun = GameObject.Find("Sun");
-
-        lightValue = 0;
-
-        seedScale = stalk.transform.localScale;
-
-        growScale = seedScale;
-        growScale.y = growHeight;
-
-        platScale = platform.transform.localScale;
-    }
-
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         timer += Time.deltaTime;
+            Debug.Log(timer);
 
-        if(timer > timeBetweenChecks)
+        if (timer > timeBetweenChecks)
         {
-            CheckIfInSun();
+            base.CheckIfInSun();
             timer = 0.0f;
         }
 
-        if(isInLight)
+        if (isInLight)
         {
             Grow();
         }
@@ -75,39 +39,29 @@ public class LightDetection : MonoBehaviour
         }
     }
 
-   /*
-    * Purpose: Determine if the seed is colliding in the sun spot
-    * References: Update Function
-    * Scripts Called: ---
-    * Status: working
-    */
-    void CheckIfInSun()
+    PlatformPlant() : base() //???
     {
-        if(shouldUseSun)
-        {
-            int layerMask = 1 << 9;
+        timer = 0f;
+        growingTimer = 0f;
+        platformTimer = 0f;
 
-            layerMask = ~layerMask;
+        lightValue = 0;
 
-            Vector3 directionTowardsSun = -sun.transform.forward;
-            isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
-        }
-        else
-        {
-            isInLight = lightValue > 0;
-        }
+        growScale = seedScale;
+        growScale.y = growHeight;
+
         
     }
 
-   /*
-    * Purpose: Growing process when seed is actively in the light
-    * References: Update Function
-    * Scripts Called: ---
-    * Status: working
-    */
-    void Grow()
-    {   
-        if(growingTimer > 1.0f)
+    private void Start()
+    {
+        seedScale = stalk.transform.localScale; //?
+        platScale = platform.transform.localScale;
+    }
+
+    public override void Grow()
+    {
+        if (growingTimer > 1.0f)
         {
             if (platformTimer < 1.0f)
                 platformTimer += Time.deltaTime / timeToPlatform;
@@ -119,7 +73,7 @@ public class LightDetection : MonoBehaviour
             platform.layer = 0;
             platform.transform.localScale = pScale;
             platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-            
+
         }
         else
         {
@@ -140,15 +94,9 @@ public class LightDetection : MonoBehaviour
         platform.transform.localPosition = platPosition;
     }
 
-   /*
-    * Purpose: Shrink the seed back down once the seed leaves the light
-    * References: Update function
-    * Scripts Called: ---
-    * Status: working
-    */
-    void Shrink()
+    public override void Shrink()
     {
-        if(platformTimer > 0.0f)
+        if (platformTimer > 0.0f)
         {
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
@@ -171,8 +119,8 @@ public class LightDetection : MonoBehaviour
         }
         else
             deathTimer = 0.0f;
-            
-        
+
+
         Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
         Vector3 position = stalk.transform.localPosition;
         Vector3 platPosition = platform.transform.localPosition;
@@ -191,7 +139,7 @@ public class LightDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Light")
+        if (other.gameObject.tag == "Light")
         {
             lightValue++;
         }
@@ -200,7 +148,7 @@ public class LightDetection : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Light")
-        {
+        {   
             lightValue--;
 
             if (lightValue < 0)

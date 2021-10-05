@@ -18,15 +18,12 @@ public class PlantManager : MonoBehaviour
         PlantType platformPlant = new PlantType();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
 
-public class PlantType
+public class PlantType : MonoBehaviour
 {
+
     public float timeBetweenChecks = 1.0f;
     public float maxRaycastDistance = 100.0f;
 
@@ -37,24 +34,21 @@ public class PlantType
     public float timeToShrink = 2.0f;
     public float timeToDeath = 5.0f;
 
-    private float timer;
-    private float growingTimer;
-    private float deathTimer;
 
-    private GameObject sun;
+    // Update is called once per frame
+    public virtual void Update()
+    {
+    }
 
-    private Vector3 seedScale;
+    public PlantType()
+    { }
 
-    private int lightValue;
-
-    PlantType(float _timeToGrow, float _timeToShrink, float _timeToDeath)
+    public PlantType(float _timeToGrow, float _timeToShrink, float _timeToDeath)
     {
         timeToGrow = _timeToGrow;
         timeToShrink = _timeToShrink;
         timeToDeath = _timeToDeath;
 
-        timer = 0.0f;
-        growingTimer = 0.0f;
         sun = GameObject.Find("Sun");
 
         lightValue = 0;
@@ -66,7 +60,7 @@ public class PlantType
     * Scripts Called: ---
     * Status: working
     */
-    bool CheckIfInSun()
+    public void CheckIfInSun()
     {
         if (shouldUseSun)
         {
@@ -75,14 +69,20 @@ public class PlantType
             layerMask = ~layerMask;
 
             Vector3 directionTowardsSun = -sun.transform.forward;
-            //isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
-            return true;
+            isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
         }
         else
         {
             isInLight = lightValue > 0;
-            return false;
         }
 
     }
+
+    public virtual void Grow() { }
+    public virtual void Shrink() { }
+
+
+    protected Vector3 seedScale;
+    protected int lightValue;
+    protected GameObject sun;
 }

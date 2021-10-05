@@ -2,68 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaunchingPlant : MonoBehaviour
+public class LaunchingPlant : PlantType
 {
+    public float timeToMax = 2.0f;
+    public float timeToHide = 5f;
+    public float launchForce;
+    public Vector2 foliageDimentions;
 
-
-    public float timeBetweenChecks = 1.0f;
-    public float maxRaycastDistance = 100.0f;
-
-    public bool isInLight = false;
-
-    public bool shouldUseSun;
-
-    public float timeToGrow = 3.0f;
-    public float timeToShrink = 2.0f;
-    public float timeToWait = 2.0f;
-    public float timeToDeath = 5.0f;
-
-    public float launchForce = 20f;
-
-    public GameObject stalk;
     public GameObject foliage;
+    public GameObject shrinkFoliage;
 
-    private float timer;
+    private Vector3 foliageScale;
+    private Vector3 growScale;
+    private float hideTimer;
+    private float foliageTimer;
     private float growingTimer;
     private float deathTimer;
-    private float waitingTimer;
 
+    private float timer;
 
-    private GameObject sun;
-
-    private Vector3 seedScale;
-    private Vector3 growScale;
-
-    private Vector3 fullScale;
-    private Vector3 foliageScale;
-
-    private int lightValue;
-    // Start is called before the first frame update
-    void Start()
-    {
-        timer = 0.0f;
-        growingTimer = 0.0f;
-        waitingTimer = 0.0f;
-        sun = GameObject.Find("Sun");
-
-        lightValue = 0;
-
-        seedScale = stalk.transform.localScale;
-
-        growScale = seedScale;
-        // growScale.y = growHeight;
-
-        fullScale = foliage.transform.localScale;
-    }
-
-    // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         timer += Time.deltaTime;
+        Debug.Log(timer);
 
         if (timer > timeBetweenChecks)
         {
-            CheckIfInSun();
+            base.CheckIfInSun();
             timer = 0.0f;
         }
 
@@ -77,90 +42,45 @@ public class LaunchingPlant : MonoBehaviour
         }
     }
 
-    /*
-     * Purpose: Determine if the seed is colliding in the sun spot
-     * References: Update Function
-     * Scripts Called: ---
-     * Status: working
-     */
-    void CheckIfInSun()
+    LaunchingPlant() : base() //???
     {
-        if (shouldUseSun)
-        {
-            int layerMask = 1 << 9;
+        timer = 0f;
+        growingTimer = 0f;
+        hideTimer = 0f;
 
-            layerMask = ~layerMask;
+        lightValue = 0;
 
-            Vector3 directionTowardsSun = -sun.transform.forward;
-            isInLight = !Physics.Raycast(transform.position, directionTowardsSun, maxRaycastDistance, layerMask);
-        }
-        else
-        {
-            isInLight = lightValue > 0;
-        }
+        growScale = seedScale;
+       // growScale.y = growHeight;
 
     }
 
-    /*
-     * Purpose: Growing process when seed is actively in the light
-     * References: Update Function
-     * Scripts Called: ---
-     * Status: working
-     */
-    void Grow()
+    private void Start()
     {
-        if (growingTimer > 1.0f)
-        {
-            if (waitingTimer < 1.0f)
-                waitingTimer += Time.deltaTime / timeToWait;
-            else
-                return;
+        seedScale = shrinkFoliage.transform.localScale; //?
+        foliageScale = foliage.transform.localScale;
+    }
 
-            Vector3 pScale = Vector3.Lerp(fullScale, new Vector3(foliageScale.x, fullScale.y, foliageScale.y), platformTimer);
-
-            foliage.layer = 0;
-            foliage.transform.localScale = pScale;
-            foliage.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
-
-        }
+    public override void Grow()
+    {
+        if (growingTimer < 1f)
+            return;
         else
-        {
             growingTimer += Time.deltaTime / timeToGrow;
-        }
+
 
         Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
-        Vector3 position = stalk.transform.localPosition;
-        Vector3 platPosition = foliage.transform.localPosition;
+        Vector3 position = foliage.transform.localPosition;
 
         float height = scale.y - seedScale.y;
         position.y = height / 2.0f;
-        platPosition.y = height;
 
-        stalk.transform.localScale = scale;
-        stalk.transform.localPosition = position;
-
-        foliage.transform.localPosition = platPosition;
+        foliage.transform.localScale = scale;
+        foliage.transform.localPosition = position;
     }
 
-    /*
-     * Purpose: Shrink the seed back down once the seed leaves the light
-     * References: Update function
-     * Scripts Called: ---
-     * Status: working
-     */
-    void Shrink()
+    public override void Shrink()
     {
-        if (platformTimer > 0.0f)
-        {
-            Vector3 pScale = Vector3.Lerp(fullScale, new Vector3(foliageScale.x, fullScale.y, foliageScale.y), platformTimer);
-
-            foliage.transform.localScale = pScale;
-
-            platformTimer -= Time.deltaTime;
-            return;
-        }
-
-
         if (growingTimer < 0.0f)
         {
 
@@ -176,17 +96,13 @@ public class LaunchingPlant : MonoBehaviour
 
 
         Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
-        Vector3 position = stalk.transform.localPosition;
-        Vector3 platPosition = foliage.transform.localPosition;
+        Vector3 position = foliage.transform.localPosition;
 
         float height = scale.y - seedScale.y;
         position.y = height / 2.0f;
-        platPosition.y = height;
 
-        stalk.transform.localScale = scale;
-        stalk.transform.localPosition = position;
-
-        foliage.transform.localPosition = platPosition;
+        foliage.transform.localScale = scale;
+        foliage.transform.localPosition = position;
 
         growingTimer -= Time.deltaTime;
     }
