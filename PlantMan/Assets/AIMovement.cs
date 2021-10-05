@@ -10,6 +10,14 @@ public class AIMovement : MonoBehaviour
 
     GameObject player;
 
+    public float FOV; //Represents the FOV of the enemy.
+                      //0 represents a semi-circle, the Enemy can see anything in front of it
+                      //0.5 represents a quarter of a circle in front of the enemy, most similar to how they actually see
+                      //1.0 represents a line in front of the enemy, can only see things in this line, which isn't possible, so nothing will happen
+                      //This number could become negative... it would then start expanding to be able to see things behind
+
+    public float viewDistance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +33,7 @@ public class AIMovement : MonoBehaviour
 
         Vector3 projection = Vector3.Project(dir.normalized, gameObject.transform.forward);
 
-        if (Vector3.Dot(projection, gameObject.transform.forward) < 0)
-            Debug.Log("IN FRONT OF ME");
-            //navAgent.destination = player.transform.position;
+        if (Vector3.Dot(projection, gameObject.transform.forward) > 0.5 && dir.magnitude < viewDistance)
+            navAgent.destination = player.transform.position;
     }
 }
