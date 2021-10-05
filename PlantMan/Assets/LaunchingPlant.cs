@@ -8,23 +8,29 @@ public class LaunchingPlant : PlantType
     public float timeToHide = 5f;
     public float launchForce;
     public Vector2 foliageDimentions;
+    public float growMultiplier;
 
     public GameObject foliage;
     public GameObject shrinkFoliage;
 
-    private Vector3 foliageScale;
+    private Vector3 hideScale;
     private Vector3 growScale;
+
+
     private float hideTimer;
     private float foliageTimer;
     private float growingTimer;
     private float deathTimer;
+
+    public bool playerInRange;
+    private bool fullGrown;
+    private bool launched;
 
     private float timer;
 
     public override void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log(timer);
 
         if (timer > timeBetweenChecks)
         {
@@ -40,6 +46,11 @@ public class LaunchingPlant : PlantType
         {
             Shrink();
         }
+
+        if(playerInRange && fullGrown)
+        {
+            Hide();
+        }
     }
 
     LaunchingPlant() : base() //???
@@ -50,21 +61,28 @@ public class LaunchingPlant : PlantType
 
         lightValue = 0;
 
-        growScale = seedScale;
-       // growScale.y = growHeight;
+        growScale = new Vector3(1.5f, 0.1f, 1.5f) ;
+        hideScale = new Vector3(0.75f, 0.1f, 0.75f);
+
+        fullGrown = false;
 
     }
 
     private void Start()
     {
-        seedScale = shrinkFoliage.transform.localScale; //?
-        foliageScale = foliage.transform.localScale;
+        seedScale = foliage.transform.localScale; //?
+        fullGrown = false;
+        //foliageScale = foliage.transform.localScale;
     }
 
     public override void Grow()
     {
-        if (growingTimer < 1f)
+        if (growingTimer > 1f)
+        {
+            fullGrown = true;
+            gameObject.layer = 0;
             return;
+        }
         else
             growingTimer += Time.deltaTime / timeToGrow;
 
@@ -83,7 +101,7 @@ public class LaunchingPlant : PlantType
     {
         if (growingTimer < 0.0f)
         {
-
+            fullGrown = false;
             deathTimer += Time.deltaTime;
 
             if (deathTimer > timeToDeath)
@@ -107,11 +125,49 @@ public class LaunchingPlant : PlantType
         growingTimer -= Time.deltaTime;
     }
 
+    private void Hide()
+    {
+        if (growingTimer < 0.0f)
+        {
+            hideTimer += Time.deltaTime;
+
+            if (hideTimer > timeToHide)
+                Launch();
+
+            return;
+        }
+        else
+            hideTimer = 0.0f;
+
+
+        Vector3 scale = Vector3.Lerp(growScale, hideScale, growingTimer);
+        Vector3 position = foliage.transform.localPosition;
+
+        float height = scale.y - seedScale.y;
+        position.y = height / 2.0f;
+
+        foliage.transform.localScale = scale;
+        foliage.transform.localPosition = position;
+
+        growingTimer -= Time.deltaTime;
+    }
+
+    private void Launch()
+    {
+        launched = true;
+        Debug.Log("Hidden");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Light")
         {
             lightValue++;
+        }
+       // Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Player")
+        {
+            playerInRange = true;
         }
     }
 
@@ -123,6 +179,12 @@ public class LaunchingPlant : PlantType
 
             if (lightValue < 0)
                 lightValue = 0;
+
+        }
+
+        if (other.gameObject.tag == "Player")
+        {
+            playerInRange = false;
         }
     }
 }

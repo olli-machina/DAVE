@@ -37,6 +37,7 @@ class PlatformPlant : PlantType
         {
             Shrink();
         }
+
     }
 
     PlatformPlant() : base() //???
@@ -136,6 +137,7 @@ class PlatformPlant : PlantType
 
         growingTimer -= Time.deltaTime;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
