@@ -9,18 +9,21 @@ public class LaunchingPlant : PlantType
     public float launchForce;
     public Vector2 foliageDimentions;
     public float growMultiplier;
+    public float launchCoolDown;
 
     public GameObject foliage;
     public GameObject shrinkFoliage;
+
+    private GameObject player;
 
     private Vector3 hideScale;
     private Vector3 growScale;
 
 
     private float hideTimer;
-    private float foliageTimer;
     private float growingTimer;
     private float deathTimer;
+    private float cooldownTimer;
 
     public bool playerInRange;
     private bool fullGrown;
@@ -116,17 +119,19 @@ public class LaunchingPlant : PlantType
         else
             deathTimer = 0.0f;
 
+        if (!launching)
+        {
+            Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
+            Vector3 position = foliage.transform.localPosition;
 
-        Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
-        Vector3 position = foliage.transform.localPosition;
+            float height = scale.y - seedScale.y;
+            position.y = height / 2.0f;
 
-        float height = scale.y - seedScale.y;
-        position.y = height / 2.0f;
+            foliage.transform.localScale = scale;
+            foliage.transform.localPosition = position;
 
-        foliage.transform.localScale = scale;
-        foliage.transform.localPosition = position;
-
-        growingTimer -= Time.deltaTime;
+            growingTimer -= Time.deltaTime;
+        }
     }
 
     private void Hide()
@@ -138,6 +143,14 @@ public class LaunchingPlant : PlantType
             if (hideTimer > timeToHide)
                 Launch();
 
+            //if(!launching)
+            //{
+            //    cooldownTimer += Time.deltaTime;
+            //    if(cooldownTimer > launchCoolDown)
+            //    {
+
+            //    }
+            //}
             return;
         }
         else
@@ -158,10 +171,18 @@ public class LaunchingPlant : PlantType
 
     private void Launch()
     {
-        foliage.transform.localScale = growScale;
-        Debug.Log("Hidden");
-        launching = false;
-        playerInRange = false;
+        if (launching)
+        {
+            foliage.transform.localScale = growScale;
+            player.GetComponentInChildren<Rigidbody>().AddForce(0f, 2000f, 0f);
+            Debug.Log("Hidden");
+            launching = false;
+            playerInRange = false;
+            hideTimer = 0f;
+            growingTimer = 1f;
+        }
+        else
+            return;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -174,6 +195,7 @@ public class LaunchingPlant : PlantType
         if (other.gameObject.tag == "Player")
         {
             playerInRange = true;
+            player = other.gameObject;
         }
     }
 
@@ -190,8 +212,8 @@ public class LaunchingPlant : PlantType
 
         if (other.gameObject.tag == "Player")
         {
-            if(!launching)
-                playerInRange = false;
+            //if(!launching)
+            playerInRange = false;
         }
     }
 }

@@ -41,6 +41,8 @@ public class PlayerAttackScript : MonoBehaviour
     private NewInputLook aimControls;
     private CinemachineFreeLook CM_MainCam, CM_WideCam, CM_AimCam;
 
+    private CinemachineOrbitalTransposer CMT_WideCam, CMT_AimCam, CMT_MainCam;
+
     public GameObject seedToShoot, shootingLine;
 
     // Start is called before the first frame update
@@ -78,6 +80,11 @@ public class PlayerAttackScript : MonoBehaviour
 
             forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.z));
             //ParabolaPath.Instance.UpdateTrajectory(forceV, gameObject.GetComponent<Rigidbody>(), transform.position);
+        }
+
+        if(changeCam)
+        {
+            CinemachineOrbitalTransposer CM_transpose = mainCam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineOrbitalTransposer>();
         }
 /* Old Stuff
         if (tridentStab && timer > tridentStabCooldown ||
@@ -149,39 +156,32 @@ public class PlayerAttackScript : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        changeCam = true;
         aimControls.aiming = true;
-        aimCam.SetActive(true);
-        wideCam.SetActive(false);
-        //CM_AimCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-        //CM_MainCam.m_XAxis.m_MaxSpeed = 50;
-        //CM_MainCam.m_YAxis.m_MaxValue = 0;
+        CM_AimCam.m_XAxis = CM_WideCam.m_XAxis;
+        CM_AimCam.m_YAxis = CM_WideCam.m_YAxis;
+        CM_AimCam.Priority = 11;
 
         if (context.canceled)
         {
-            changeCam = true;
-            //CM_WideCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-            //CM_MainCam.m_XAxis.m_MaxSpeed = 450;
-            //CM_MainCam.m_YAxis.m_MaxValue = 1;
-            wideCam.SetActive(true);
-            aimCam.SetActive(false);
+            CM_WideCam.m_XAxis = CM_AimCam.m_XAxis;
+            CM_WideCam.m_YAxis = CM_AimCam.m_YAxis;
+            CM_AimCam.Priority = 9;
             aimControls.aiming = false;
-          //  aimCam.SetActive(false);
         }
     }
-    private void LateUpdate()
-    {
-        if (changeCam)
-        {
-            //CM_MainCam.m_YAxis.Value = startYValue;
-            CM_MainCam.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CM_MainCam.m_YAxis.Value, 0), Quaternion.Euler(0, startYValue, 0), 5 * Time.deltaTime).y;
+    //private void LateUpdate()
+    //{
+    //    if (changeCam)
+    //    {
+    //        //CM_MainCam.m_YAxis.Value = startYValue;
+    //        CM_MainCam.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CM_MainCam.m_YAxis.Value, 0), Quaternion.Euler(0, startYValue, 0), 5 * Time.deltaTime).y;
 
-            if (Mathf.Abs(CM_MainCam.m_YAxis.Value - startYValue) < 0.1f)
-            {
-                changeCam = false;
-            }
-        }
-    }
+    //        if (Mathf.Abs(CM_MainCam.m_YAxis.Value - startYValue) < 0.1f)
+    //        {
+    //            changeCam = false;
+    //        }
+    //    }
+    //}
 
 
     /* Old Stuff

@@ -35,7 +35,7 @@ public class NewInputLook : MonoBehaviour
         lookMovement = context.ReadValue<Vector2>().normalized;
         lookMovement.y = invertY ? -lookMovement.y : lookMovement.y;
 
-            lookMovement.x *= /*lookMovement.x **/ 180f;
+        lookMovement.x *= /*lookMovement.x **/ 180f;
 
         if(aiming)
         {
