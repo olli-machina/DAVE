@@ -140,33 +140,30 @@ public class PlayerAttackScript : MonoBehaviour
         {
             GameObject seed = Instantiate(seedToShoot);
             SeedParabola pathScript = seed.GetComponent<SeedParabola>();
+            GameObject aimObj = GameObject.Find("Aim");
 
             seed.transform.position = gameObject.transform.position;
-            pathScript.end = GameObject.Find("Aim").transform.position;
+            pathScript.end = aimObj.transform.position;
         }
+
         
     }
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        changeCam = true;
+        Vector3 moveInFront = Vector3.forward * 1.5f;
+        aimMarker.transform.position = new Vector3(transform.localPosition.x + moveInFront.x, 4, transform.localPosition.z + moveInFront.z + 3f);
+
         aimControls.aiming = true;
-        aimCam.SetActive(true);
-        wideCam.SetActive(false);
-        //CM_AimCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-        //CM_MainCam.m_XAxis.m_MaxSpeed = 50;
-        //CM_MainCam.m_YAxis.m_MaxValue = 0;
+        //aimCam.SetActive(true);
+        //wideCam.SetActive(false);
 
         if (context.canceled)
         {
-            changeCam = true;
-            //CM_WideCam.m_Orbits.CopyTo(CM_MainCam.m_Orbits, 0);
-            //CM_MainCam.m_XAxis.m_MaxSpeed = 450;
-            //CM_MainCam.m_YAxis.m_MaxValue = 1;
-            wideCam.SetActive(true);
-            aimCam.SetActive(false);
+            //wideCam.SetActive(true);
+            //aimCam.SetActive(false);
+            GameObject.Find("Aim").GetComponent<AimBoxScript>().onWall = false;
             aimControls.aiming = false;
-          //  aimCam.SetActive(false);
         }
     }
     private void LateUpdate()

@@ -31,6 +31,7 @@ public class SeedParabola : MonoBehaviour
             onePointBeforeFinal.y += animCurve.Evaluate(1.0f - Time.deltaTime / .5f);
             Vector3 finalVel = (end - onePointBeforeFinal) * 20f;
             GetComponent<Rigidbody>().AddForce(finalVel);
+            Debug.Log(end);
             Destroy(this);
             return;
         }

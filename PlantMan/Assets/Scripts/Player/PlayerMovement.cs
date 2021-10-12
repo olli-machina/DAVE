@@ -39,11 +39,9 @@ public class PlayerMovement : MonoBehaviour
 
         rawInput = input;
 
-       // Vector3 direction = transform.forward.;
-
         if (aimTarget.GetComponent<AimBoxScript>().onWall)
         {
-            aimMovement = new Vector3(rawInput.x, rawInput.y, 0);
+            aimMovement = new Vector3(0, rawInput.y, 0);
             isOnWall = true;
         }
         else
@@ -119,29 +117,22 @@ public class PlayerMovement : MonoBehaviour
     public void MoveTarget()
     {
 
-        //Vector3 playerForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
-        //Vector3 rotateMovement = new Vector3(aimMovement.x * playerForward.x, 0.0f, aimMovement.z * playerForward.z);
-        //Quaternion rotationToCamera = Quaternion.LookRotation(rotateMovement, Vector3.up);
-        //                                         //Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
-        //Vector3 moveDir = new Vector3(rotateMovement.x * aimMovement.normalized.x, 0, rotateMovement.z * aimMovement.normalized.z);
+        if (!aimTarget.GetComponent<AimBoxScript>().onWall)
+        {
+            float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+            aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+            //Vector3 forward = Vector3.ProjectOnPlane(aimTarget.transform.forward, Vector3.up);
+            Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
 
-        //if (changedInput)
-        //{
-        //    rotateMovement = rotationToCamera * rotateMovement;
-        //    changedInput = false;
-        //}
-
-        //                                     //aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
-
-        //                                     //aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
-
-        
-        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
-        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-        //Vector3 forward = Vector3.ProjectOnPlane(aimTarget.transform.forward, Vector3.up);
-        Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
-
-        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+            aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+        }
+        else
+        {
+            float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+            aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+            Vector3 moveDir = new Vector3(0, aimMovement.y, 0);
+            aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+        }
     }
     private void OnDrawGizmos()
     {
@@ -149,31 +140,4 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay(aimTarget.transform.position, aimTarget.transform.forward);
 
     }
-
-
-    /* Old Attempt
-     *         if(aimTarget.GetComponent<AimBoxScript>().onWall ^ isOnWall)
-        {
-            return;
-        }
-
-        //Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
-        Vector3 playerForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
-                                                 //Vector3 rotateMovement = new Vector3(aimMovement.x * cameraForward.x, 0.0f, aimMovement.z * cameraForward.z);
-                                                 //Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
-                                                 //Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
-       // Vector3 moveDir = new Vector3(playerForward.x * aimMovement.normalized.x, 0, playerForward.z * aimMovement.normalized.z);
-
-        if (changedInput)
-        {
-                                               //   rotateMovement = rotationToCamera * rotateMovement;
-            changedInput = false;
-        }
-
-                                             //aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
-
-                                             //aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
-
-       // aimTarget.transform.position += moveDir * Time.deltaTime * 10f;
-     */
 }
