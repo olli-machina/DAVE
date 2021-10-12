@@ -58,8 +58,8 @@ public class PlayerAttackScript : MonoBehaviour
 
         if (animationTimer > 0)
             animationTimer -= Time.deltaTime;
-        if (aimCam != null)
-            Debug.Log(aimCam.name);
+        //if (aimCam != null)
+            //Debug.Log(aimCam.name);
 
         if (!isShoot && aimCam.activeInHierarchy)
         {

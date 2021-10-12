@@ -89,6 +89,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SeedSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""3453a3ea-5154-4058-8e7e-152deda65191"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -322,6 +330,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60f1a723-eeb6-4e01-8109-d76c5cab8ad8"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SeedSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -367,6 +386,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerControlScheme_Quit = m_PlayerControlScheme.FindAction("Quit", throwIfNotFound: true);
         m_PlayerControlScheme_Restart = m_PlayerControlScheme.FindAction("Restart", throwIfNotFound: true);
         m_PlayerControlScheme_Pause = m_PlayerControlScheme.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerControlScheme_SeedSwitch = m_PlayerControlScheme.FindAction("SeedSwitch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,6 +445,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControlScheme_Quit;
     private readonly InputAction m_PlayerControlScheme_Restart;
     private readonly InputAction m_PlayerControlScheme_Pause;
+    private readonly InputAction m_PlayerControlScheme_SeedSwitch;
     public struct PlayerControlSchemeActions
     {
         private @PlayerControls m_Wrapper;
@@ -438,6 +459,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Quit => m_Wrapper.m_PlayerControlScheme_Quit;
         public InputAction @Restart => m_Wrapper.m_PlayerControlScheme_Restart;
         public InputAction @Pause => m_Wrapper.m_PlayerControlScheme_Pause;
+        public InputAction @SeedSwitch => m_Wrapper.m_PlayerControlScheme_SeedSwitch;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlScheme; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -474,6 +496,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnPause;
+                @SeedSwitch.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
+                @SeedSwitch.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
+                @SeedSwitch.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
             }
             m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface = instance;
             if (instance != null)
@@ -505,6 +530,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @SeedSwitch.started += instance.OnSeedSwitch;
+                @SeedSwitch.performed += instance.OnSeedSwitch;
+                @SeedSwitch.canceled += instance.OnSeedSwitch;
             }
         }
     }
@@ -538,5 +566,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnSeedSwitch(InputAction.CallbackContext context);
     }
 }
