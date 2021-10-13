@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.Animations;
 
 public class NewInputLook : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class NewInputLook : MonoBehaviour
     [SerializeField]
     private GameObject aimTarget, player;
     [SerializeField]
-    private CinemachineVirtualCamera aimCam;
+   // private CinemachineVirtualCamera aimCam;
 
 
     // Start is called before the first frame update
@@ -31,24 +32,32 @@ public class NewInputLook : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        if (!aiming)
-        {
-            lookMovement = context.ReadValue<Vector2>().normalized;
-            lookMovement.y = invertY ? -lookMovement.y : lookMovement.y;
+        lookMovement = context.ReadValue<Vector2>().normalized;
+        lookMovement.y = invertY ? -lookMovement.y : lookMovement.y;
 
-            lookMovement.x *= /*lookMovement.x **/ 180f;
-        }
+        lookMovement.x *= /*lookMovement.x **/ 180f;
 
-        else
+        if(aiming)
         {
             Vector2 aimMovement = context.ReadValue<Vector2>();//.normalized;
             player.GetComponent<PlayerMovement>().SetAimDirection(aimMovement);
         }
+       // else
     }
 
     public void Move()
     {
-        freeLookComponent.m_XAxis.Value += lookMovement.x * turnSpeed * Time.deltaTime;
-        freeLookComponent.m_YAxis.Value += lookMovement.y * turnSpeed * Time.deltaTime;
+        if (!aiming)
+        {
+            freeLookComponent.m_YAxis.Value += lookMovement.y * turnSpeed * Time.deltaTime;
+            freeLookComponent.m_XAxis.Value += lookMovement.x * turnSpeed * Time.deltaTime;
+            aimTarget.GetComponent<PositionConstraint>().enabled = false;
+        }
+
+        else
+        {
+            freeLookComponent.m_XAxis.Value += lookMovement.x * .5f * Time.deltaTime;
+            aimTarget.GetComponent<PositionConstraint>().enabled = true;
+        }
     }
 }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerAttackScript : MonoBehaviour
 {
-
+    /*Old Stuff
     public float tridentStabDamage;
     public GameObject tridentStabModel;
     public float tridentStabAnimationTime;
@@ -26,40 +27,47 @@ public class PlayerAttackScript : MonoBehaviour
     private bool tridentFree;
     private bool tridentStab;
     private bool tridentSwipe;
-
+    */
     private float timer;
     private float animationTimer;
 
-    public GameObject mainCam, aimCam;
+    public GameObject mainCam, aimCam, wideCam;
     public float forceMultiplier = 2;
-    private bool isShoot = false;
+    private float startYValue;
+    private bool isShoot = false, changeCam = false;
     public GameObject aimMarker;
     private Vector3 forceV;
     [SerializeField]
     private NewInputLook aimControls;
+    private CinemachineFreeLook CM_MainCam, CM_WideCam, CM_AimCam;
+
+    private CinemachineOrbitalTransposer CMT_WideCam, CMT_AimCam, CMT_MainCam;
 
     public GameObject seedToShoot, shootingLine;
 
     // Start is called before the first frame update
     void Start()
     {
+        /* Old Stuff
         stabEnemiesInRange = new List<GameObject>();
         swipeEnemiesInRange = new List<GameObject>();
-        tridentFree = true;
+        */
+        CM_MainCam = mainCam.GetComponent<CinemachineFreeLook>();
+        CM_WideCam = wideCam.GetComponent<CinemachineFreeLook>();
+        CM_AimCam = aimCam.GetComponent<CinemachineFreeLook>();
+
+        startYValue = CM_MainCam.m_YAxis.Value;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        cleanupLists();
+        //cleanupLists();
 
         timer += Time.deltaTime;
 
         if (animationTimer > 0)
             animationTimer -= Time.deltaTime;
-        //if (aimCam != null)
-            //Debug.Log(aimCam.name);
 
         if (!isShoot && aimCam.activeInHierarchy)
         {
@@ -71,9 +79,14 @@ public class PlayerAttackScript : MonoBehaviour
             Vector3 forceInit = (aimMarker.transform.position - gameObject.transform.position) * forceMultiplier * 70;
 
             forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.z));
-            ParabolaPath.Instance.UpdateTrajectory(forceV, gameObject.GetComponent<Rigidbody>(), transform.position);
+            //ParabolaPath.Instance.UpdateTrajectory(forceV, gameObject.GetComponent<Rigidbody>(), transform.position);
         }
 
+        if(changeCam)
+        {
+            CinemachineOrbitalTransposer CM_transpose = mainCam.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        }
+/* Old Stuff
         if (tridentStab && timer > tridentStabCooldown ||
             tridentSwipe && timer > tridentSwipeCooldown)
         {
@@ -89,10 +102,12 @@ public class PlayerAttackScript : MonoBehaviour
             tridentStabModel.SetActive(false);
             tridentSwipeModel.SetActive(false);
         }
+*/
     }
 
     public void OnMelee(InputAction.CallbackContext context)
     {
+        /* Old Stuff
         if (tridentFree)
         {
             tridentFree = false;
@@ -107,11 +122,12 @@ public class PlayerAttackScript : MonoBehaviour
 
             timer = 0.0f;
         }
+        */
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        /*
+        /* Old Stuff
         if (tridentFree)
         {
             tridentFree = false;
@@ -124,8 +140,8 @@ public class PlayerAttackScript : MonoBehaviour
             trident.GetComponent<Rigidbody>().AddForce(tridentThrowForce * gameObject.transform.forward);
 
             trident.GetComponent<TridentPickupScript>().damageAmount = tridentThrowDamage;
+            isShoot = false;
         }*/
-        // isShoot = false;
 
         if(context.started)
         {
@@ -140,78 +156,83 @@ public class PlayerAttackScript : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        if(!aimCam.activeInHierarchy)
-        {
-            mainCam.SetActive(false);
-            aimCam.SetActive(true);
-            aimControls.aiming = true;
-            shootingLine.SetActive(true);
-          //  aimCam.GetComponentInChildren<GameObject>().SetActive(true);
-            //UpdateTrajectory();
-        }
+        aimControls.aiming = true;
+        CM_AimCam.m_XAxis = CM_WideCam.m_XAxis;
+        CM_AimCam.m_YAxis = CM_WideCam.m_YAxis;
+        CM_AimCam.Priority = 11;
 
-        if(context.canceled)
+        if (context.canceled)
         {
-            mainCam.SetActive(true);
-            aimCam.SetActive(false);
+            CM_WideCam.m_XAxis = CM_AimCam.m_XAxis;
+            CM_WideCam.m_YAxis = CM_AimCam.m_YAxis;
+            CM_AimCam.Priority = 9;
             aimControls.aiming = false;
-            shootingLine.SetActive(false);
-         //   aimCam.GetComponentInChildren<GameObject>().SetActive(false);
+        }
+    }
+    //private void LateUpdate()
+    //{
+    //    if (changeCam)
+    //    {
+    //        //CM_MainCam.m_YAxis.Value = startYValue;
+    //        CM_MainCam.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CM_MainCam.m_YAxis.Value, 0), Quaternion.Euler(0, startYValue, 0), 5 * Time.deltaTime).y;
+
+    //        if (Mathf.Abs(CM_MainCam.m_YAxis.Value - startYValue) < 0.1f)
+    //        {
+    //            changeCam = false;
+    //        }
+    //    }
+    //}
+
+
+    /* Old Stuff
+        public void AddEnemyToTridentStab(GameObject obj)
+        {
+            stabEnemiesInRange.Add(obj);
         }
 
-    }
-
-
-
-
-    public void AddEnemyToTridentStab(GameObject obj)
-    {
-        stabEnemiesInRange.Add(obj);
-    }
-
-    public void RemoveEnemyFromTridentStab(GameObject obj)
-    {
-        stabEnemiesInRange.Remove(obj);
-    }
-
-    public void AddEnemyToTridentSwipe(GameObject obj)
-    {
-        swipeEnemiesInRange.Add(obj);
-    }
-
-    public void RemoveEnemyFromTridentSwipe(GameObject obj)
-    {
-        swipeEnemiesInRange.Remove(obj);
-    }
-
-    void cleanupLists()
-    {
-        foreach (GameObject e in stabEnemiesInRange)
+        public void RemoveEnemyFromTridentStab(GameObject obj)
         {
+            stabEnemiesInRange.Remove(obj);
+        }
 
-            if (e == null)
+        public void AddEnemyToTridentSwipe(GameObject obj)
+        {
+            swipeEnemiesInRange.Add(obj);
+        }
+
+        public void RemoveEnemyFromTridentSwipe(GameObject obj)
+        {
+            swipeEnemiesInRange.Remove(obj);
+        }
+
+        void cleanupLists()
+        {
+            foreach (GameObject e in stabEnemiesInRange)
             {
-                stabEnemiesInRange.Remove(e);
-                break;
+
+                if (e == null)
+                {
+                    stabEnemiesInRange.Remove(e);
+                    break;
+                }
+
             }
 
-        }
-
-        foreach (GameObject e in swipeEnemiesInRange)
-        {
-
-            if (e == null)
+            foreach (GameObject e in swipeEnemiesInRange)
             {
-                swipeEnemiesInRange.Remove(e);
-                break;
+
+                if (e == null)
+                {
+                    swipeEnemiesInRange.Remove(e);
+                    break;
+                }
+
             }
-
         }
-    }
 
-    public void returnTrident()
-    {
-        tridentFree = true;
-    }
-
+        public void returnTrident()
+        {
+            tridentFree = true;
+        }
+    */
 }

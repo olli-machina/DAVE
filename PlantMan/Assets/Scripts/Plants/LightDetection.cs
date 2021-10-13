@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class LightDetection : MonoBehaviour
 {
-    public float timeBetweenChecks = 1.0f;
-    public float maxRaycastDistance = 100.0f;
+    public float timeBetweenChecks = 1.0f; //*
+    public float maxRaycastDistance = 100.0f; //*
 
-    public bool isInLight = false;
+    public bool isInLight = false; //*
 
-    public bool shouldUseSun;
+    public bool shouldUseSun; //*
 
-    public float timeToGrow = 3.0f;
-    public float timeToShrink = 2.0f;
+    public float timeToGrow = 3.0f; //*
+    public float timeToShrink = 2.0f; //*
     public float timeToPlatform = 2.0f;
-    public float timeToDeath = 5.0f;
+    public float timeToDeath = 5.0f; //*
 
     public float growHeight = 10.0f;
 
@@ -23,19 +23,19 @@ public class LightDetection : MonoBehaviour
     public GameObject stalk;
     public GameObject platform;
 
-    private float timer;
-    private float growingTimer;
-    private float platformTimer;
-    private float deathTimer;
+    private float timer; //*
+    private float growingTimer; //*
+    private float platformTimer; 
+    private float deathTimer; //*
 
-    private GameObject sun;
+    private GameObject sun; //*
 
-    private Vector3 seedScale;
+    private Vector3 seedScale; //*
     private Vector3 growScale;
 
     private Vector3 platScale;
 
-    private int lightValue;
+    private int lightValue; //*
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +75,12 @@ public class LightDetection : MonoBehaviour
         }
     }
 
+   /*
+    * Purpose: Determine if the seed is colliding in the sun spot
+    * References: Update Function
+    * Scripts Called: ---
+    * Status: working
+    */
     void CheckIfInSun()
     {
         if(shouldUseSun)
@@ -93,10 +99,14 @@ public class LightDetection : MonoBehaviour
         
     }
 
+   /*
+    * Purpose: Growing process when seed is actively in the light
+    * References: Update Function
+    * Scripts Called: ---
+    * Status: working
+    */
     void Grow()
-    {
-        
-
+    {   
         if(growingTimer > 1.0f)
         {
             if (platformTimer < 1.0f)
@@ -130,6 +140,12 @@ public class LightDetection : MonoBehaviour
         platform.transform.localPosition = platPosition;
     }
 
+   /*
+    * Purpose: Shrink the seed back down once the seed leaves the light
+    * References: Update function
+    * Scripts Called: ---
+    * Status: working
+    */
     void Shrink()
     {
         if(platformTimer > 0.0f)

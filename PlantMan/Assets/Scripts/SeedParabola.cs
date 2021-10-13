@@ -38,7 +38,6 @@ public class SeedParabola : MonoBehaviour
         Vector3 pos = Vector3.Lerp(start, end, animTime);
         pos.y += animCurve.Evaluate(animTime);
         transform.position = pos;
-        Debug.Log("New position set to: " + pos);
     }
 
     public void UpdateTrajectory()

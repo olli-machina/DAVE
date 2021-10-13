@@ -121,24 +121,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveTarget()
     {
+       
+        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+        Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
 
-        if(aimTarget.GetComponent<AimBoxScript>().onWall ^ isOnWall)
-        {
-            return;
-        }
-
-        Vector3 cameraForward = Vector3.ProjectOnPlane(Camera.main.transform.forward, Vector3.up);
-        Quaternion rotationToCamera = Quaternion.LookRotation(cameraForward, Vector3.up);
-
-        Vector3 rotateMovement = new Vector3(aimMovement.x, 0.0f, aimMovement.z);
-        if (changedInput)
-        {
-            rotateMovement = rotationToCamera * rotateMovement;
-            changedInput = false;
-        }
-        aimMovement = new Vector3(rotateMovement.x, aimMovement.y, rotateMovement.z);
-        aimTarget.transform.position += aimMovement * 10f * Time.deltaTime;
+        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black; //ray facing forward
+        Gizmos.DrawRay(aimTarget.transform.position, aimTarget.transform.forward);
 
-        //aimTarget.transform.localPosition += (new Vector3(aimMovement.x, 0, aimMovement.y).normalized) * 25f * Time.deltaTime;
+    }
+  
 }

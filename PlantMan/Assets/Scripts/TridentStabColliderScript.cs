@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class TridentStabColliderScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    //// Start is called before the first frame update
+    //void Start()
+    //{
         
-    }
+    //}
 
-    // Update is called once per frame
-    void Update()
-    {
+    //// Update is called once per frame
+    //void Update()
+    //{
         
-    }
+    //}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-            GetComponentInParent<PlayerAttackScript>().AddEnemyToTridentStab(other.gameObject);
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Enemy")
+    //        GetComponentInParent<PlayerAttackScript>().AddEnemyToTridentStab(other.gameObject);
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy")
-            GetComponentInParent<PlayerAttackScript>().RemoveEnemyFromTridentStab(other.gameObject);
-    }
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Enemy")
+    //        GetComponentInParent<PlayerAttackScript>().RemoveEnemyFromTridentStab(other.gameObject);
+    //}
 }

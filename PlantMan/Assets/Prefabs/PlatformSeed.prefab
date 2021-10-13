@@ -281,12 +281,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7812825639662963003}
-  - component: {fileID: 7812825639662963002}
   - component: {fileID: 7812825639662963001}
   - component: {fileID: 7812825639662963000}
+  - component: {fileID: 4733889913244242371}
   - component: {fileID: 345340635715585577}
   m_Layer: 10
-  m_Name: Seed
+  m_Name: PlatformSeed
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,30 +309,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7812825639662963002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7812825639662962999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98945274e2dfba543be1d622f18e9564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBetweenChecks: 1
-  maxRaycastDistance: 100
-  isInLight: 0
-  shouldUseSun: 0
-  timeToGrow: 3
-  timeToShrink: 1.5
-  timeToPlatform: 2
-  timeToDeath: 5
-  growHeight: 2
-  platformDimentions: {x: 2, y: 2}
-  stalk: {fileID: 7812825638619357302}
-  platform: {fileID: 7812825638214993053}
 --- !u!54 &7812825639662963001
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -362,6 +338,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startForce: 0
+--- !u!114 &4733889913244242371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812825639662962999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591abf220ee4f8a4986c4e4c6943f774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenChecks: 1
+  maxRaycastDistance: 100
+  isInLight: 0
+  shouldUseSun: 0
+  timeToGrow: 3
+  timeToShrink: 2
+  timeToDeath: 5
+  timeToPlatform: 2
+  growHeight: 10
+  platformDimentions: {x: 0, y: 0}
+  stalk: {fileID: 7812825638619357302}
+  platform: {fileID: 7812825638214993053}
 --- !u!114 &345340635715585577
 MonoBehaviour:
   m_ObjectHideFlags: 0
