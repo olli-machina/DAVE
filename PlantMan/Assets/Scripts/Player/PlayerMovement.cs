@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (aimTarget.GetComponent<AimBoxScript>().onWall)
         {
-            aimMovement = new Vector3(rawInput.x, rawInput.y, 0);
+            aimMovement = new Vector3(0, rawInput.y, 0);
             isOnWall = true;
         }
         else
@@ -121,12 +121,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveTarget()
     {
-       
-        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
-        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-        Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
 
-        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+        //float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+        //aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+        //Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
+
+        if (!aimTarget.GetComponent<AimBoxScript>().onWall)
+        {
+            float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+            aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+            //Vector3 forward = Vector3.ProjectOnPlane(aimTarget.transform.forward, Vector3.up);
+            Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
+
+            aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+        }
+        else
+        {
+            float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
+            aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
+            Vector3 moveDir = new Vector3(0, aimMovement.y, 0);
+            aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
+        }
     }
     private void OnDrawGizmos()
     {
@@ -134,5 +149,5 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawRay(aimTarget.transform.position, aimTarget.transform.forward);
 
     }
-  
+
 }

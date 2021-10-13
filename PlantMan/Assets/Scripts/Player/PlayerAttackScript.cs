@@ -147,26 +147,55 @@ public class PlayerAttackScript : MonoBehaviour
         {
             GameObject seed = Instantiate(seedToShoot);
             SeedParabola pathScript = seed.GetComponent<SeedParabola>();
+            GameObject aimObj = GameObject.Find("Aim");
 
             seed.transform.position = gameObject.transform.position;
-            pathScript.end = GameObject.Find("Aim").transform.position;
+            pathScript.end = aimObj.transform.position;
         }
+
         
     }
 
     public void OnAim(InputAction.CallbackContext context)
     {
+        //aimControls.aiming = true;
+        //CM_AimCam.m_XAxis = CM_WideCam.m_XAxis;
+        //CM_AimCam.m_YAxis = CM_WideCam.m_YAxis;
+        //CM_AimCam.Priority = 11;
+
+        //if (context.canceled)
+        //{
+        //    CM_WideCam.m_XAxis = CM_AimCam.m_XAxis;
+        //    CM_WideCam.m_YAxis = CM_AimCam.m_YAxis;
+        //    CM_AimCam.Priority = 9;
+        //    aimControls.aiming = false;
+        Vector3 moveInFront = Vector3.forward * 1.5f;
+        aimMarker.transform.position = new Vector3(transform.localPosition.x + moveInFront.x, 4, transform.localPosition.z + moveInFront.z + 3f);
+
         aimControls.aiming = true;
-        CM_AimCam.m_XAxis = CM_WideCam.m_XAxis;
-        CM_AimCam.m_YAxis = CM_WideCam.m_YAxis;
-        CM_AimCam.Priority = 11;
+        //aimCam.SetActive(true);
+        //wideCam.SetActive(false);
 
         if (context.canceled)
         {
-            CM_WideCam.m_XAxis = CM_AimCam.m_XAxis;
-            CM_WideCam.m_YAxis = CM_AimCam.m_YAxis;
-            CM_AimCam.Priority = 9;
+            //wideCam.SetActive(true);
+            //aimCam.SetActive(false);
+            GameObject.Find("Aim").GetComponent<AimBoxScript>().onWall = false;
             aimControls.aiming = false;
+        }
+    }
+    private void LateUpdate()
+    {
+        if (changeCam)
+        {
+            //CM_MainCam.m_YAxis.Value = startYValue;
+            CM_MainCam.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CM_MainCam.m_YAxis.Value, 0), Quaternion.Euler(0, startYValue, 0), 5 * Time.deltaTime).y;
+
+            if (Mathf.Abs(CM_MainCam.m_YAxis.Value - startYValue) < 0.1f)
+            {
+                changeCam = false;
+            }
+
         }
     }
     //private void LateUpdate()
