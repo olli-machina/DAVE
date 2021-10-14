@@ -34,17 +34,4 @@ public class AimBoxScript : MonoBehaviour
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Wall")
-    //        onWall = false;
-    //}
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Wall")
-    //        onWall = true;
-    //    else if (other.gameObject.tag == "Ground")
-    //        onWall = false;
-    //}
 }

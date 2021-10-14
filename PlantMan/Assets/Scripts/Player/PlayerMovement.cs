@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     public GameObject aimTarget;
     bool changedInput;
+    public bool sapRun;
 
     bool isOnWall;
 
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         //gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
         isOnWall = false;
+        sapRun = false;
     }
 
     void FixedUpdate()
@@ -70,7 +72,15 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 inputVec = context.ReadValue<Vector2>();
 
-        direction = new Vector3(inputVec.x, 0f, inputVec.y);
+        if (sapRun)
+        {
+            direction = new Vector3(inputVec.x, inputVec.y, 0f);
+        }
+        else
+        {
+            direction = new Vector3(inputVec.x, 0f, inputVec.y);
+        }
+
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -90,8 +100,17 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocity = rb.velocity;
         Vector3 velocityChange = (targetVelocity - velocity);
         velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-        velocityChange.y = 0;
+
+        if (sapRun)
+        {
+            velocityChange.y = Mathf.Clamp(velocityChange.y, -maxVelocityChange, maxVelocityChange);
+            velocityChange.z = 0;
+        }
+        else
+        {
+            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+            velocityChange.y = 0;
+        }
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 

@@ -21,7 +21,6 @@ class PlatformPlant : PlantType
     public override void Update()
     {
         timer += Time.deltaTime;
-            Debug.Log(timer);
 
         if (timer > timeBetweenChecks)
         {
