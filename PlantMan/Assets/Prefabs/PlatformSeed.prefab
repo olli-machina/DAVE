@@ -355,11 +355,11 @@ MonoBehaviour:
   isInLight: 0
   shouldUseSun: 0
   timeToGrow: 3
-  timeToShrink: 2
+  timeToShrink: 1.5
   timeToDeath: 5
   timeToPlatform: 2
-  growHeight: 10
-  platformDimentions: {x: 0, y: 0}
+  growHeight: 2
+  platformDimentions: {x: 2, y: 2}
   stalk: {fileID: 7812825638619357302}
   platform: {fileID: 7812825638214993053}
 --- !u!114 &345340635715585577

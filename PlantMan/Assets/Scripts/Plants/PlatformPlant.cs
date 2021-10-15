@@ -47,15 +47,13 @@ class PlatformPlant : PlantType
 
         lightValue = 0;
 
-        growScale = seedScale;
-        growScale.y = growHeight;
-
-        
     }
 
     private void Start()
     {
         seedScale = stalk.transform.localScale; //?
+        growScale = seedScale;
+        growScale.y = growHeight;
         platScale = platform.transform.localScale;
     }
 

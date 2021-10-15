@@ -52,11 +52,11 @@ public class PlayerAttackScript : MonoBehaviour
         stabEnemiesInRange = new List<GameObject>();
         swipeEnemiesInRange = new List<GameObject>();
         */
-        CM_MainCam = mainCam.GetComponent<CinemachineFreeLook>();
-        CM_WideCam = wideCam.GetComponent<CinemachineFreeLook>();
-        CM_AimCam = aimCam.GetComponent<CinemachineFreeLook>();
+        //CM_MainCam = mainCam.GetComponent<CinemachineFreeLook>();
+        //CM_WideCam = wideCam.GetComponent<CinemachineFreeLook>();
+        //CM_AimCam = aimCam.GetComponent<CinemachineFreeLook>();
 
-        startYValue = CM_MainCam.m_YAxis.Value;
+        //startYValue = CM_MainCam.m_YAxis.Value;
     }
 
     // Update is called once per frame

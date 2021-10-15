@@ -51,13 +51,13 @@ public class NewInputLook : MonoBehaviour
         {
             freeLookComponent.m_YAxis.Value += lookMovement.y * turnSpeed * Time.deltaTime;
             freeLookComponent.m_XAxis.Value += lookMovement.x * turnSpeed * Time.deltaTime;
-            aimTarget.GetComponent<PositionConstraint>().enabled = false;
+            //aimTarget.GetComponent<PositionConstraint>().enabled = false;
         }
 
         else
         {
             freeLookComponent.m_XAxis.Value += lookMovement.x * .5f * Time.deltaTime;
-            aimTarget.GetComponent<PositionConstraint>().enabled = true;
+            //aimTarget.GetComponent<PositionConstraint>().enabled = true;
         }
     }
 }
