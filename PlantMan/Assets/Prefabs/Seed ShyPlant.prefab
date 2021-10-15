@@ -311,9 +311,10 @@ MonoBehaviour:
   timeToDeath: 5
   timeToMax: 2
   timeToHide: 3
-  launchForce: 20
+  launchForce: 700
   foliageDimentions: {x: 0, y: 0}
   growMultiplier: 5
+  launchCoolDown: 0
   foliage: {fileID: 7812825638619357302}
   shrinkFoliage: {fileID: 7812825638697625284}
   playerInRange: 0

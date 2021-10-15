@@ -30,7 +30,7 @@ public class AimBoxScript : MonoBehaviour
         else if (other.gameObject.tag == "Ground")
         {
             onWall = false;
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 4.25f, gameObject.transform.position.z);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 4.75f, gameObject.transform.position.z);
         }
     }
 

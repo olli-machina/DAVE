@@ -170,7 +170,7 @@ public class PlayerAttackScript : MonoBehaviour
         //    CM_AimCam.Priority = 9;
         //    aimControls.aiming = false;
         Vector3 moveInFront = Vector3.forward * 1.5f;
-        aimMarker.transform.position = new Vector3(transform.localPosition.x + moveInFront.x, 4, transform.localPosition.z + moveInFront.z + 3f);
+        aimMarker.transform.position = new Vector3(transform.localPosition.x + moveInFront.x, 4.75f, transform.localPosition.z + moveInFront.z + 3f);
 
         aimControls.aiming = true;
         //aimCam.SetActive(true);

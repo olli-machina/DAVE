@@ -174,7 +174,7 @@ public class LaunchingPlant : PlantType
         if (launching)
         {
             foliage.transform.localScale = growScale;
-            player.GetComponentInChildren<Rigidbody>().AddForce(0f, 2000f, 0f);
+            player.GetComponentInChildren<Rigidbody>().AddForce(0f, launchForce, 0f);
             Debug.Log("Hidden");
             launching = false;
             playerInRange = false;
