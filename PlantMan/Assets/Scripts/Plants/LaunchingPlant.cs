@@ -77,7 +77,7 @@ public class LaunchingPlant : PlantType
 
     private void Start()
     {
-        seedScale = foliage.transform.localScale; //?
+        startingScale = foliage.transform.localScale; //?
         fullGrown = false;
         //foliageScale = foliage.transform.localScale;
     }
@@ -94,10 +94,10 @@ public class LaunchingPlant : PlantType
             growingTimer += Time.deltaTime / timeToGrow;
 
 
-        Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
+        Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
         Vector3 position = foliage.transform.localPosition;
 
-        float height = scale.y - seedScale.y;
+        float height = scale.y - startingScale.y;
         position.y = height / 2.0f;
 
         foliage.transform.localScale = scale;
@@ -121,10 +121,10 @@ public class LaunchingPlant : PlantType
 
         if (!launching)
         {
-            Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
+            Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
             Vector3 position = foliage.transform.localPosition;
 
-            float height = scale.y - seedScale.y;
+            float height = scale.y - startingScale.y;
             position.y = height / 2.0f;
 
             foliage.transform.localScale = scale;
@@ -160,7 +160,7 @@ public class LaunchingPlant : PlantType
         Vector3 scale = Vector3.Lerp(hideScale, growScale, growingTimer);
         Vector3 position = foliage.transform.localPosition;
 
-        float height = scale.y - seedScale.y;
+        float height = scale.y - startingScale.y;
         position.y = height / 2.0f;
 
         foliage.transform.localScale = scale;

@@ -11,13 +11,11 @@ public class PlantManager : MonoBehaviour
     };
 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        PlantType platformPlant = new PlantType();
-    }
-
+//    // Start is called before the first frame update
+//    void Start()
+//    {
+//        PlantType platformPlant = new PlantType();
+//    }
 
 }
 
@@ -82,7 +80,7 @@ public class PlantType : MonoBehaviour
     public virtual void Shrink() { }
 
 
-    protected Vector3 seedScale;
+    protected Vector3 startingScale;
     protected int lightValue;
     protected GameObject sun;
 }

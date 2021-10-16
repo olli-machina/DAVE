@@ -15,8 +15,7 @@ public class SeedParabola : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        start = transform.position;
-        //end = new Vector3(9999, 9999, 9999);
+        start = transform.position; //start line at the player
         animTime = 0.0f;
     }
 
@@ -24,24 +23,18 @@ public class SeedParabola : MonoBehaviour
     void Update()
     {
         animTime += Time.deltaTime / .5f;
-        if (animTime > 1.0f)
+        if (animTime > 1.0f) //when the seed has finished parabola
         {
-            // transform.position = end;
-            Vector3 onePointBeforeFinal = Vector3.Lerp(start, end, 1.0f - Time.deltaTime / .5f);
+            Vector3 onePointBeforeFinal = Vector3.Lerp(start, end, 1.0f - Time.deltaTime / .5f); //move back a frame to not collide with box
             onePointBeforeFinal.y += animCurve.Evaluate(1.0f - Time.deltaTime / .5f);
             Vector3 finalVel = (end - onePointBeforeFinal) * 20f;
             GetComponent<Rigidbody>().AddForce(finalVel);
-            Destroy(this);
+            Destroy(this); //destroy the parabola
             return;
         }
 
         Vector3 pos = Vector3.Lerp(start, end, animTime);
         pos.y += animCurve.Evaluate(animTime);
-        transform.position = pos;
-    }
-
-    public void UpdateTrajectory()
-    {
-
+        transform.position = pos; //draw out parabola on line
     }
 }

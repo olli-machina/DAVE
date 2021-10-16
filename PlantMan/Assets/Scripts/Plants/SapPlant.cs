@@ -15,11 +15,8 @@ public class SapPlant : PlantType
     public bool isDripping;
     public float newSpeed;
 
-    [SerializeField]
     private float dripTimer;
     private float timer;
-
-    private float deathTimer;
 
     public override void Update()
     {
@@ -27,7 +24,6 @@ public class SapPlant : PlantType
 
         if (timer > timeBetweenChecks)
         {
-            //base.CheckIfInSun();
             timer = 0.0f;
         }
 
@@ -38,7 +34,7 @@ public class SapPlant : PlantType
 
     }
 
-    SapPlant() : base() //???
+    SapPlant() : base()
     {
         timer = 0f;
         dripTimer = 0f;
@@ -53,21 +49,28 @@ public class SapPlant : PlantType
         startPos = sap.transform.localPosition;
     }
 
+    /*
+    * Purpose: if player shoots sap plant on the wall- sap starts dripping in this function
+    * References: Update() called if isDripping is true
+    * Scripts Called: None
+    * Status: working
+    */
     public void Drip()
-    {
+    { 
+        //drip for correct duration
         if(dripTimer > timeDrip)
         {
             isDripping = false;
             dripTimer = 0;
-            return;
+            return; //leave function if it is done dripping
         }
         else
         {
             dripTimer += Time.deltaTime;
         }
 
-        Vector3 scale = Vector3.Lerp(seedScale, dripScale, dripTimer);
-        Vector3 movePosition = new Vector3(startPos.x, -dripDist/2f, startPos.z);
+        Vector3 scale = Vector3.Lerp(startingScale, dripScale, dripTimer); //scale to floor
+        Vector3 movePosition = new Vector3(startPos.x, -dripDist/2f, startPos.z); //move y position as it drips because it scales both ways
         Vector3 position = Vector3.Lerp(startPos, movePosition, dripTimer);
 
         sap.transform.localScale = scale;

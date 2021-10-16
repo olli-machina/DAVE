@@ -39,17 +39,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     private void Update()
     {
         
-        if (currentlyActive && seedSwitchUI.gameObject.activeInHierarchy)
+        if (currentlyActive && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
         {
             Vector2 dirNorm = dir.normalized;
 
-            bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x));
+            bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x)); //Determine which quadrant our movement selection is in
 
-            bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));
+            bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));//Determine which quadrant our movement selection is in
 
+            //Y is top, G is right, R is down, B ir left
             if (dirNorm.y > 0.0f && dirNorm.x > 0.0f) //Q1
             {
                 if (yGreater)
@@ -113,6 +115,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /*
+    * Purpose: Pauses or unpauses the game, and activates the Pause UI
+    * References: called by InputManager attached to player object
+    * Scripts Called: None
+    * Status: working
+    */
     public void Pause(InputAction.CallbackContext context)
     {
         if(Time.timeScale == 1.0f && !currentlyActive)
@@ -130,6 +138,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /*
+    * Purpose: Pauses or unpauses the game, and activates the Seed Switch UI. Allows the player to switch the active seed in the UI
+    * References: called by InputManager attached to player object
+    * Scripts Called: PlayerAttackScript on player object
+    * Status: working
+    */
     public void SeedSwitch(InputAction.CallbackContext context)
     {
         if(context.started && !currentlyActive)
@@ -167,6 +181,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /*
+    * Purpose: sets movement direction vector, so that it can be used by the SeedSwitch UI
+    * References: called by InputManager attached to player object
+    * Scripts Called: None
+    * Status: working
+    */
     public void Direction(InputAction.CallbackContext context)
     {
         
@@ -174,6 +194,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    /*
+    * Purpose: Switches the seed to match the seed chosen in the update function
+    * References: called by Update()
+    * Scripts Called: None
+    * Status: working
+    */
     private void updateSeed(seed newSeed)
     {
         

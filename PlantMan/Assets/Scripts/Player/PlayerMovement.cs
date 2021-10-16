@@ -13,19 +13,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     public GameObject aimTarget;
-    bool changedInput;
     public bool sapRun;
 
-    bool isOnWall;
-
     Vector2 rawInput;
-    //GameObject gameManager;
 
     private void Start()
     {
-        //gameManager = GameObject.Find("GameManager");
         rb = gameObject.GetComponent<Rigidbody>();
-        isOnWall = false;
         sapRun = false;
     }
 
@@ -40,58 +34,90 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+     * Purpose: If the aim box target collides with the wall, change direction to be x,y ranther than x,z
+     * References: 
+     * Scripts Called: AimBoxScript
+     * Status: Find It***
+     */
     public void SetAimDirection(Vector2 input)
     {
-        changedInput = true;
-
         rawInput = input;
 
         if (aimTarget.GetComponent<AimBoxScript>().onWall)
         {
             aimMovement = new Vector3(0, rawInput.y, 0);
-            isOnWall = true;
         }
         else
         {
             aimMovement = new Vector3(rawInput.x, 0, rawInput.y);
-            isOnWall = false;
         }
     }
 
+    /*
+     * Purpose: Allow player to exit game by pressing esc through input manager
+     * References: Input manager attached to player
+     * Scripts Called: ---
+     * Status: working
+     */
     public void OnQuit(InputAction.CallbackContext context)
     {
         Application.Quit();
     }
 
+    /*
+     * Purpose: Allow player to re-load the current level by pressing a button
+     * References: Input manager attached to player
+     * Scripts Called: ---
+     * Status: working
+     */
     public void OnRestart(InputAction.CallbackContext context)
     {
         SceneManager.LoadScene("MergeTesting");
     }
 
+    /*
+     * Purpose: Control player movement direction plane for sap plant
+     * References: Input manager attached to player
+     * Scripts Called: ---
+     * Status: working
+     */
     public void Direction(InputAction.CallbackContext context)
     {
         Vector2 inputVec = context.ReadValue<Vector2>();
 
-        if (sapRun)
+        if (sapRun) //if running on sap wall, move up
         {
             direction = new Vector3(inputVec.x, inputVec.y, 0f);
         }
-        else
+        else //if not, move forward
         {
             direction = new Vector3(inputVec.x, 0f, inputVec.y);
         }
 
     }
 
+    /*
+     * Purpose: Read player input to jump and execute action
+     * References: Input manager attached to player
+     * Scripts Called: ---
+     * Status: working
+     */
     public void Jump(InputAction.CallbackContext context)
     {
         if(isGrounded)
             rb.AddForce(new Vector3(0, jumpForce, 0));
     }
 
+    /*
+     * Purpose: Update player movement every frame for smooth controls
+     * References: Update()
+     * Scripts Called: ---
+     * Status: working
+     */
     public void OnMove()
     {
-       
+       //get target velocity for player based on movement direction in Direction()
         Vector3 targetVelocity = direction;
         targetVelocity = transform.TransformDirection(targetVelocity);
         targetVelocity = targetVelocity.normalized * speed * Time.deltaTime;
@@ -101,16 +127,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 velocityChange = (targetVelocity - velocity);
         velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
 
+        //if they are running up a wall of sap, z = 0
         if (sapRun)
         {
             velocityChange.y = Mathf.Clamp(velocityChange.y, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = 0;
         }
+        //otherwise, y = 0
         else
         {
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
         }
+        //add the force to the player
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
     }
 
@@ -138,22 +167,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /*
+     * Purpose: Move the aim target when the player is in an aim mode
+     * References: Update()
+     * Scripts Called: AimBoxScript
+     * Status: working
+     */
     public void MoveTarget()
     {
-
-        //float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
-        //aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-        //Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
-
+        //if the box is not on the wall, move on x and z plane
         if (!aimTarget.GetComponent<AimBoxScript>().onWall)
         {
             float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
             aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-            //Vector3 forward = Vector3.ProjectOnPlane(aimTarget.transform.forward, Vector3.up);
             Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
 
             aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
         }
+
+        //if the box is on the wall, move on the x and y plane
         else
         {
             float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
@@ -162,6 +194,13 @@ public class PlayerMovement : MonoBehaviour
             aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
         }
     }
+
+    /*
+     * Purpose: Draw debugging gizmo facing forward from aim box
+     * References: ---
+     * Scripts Called: ---
+     * Status: working
+     */
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black; //ray facing forward

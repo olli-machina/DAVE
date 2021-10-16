@@ -5,7 +5,7 @@ using UnityEngine;
 class PlatformPlant : PlantType
 {
     public float timeToPlatform = 2.0f;
-    public float growHeight = 10.0f;
+    public float growHeight = 2.0f;
     public Vector2 platformDimentions;
     public GameObject stalk;
     public GameObject platform;
@@ -24,7 +24,7 @@ class PlatformPlant : PlantType
 
         if (timer > timeBetweenChecks)
         {
-            base.CheckIfInSun();
+            CheckIfInSun();
             timer = 0.0f;
         }
 
@@ -39,7 +39,7 @@ class PlatformPlant : PlantType
 
     }
 
-    PlatformPlant() : base() //???
+    PlatformPlant() : base()
     {
         timer = 0f;
         growingTimer = 0f;
@@ -51,26 +51,32 @@ class PlatformPlant : PlantType
 
     private void Start()
     {
-        seedScale = stalk.transform.localScale; //?
-        growScale = seedScale;
+        startingScale = stalk.transform.localScale; //Starting scale
+        growScale = startingScale;
         growScale.y = growHeight;
         platScale = platform.transform.localScale;
     }
 
+    /*
+    * Purpose: Handles the animation for the plant growing
+    * References: called by Update() if isInLight
+    * Scripts Called: None
+    * Status: working
+    */
     public override void Grow()
     {
-        if (growingTimer > 1.0f)
+        if (growingTimer > 1.0f) //If the stalk is done growing
         {
-            if (platformTimer < 1.0f)
+            if (platformTimer < 1.0f) //If platform is not done growing
                 platformTimer += Time.deltaTime / timeToPlatform;
             else
-                return;
+                return; //Growing completely done
 
-            Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
+            Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer); //Grow platform
 
             platform.layer = 0;
             platform.transform.localScale = pScale;
-            platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
+            platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up); //Make platform face upwards
 
         }
         else
@@ -78,11 +84,11 @@ class PlatformPlant : PlantType
             growingTimer += Time.deltaTime / timeToGrow;
         }
 
-        Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
+        Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
         Vector3 position = stalk.transform.localPosition;
         Vector3 platPosition = platform.transform.localPosition;
 
-        float height = scale.y - seedScale.y;
+        float height = scale.y - startingScale.y;
         position.y = height / 2.0f;
         platPosition.y = height;
 
@@ -92,6 +98,13 @@ class PlatformPlant : PlantType
         platform.transform.localPosition = platPosition;
     }
 
+
+    /*
+    * Purpose: Handles the animation for the plant shrinking
+    * References: called by Update() if not isInLight
+    * Scripts Called: None
+    * Status: working
+    */
     public override void Shrink()
     {
         if (platformTimer > 0.0f)
@@ -119,11 +132,11 @@ class PlatformPlant : PlantType
             deathTimer = 0.0f;
 
 
-        Vector3 scale = Vector3.Lerp(seedScale, growScale, growingTimer);
+        Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
         Vector3 position = stalk.transform.localPosition;
         Vector3 platPosition = platform.transform.localPosition;
 
-        float height = scale.y - seedScale.y;
+        float height = scale.y - startingScale.y;
         position.y = height / 2.0f;
         platPosition.y = height;
 
