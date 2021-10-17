@@ -58,7 +58,7 @@
     <Compile Include="Assets\Scripts\Plants\ParabolaPath.cs" />
     <Compile Include="Assets\Scripts\AimBoxScript.cs" />
     <Compile Include="Assets\Scripts\Plants\SapObjScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerControls.cs" />
+    <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\NextSemester\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Plants\PlatformPlant.cs" />
     <Compile Include="Assets\Scripts\Plants\LaunchingPlant.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Player\NewInputLook.cs" />
     <Compile Include="Assets\Scripts\Plants\PlantManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\PlayerAim.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
