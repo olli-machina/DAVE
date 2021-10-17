@@ -10,13 +10,6 @@ public class PlantManager : MonoBehaviour
         LaunchPad
     };
 
-
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-//        PlantType platformPlant = new PlantType();
-//    }
-
 }
 
 public class PlantType : MonoBehaviour
