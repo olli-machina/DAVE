@@ -114,33 +114,42 @@ public class PlayerMovement : MonoBehaviour
      * References: Update()
      * Scripts Called: ---
      * Status: working
+     * Contributers: ???, Brandon L'Abbe
      */
     public void OnMove()
     {
-       //get target velocity for player based on movement direction in Direction()
-        Vector3 targetVelocity = direction;
-        targetVelocity = transform.TransformDirection(targetVelocity);
-        targetVelocity = targetVelocity.normalized * speed * Time.deltaTime;
+        bool aiming = GetComponent<PlayerAim>().getIsAiming();
 
-        // Apply a force that attempts to reach our target velocity
-        Vector3 velocity = rb.velocity;
-        Vector3 velocityChange = (targetVelocity - velocity);
-        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-
-        //if they are running up a wall of sap, z = 0
-        if (sapRun)
+        if (!aiming)
         {
-            velocityChange.y = Mathf.Clamp(velocityChange.y, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = 0;
+            //get target velocity for player based on movement direction in Direction()
+            Vector3 targetVelocity = direction;
+            targetVelocity = transform.TransformDirection(targetVelocity);
+            targetVelocity = targetVelocity.normalized * speed * Time.deltaTime;
+
+            // Apply a force that attempts to reach our target velocity
+            Vector3 velocity = rb.velocity;
+            Vector3 velocityChange = (targetVelocity - velocity);
+            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+
+            //if they are running up a wall of sap, z = 0
+            if (sapRun)
+            {
+                velocityChange.y = Mathf.Clamp(velocityChange.y, -maxVelocityChange, maxVelocityChange);
+                velocityChange.z = 0;
+            }
+            //otherwise, y = 0
+            else
+            {
+                velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+                velocityChange.y = 0;
+            }
+            //add the force to the player
+            rb.AddForce(velocityChange, ForceMode.VelocityChange);
         }
-        //otherwise, y = 0
         else
-        {
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0;
-        }
-        //add the force to the player
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            rb.velocity = Vector3.zero;
+       
     }
 
     private void OnCollisionEnter(Collision collision)
