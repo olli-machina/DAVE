@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private bool isGrounded;
     public GameObject aimTarget;
-    public bool sapRun;
+    public bool sapRun, sapSlow;
+    private float originalSpeed;
 
     Vector2 rawInput;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         sapRun = false;
+        originalSpeed = speed;
     }
 
     void FixedUpdate()
@@ -32,6 +34,14 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+        //if(sapSlow)
+        //{
+        //    speed = originalSpeed/3;
+        //}
+        //else
+        //{
+        //    speed = originalSpeed;
+        //}
     }
 
     /*

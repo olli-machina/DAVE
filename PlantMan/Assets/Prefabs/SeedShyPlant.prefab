@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 6025410927215063254}
   - component: {fileID: 1378298206832539027}
   m_Layer: 10
-  m_Name: Seed ShyPlant
+  m_Name: SeedShyPlant
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

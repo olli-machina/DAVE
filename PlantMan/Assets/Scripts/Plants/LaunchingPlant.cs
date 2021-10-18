@@ -23,7 +23,6 @@ public class LaunchingPlant : PlantType
     private float hideTimer;
     private float growingTimer;
     private float deathTimer;
-    private float cooldownTimer;
 
     public bool playerInRange;
     private bool fullGrown;
@@ -37,7 +36,7 @@ public class LaunchingPlant : PlantType
 
         if (timer > timeBetweenChecks)
         {
-            base.CheckIfInSun();
+            CheckIfInSun();
             timer = 0.0f;
         }
 
@@ -60,7 +59,7 @@ public class LaunchingPlant : PlantType
 
     }
 
-    LaunchingPlant() : base() //???
+    LaunchingPlant() : base()
     {
         timer = 0f;
         growingTimer = 0f;
@@ -77,13 +76,20 @@ public class LaunchingPlant : PlantType
 
     private void Start()
     {
-        startingScale = foliage.transform.localScale; //?
+        startingScale = foliage.transform.localScale;
         fullGrown = false;
-        //foliageScale = foliage.transform.localScale;
     }
 
+    /*
+    * Purpose: grow the launch plant after shot and when the player leaves the range
+    * References: Update() if isInLight, 
+    * Scripts Called: None
+    * Status: working
+    */
     public override void Grow()
     {
+        //mark that the plant is full grown for after player leaves range
+        //Plant should not reset- just grow back to the full size
         if (growingTimer > 1f)
         {
             fullGrown = true;
@@ -104,8 +110,15 @@ public class LaunchingPlant : PlantType
         foliage.transform.localPosition = position;
     }
 
+    /*
+    * Purpose: shrink the plant if out of light or if player is in range
+    * References: Update() if !isInLight
+    * Scripts Called: None
+    * Status: working
+    */
     public override void Shrink()
     {
+        //if it's been out of the light long enough to shrink all the way, reset the seed growth overall
         if (growingTimer < 0.0f)
         {
             fullGrown = false;
@@ -119,6 +132,7 @@ public class LaunchingPlant : PlantType
         else
             deathTimer = 0.0f;
 
+        //if it's not launching, then it is shrinking from no light
         if (!launching)
         {
             Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
@@ -134,23 +148,23 @@ public class LaunchingPlant : PlantType
         }
     }
 
+    /*
+    * Purpose: shrink the plant when player is in range
+    * References: Update() if isInLight
+    * Scripts Called: None
+    * Status: working
+    */
     private void Hide()
     {
+        //it is in hiding, waiting to launch player
         if (growingTimer < 0.0f)
         {
             hideTimer += Time.deltaTime;
 
+            //hiding done, launch player
             if (hideTimer > timeToHide)
                 Launch();
 
-            //if(!launching)
-            //{
-            //    cooldownTimer += Time.deltaTime;
-            //    if(cooldownTimer > launchCoolDown)
-            //    {
-
-            //    }
-            //}
             return;
         }
         else
@@ -169,19 +183,24 @@ public class LaunchingPlant : PlantType
         growingTimer -= Time.deltaTime;
     }
 
+    /*
+    * Purpose: launch the player out from the launch plant
+    * References: Hide() when time to launch 
+    * Scripts Called: None
+    * Status: working
+    */
     private void Launch()
     {
         if (launching)
         {
             foliage.transform.localScale = growScale;
-            player.GetComponentInChildren<Rigidbody>().AddForce(0f, launchForce, 0f);
-            Debug.Log("Hidden");
+            player.GetComponentInChildren<Rigidbody>().AddForce(0f, launchForce, 0f); //need to make this in accordance to plant's vertical, not player**
             launching = false;
-            playerInRange = false;
+            playerInRange = false; //make sure player is not still in range after launching, may need to delete later**
             hideTimer = 0f;
             growingTimer = 1f;
         }
-        else
+        else //failsafe for if launch is called when it shouldn't be, only launch once
             return;
     }
 
@@ -191,7 +210,7 @@ public class LaunchingPlant : PlantType
         {
             lightValue++;
         }
-       // Debug.Log(other.gameObject.tag);
+
         if (other.gameObject.tag == "Player")
         {
             playerInRange = true;
@@ -212,7 +231,6 @@ public class LaunchingPlant : PlantType
 
         if (other.gameObject.tag == "Player")
         {
-            //if(!launching)
             playerInRange = false;
         }
     }
