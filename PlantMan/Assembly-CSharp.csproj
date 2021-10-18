@@ -54,13 +54,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Collectable.cs" />
+    <Compile Include="Assets\Scripts\Plants\SapTree.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Plants\ParabolaPath.cs" />
     <Compile Include="Assets\Scripts\AimBoxScript.cs" />
     <Compile Include="Assets\Scripts\Plants\SapObjScript.cs" />
-    <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\NextSemester\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Plants\PlatformPlant.cs" />
+    <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Plants\LaunchingPlant.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerLook.cs" />
     <Compile Include="Assets\Scripts\Plants\SeedParabola.cs" />

@@ -96,7 +96,7 @@ public class PlayerAim : MonoBehaviour
 
 
             GameObject seed = Instantiate(seedToShoot);
-            seed.transform.position = gameObject.transform.position;
+            seed.transform.position = gameObject.transform.position + getOffset();
             seed.GetComponent<Rigidbody>().velocity = dir;
 
             isCharging = false;
@@ -152,7 +152,7 @@ public class PlayerAim : MonoBehaviour
             float timeScale = time / numOfLinePoints;
             Vector3[] pos = new Vector3[numOfLinePoints + 5];
 
-            pos[0] = transform.position - aimOffset;
+            pos[0] = transform.position + getOffset();
             for (int i = 1; i < numOfLinePoints + 5; i++)
             {
                 float t = timeScale * i;
@@ -160,7 +160,7 @@ public class PlayerAim : MonoBehaviour
                 Vector3 relPos = transform.forward * (xForce * t);
                 relPos.y = (yForce * t) + 0.5f * Physics.gravity.y * t * t;
 
-                pos[i] = transform.position + relPos - aimOffset;
+                pos[i] = transform.position + relPos + getOffset();
             }
 
 
@@ -183,6 +183,8 @@ public class PlayerAim : MonoBehaviour
     {
         if (isCharging)
         {
+            OnLook(new InputAction.CallbackContext());
+
             //Get Theta Value
             float angleOffset = (activeCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value - 0.5f) * 2 * maximumAngleOffset;
             theta = startingTheta - angleOffset;
@@ -198,7 +200,7 @@ public class PlayerAim : MonoBehaviour
             float timeScale = time / numOfLinePoints;
             Vector3[] pos = new Vector3[numOfLinePoints + 5];
 
-            pos[0] = transform.position - aimOffset;
+            pos[0] = transform.position + getOffset();
             for (int i = 1; i < numOfLinePoints + 5; i++)
             {
                 float t = timeScale * i;
@@ -206,7 +208,7 @@ public class PlayerAim : MonoBehaviour
                 Vector3 relPos = transform.forward * (xForce * t);
                 relPos.y = (yForce * t) + 0.5f * Physics.gravity.y * t * t;
 
-                pos[i] = transform.position + relPos - aimOffset;
+                pos[i] = transform.position + relPos + getOffset();
             }
 
 
@@ -228,6 +230,17 @@ public class PlayerAim : MonoBehaviour
     public bool getIsAiming()
     {
         return isAiming;
+    }
+
+    Vector3 getOffset()
+    {
+        Vector3 x = transform.right;
+        x *= aimOffset.x;
+        Vector3 y = transform.up;
+        y *= aimOffset.y;
+        Vector3 z = transform.forward;
+        z *= aimOffset.z;
+        return x + y + z;
     }
 
 }

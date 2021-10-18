@@ -6728,11 +6728,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 2.3170421e-17
+      value: -2.3170421e-17
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -2.1638362e-19
+      value: 2.1638362e-19
       objectReference: {fileID: 0}
     - target: {fileID: 5947432767770193495, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47789,7 +47789,7 @@ MonoBehaviour:
   aimLine: {fileID: 1927805305}
   chargeLine: {fileID: 1103642805}
   numOfLinePoints: 30
-  aimOffset: {x: 0, y: 0, z: 0}
+  aimOffset: {x: 2, y: 0, z: 0}
   activeCamera: {fileID: 268209914}
   perspectiveMultiply: 15
 --- !u!1 &1408662875 stripped
