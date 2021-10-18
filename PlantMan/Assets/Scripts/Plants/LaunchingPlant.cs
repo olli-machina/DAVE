@@ -6,7 +6,7 @@ public class LaunchingPlant : PlantType
 {
     public float timeToMax = 2.0f;
     public float timeToHide = 5f;
-    public float launchForce;
+    public float launchForce, sideLaunchMultiplier;
     public Vector2 foliageDimentions;
     public float growMultiplier;
     public float launchCoolDown;
@@ -194,7 +194,8 @@ public class LaunchingPlant : PlantType
         if (launching)
         {
             foliage.transform.localScale = growScale;
-            player.GetComponentInChildren<Rigidbody>().AddForce(0f, launchForce, 0f); //need to make this in accordance to plant's vertical, not player**
+            Vector3 forceDirection = transform.up * launchForce;
+            player.GetComponentInChildren<Rigidbody>().AddForce(forceDirection * sideLaunchMultiplier); 
             launching = false;
             playerInRange = false; //make sure player is not still in range after launching, may need to delete later**
             hideTimer = 0f;
