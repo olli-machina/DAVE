@@ -2191,6 +2191,7 @@ GameObject:
   - component: {fileID: 7420180205619718666}
   - component: {fileID: 2725527764723259557}
   - component: {fileID: 317062442674909182}
+  - component: {fileID: 5493918970895589931}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -2256,7 +2257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573486992291685133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9eaa9baa7dc9ee4b987b97c3172665e, type: 3}
   m_Name: 
@@ -2265,7 +2266,7 @@ MonoBehaviour:
   aimCam: {fileID: 317062443282778208}
   wideCam: {fileID: 317062443297471600}
   forceMultiplier: 2.62
-  aimMarker: {fileID: 317062443735943181}
+  aimMarker: {fileID: 0}
   aimControls: {fileID: 317062443282778210}
   seedToShoot: {fileID: 7812825639662962999, guid: c8e5c5e176548834da4b40be94899e9f, type: 3}
   shootingLine: {fileID: 0}
@@ -2337,6 +2338,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Direction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 718fda92-55e6-4f77-af4b-9b0f3a4c0a90
     m_ActionName: PlayerControlScheme/Movement[/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
@@ -2381,6 +2394,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerAim, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 311a425c-837b-49b2-a766-faab75be1d2b
     m_ActionName: PlayerControlScheme/New action
   - m_PersistentCalls:
@@ -2401,8 +2426,8 @@ MonoBehaviour:
     m_ActionName: PlayerControlScheme/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 961984133415603928}
-        m_TargetAssemblyTypeName: PlayerAttackScript, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerAim, Assembly-CSharp
         m_MethodName: OnShoot
         m_Mode: 0
         m_Arguments:
@@ -2417,8 +2442,8 @@ MonoBehaviour:
     m_ActionName: PlayerControlScheme/New action
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 961984133415603928}
-        m_TargetAssemblyTypeName: PlayerAttackScript, Assembly-CSharp
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PlayerAim, Assembly-CSharp
         m_MethodName: OnAim
         m_Mode: 0
         m_Arguments:
@@ -2468,7 +2493,19 @@ MonoBehaviour:
     m_ActionId: a50e80ff-8f01-46f1-bb0e-95f3c3db20fc
     m_ActionName: PlayerControlScheme/Pause[/Keyboard/tab]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SeedSwitch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3453a3ea-5154-4058-8e7e-152deda65191
     m_ActionName: PlayerControlScheme/SeedSwitch[/Keyboard/leftCtrl]
   m_NeverAutoSwitchControlSchemes: 1
@@ -2476,6 +2513,29 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerControlScheme
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5493918970895589931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573486992291685133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d2d11f017ad9746a2ff58b09b00ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingTheta: 45
+  maximumAngleOffset: 30
+  maxForce: 8
+  timeToCharge: 2
+  seedToShoot: {fileID: 7812825639662962999, guid: c8e5c5e176548834da4b40be94899e9f, type: 3}
+  aimLine: {fileID: 0}
+  chargeLine: {fileID: 0}
+  numOfLinePoints: 30
+  aimOffset: {x: 2, y: 0, z: 0}
+  activeCamera: {fileID: 4303006816223997248}
+  perspectiveMultiply: 15
 --- !u!1 &2573486992512524752
 GameObject:
   m_ObjectHideFlags: 0
