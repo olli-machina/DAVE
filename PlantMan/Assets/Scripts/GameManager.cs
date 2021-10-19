@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
         
 
         Color col = guiColors[(int)seedChoice].GetComponent<Image>().color;
-        col.a = 0.5f;
+        col.a = 0.0f;
 
         guiColors[(int)seedChoice].GetComponent<Image>().color = col;
 
