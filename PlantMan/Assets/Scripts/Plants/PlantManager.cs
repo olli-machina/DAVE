@@ -15,15 +15,15 @@ public class PlantManager : MonoBehaviour
 public class PlantType : MonoBehaviour
 {
 
-    public float timeBetweenChecks = 1.0f;
-    public float maxRaycastDistance = 100.0f;
+    public float timeBetweenChecks = 1.0f; /**< Time between checking if plant is in sunlight*/
+    public float maxRaycastDistance = 100.0f; /**< Maximum raycast for the light*/
 
-    public bool isInLight = false;
+    public bool isInLight = false; /**< is the plant in the light*/
 
     public bool shouldUseSun;
-    public float timeToGrow = 3.0f;
-    public float timeToShrink = 2.0f;
-    public float timeToDeath = 5.0f;
+    public float timeToGrow = 3.0f; /**< Time it takes to fully grow*/
+    public float timeToShrink = 2.0f; /**< Time it takes to shrink back to seed*/
+    public float timeToDeath = 5.0f; /**< Time it takes for plant to disappear after not in the sun*/
 
 
     // Update is called once per frame
@@ -45,10 +45,10 @@ public class PlantType : MonoBehaviour
         lightValue = 0;
     }
 
-    /*
-    * Purpose: Determine if the seed is colliding in the sun spot
-    * References: Update Function
-    * Scripts Called: ---
+    /**
+    * Purpose: Determine if the seed is colliding in the sun spot \n
+    * References: Update Function \n
+    * Scripts Called: --- \n
     * Status: working
     */
     public void CheckIfInSun()

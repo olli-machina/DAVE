@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class SapPlant : PlantType
 {
-    public float timeDrip = 2.0f;
-    public float dripDist;
+    public float timeDrip = 2.0f; /**< Time it takes for sap to reach the ground*/
+    private float dripDist; /**< Distance from sap plant to ground or whatever stopping point*/
     public GameObject plant;
     public GameObject sap;
 
-    private Vector3 dripScale;
-    private Vector3 startPos;
+    private Vector3 dripScale; /**< Scale the sap object to full size*/
+    private Vector3 startPos; /**< start poisition of the sap*/
 
-    public bool isDripping;
-    public float newSpeed;
+    public bool isDripping; /**< is the sap plant dripping sap*/
 
-    private float dripTimer;
+    private float dripTimer; /**< private timer to count the time it is dripping*/
     private float timer;
 
     public override void Update()
@@ -49,10 +48,10 @@ public class SapPlant : PlantType
         startPos = sap.transform.localPosition;
     }
 
-    /*
-    * Purpose: if player shoots sap plant on the wall- sap starts dripping in this function
-    * References: Update() called if isDripping is true
-    * Scripts Called: None
+    /**
+    * Purpose: if player shoots sap plant on the wall- sap starts dripping in this function \n
+    * References: Update() called if isDripping is true \n
+    * Scripts Called: None \n
     * Status: working
     */
     public void Drip()

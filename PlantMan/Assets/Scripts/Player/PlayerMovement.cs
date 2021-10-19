@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
-    /*
+    /**
      * Purpose: If the aim box target collides with the wall, change direction to be x,y ranther than x,z
      * References: 
      * Scripts Called: AimBoxScript
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Purpose: Allow player to exit game by pressing esc through input manager
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
         Application.Quit();
     }
 
-    /*
+    /**
      * Purpose: Allow player to re-load the current level by pressing a button
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
         SceneManager.LoadScene("MergeTesting");
     }
 
-    /*
+    /**
      * Purpose: Control player movement direction plane for sap plant
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    /*
+    /**
      * Purpose: Read player input to jump and execute action
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(new Vector3(0, jumpForce, 0));
     }
 
-    /*
+    /**
      * Purpose: Update player movement every frame for smooth controls
      * References: Update()
      * Scripts Called: ---
@@ -186,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Purpose: Move the aim target when the player is in an aim mode
      * References: Update()
      * Scripts Called: AimBoxScript
@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
+    /**
      * Purpose: Draw debugging gizmo facing forward from aim box
      * References: ---
      * Scripts Called: ---

@@ -29,7 +29,7 @@ public class NewInputLook : MonoBehaviour
         Move();
     }
 
-    /*
+    /**
      * Purpose: If player moves camera, input system calls this and sets direction for player
      * References: in scene attached to cameras, called by player input on player object
      * Scripts Called: PlayerMovement from player obj
@@ -43,7 +43,7 @@ public class NewInputLook : MonoBehaviour
         lookMovement.x *= 180f; //set x camera movement
     }
 
-    /*
+    /**
      * Purpose: Moves the player every frame according to direction set in OnLook()
      * References: Update()
      * Scripts Called: ---

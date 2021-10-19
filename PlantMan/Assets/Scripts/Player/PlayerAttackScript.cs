@@ -55,8 +55,8 @@ public class PlayerAttackScript : MonoBehaviour
     {
 
     }
-
-    /*
+    
+    /**
      * Purpose: Reads controller input when player tries to shoot seed
      * References: in input controller attached to player obj
      * Scripts Called: SeedParabola
@@ -79,7 +79,7 @@ public class PlayerAttackScript : MonoBehaviour
         
     }
 
-    /*
+    /**
      * Purpose: Reads controller input when player tries to aim in game
      * References: in input controller attached to player obj
      * Scripts Called: AimBoxScript(), NewInputLook through aimControls var

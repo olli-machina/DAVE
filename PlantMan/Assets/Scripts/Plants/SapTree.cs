@@ -16,17 +16,9 @@ public class SapTree : PlantType
     public float newSpeed;
 
     private float dripTimer;
-    private float timer;
 
     public override void Update()
     {
-        //timer += Time.deltaTime;
-
-        //if (timer > timeBetweenChecks)
-        //{
-        //    timer = 0.0f;
-        //}
-
         if(isDripping)
         {
             Drip();
@@ -48,10 +40,10 @@ public class SapTree : PlantType
         startPos = sap.transform.localPosition;
     }
 
-    /*
-    * Purpose: if player shoots sap tree, drip the sap pool
-    * References: Update() called if isDripping is true
-    * Scripts Called: None
+    /**
+    * Purpose: if player shoots sap tree, drip the sap pool \n
+    * References: Update() called if isDripping is true \n
+    * Scripts Called: None \n
     * Status: ---
     */
     public void Drip()
