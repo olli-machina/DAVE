@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     private seed seedChoice;
 
-    public PlayerAttackScript playerAttackScript;
+    public PlayerAim playerAimScript;
 
     public GameObject topSeed;
     public GameObject rightSeed;
@@ -154,23 +154,23 @@ public class GameManager : MonoBehaviour
         }
         else if(context.canceled && seedSwitchUI.gameObject.activeInHierarchy && currentlyActive)
         {
-
+            Debug.Log("OFF");
             switch(seedChoice)
             {
                 case seed.Y:
-                    playerAttackScript.seedToShoot = topSeed;
-                    break;
-                case seed.G:
-                    playerAttackScript.seedToShoot = rightSeed;
-                    break;
-                case seed.R:
-                    playerAttackScript.seedToShoot = bottomSeed;
-                    break;
-                case seed.B:
-                    playerAttackScript.seedToShoot = leftSeed;
-                    break;
-                default:
-                    playerAttackScript.seedToShoot = topSeed;
+                    playerAimScript.seedToShoot = topSeed;
+                    break;            
+                case seed.G:          
+                    playerAimScript.seedToShoot = rightSeed;
+                    break;            
+                case seed.R:          
+                    playerAimScript.seedToShoot = bottomSeed;
+                    break;            
+                case seed.B:          
+                    playerAimScript.seedToShoot = leftSeed;
+                    break;            
+                default:              
+                    playerAimScript.seedToShoot = topSeed;
                     break;
             }
 
