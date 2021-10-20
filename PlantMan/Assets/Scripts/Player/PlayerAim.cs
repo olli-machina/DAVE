@@ -65,8 +65,6 @@ public class PlayerAim : MonoBehaviour
             if (timer > timeToCharge)
                 timer = timeToCharge;
 
-            Debug.Log(timer);
-
             force = maxForce * (timer / timeToCharge);
         }
 

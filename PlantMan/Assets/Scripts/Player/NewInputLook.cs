@@ -11,10 +11,6 @@ public class NewInputLook : MonoBehaviour
     public bool invertY = false;
     private CinemachineFreeLook freeLookComponent;
     Vector2 lookMovement;
-    [SerializeField]
-    public bool aiming;
-    [SerializeField]
-    private GameObject aimTarget, player;
 
 
     // Start is called before the first frame update

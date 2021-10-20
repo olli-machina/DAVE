@@ -65,7 +65,8 @@ class PlatformPlant : PlantType
     * Purpose: Handles the animation for the plant growing \n
     * References: called by Update() if isInLight \n
     * Scripts Called: None \n
-    * Status: working
+    * Status: working \n
+    * Contributor(s): Brandon L'Abbe
     */
     public override void Grow()
     {
@@ -107,7 +108,8 @@ class PlatformPlant : PlantType
     * Purpose: Handles the animation for the plant shrinking \n
     * References: called by Update() if not isInLight \n
     * Scripts Called: None \n
-    * Status: working
+    * Status: working \n
+    * Contributor(s): Brandon L'Abbe
     */
     public override void Shrink()
     {

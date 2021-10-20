@@ -107,9 +107,10 @@ GameObject:
   - component: {fileID: 7812825638619357305}
   - component: {fileID: 7812825638619357304}
   - component: {fileID: 7812825638619357303}
-  m_Layer: 10
+  - component: {fileID: 1603726231518005230}
+  m_Layer: 0
   m_Name: Stalk
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +178,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1603726231518005230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812825638619357302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.0298924, y: 15.033649, z: 10.833846}
+  m_Center: {x: -0.28694272, y: 7.0168247, z: 0.51041365}
 --- !u!1 &7812825638697625284
 GameObject:
   m_ObjectHideFlags: 0
