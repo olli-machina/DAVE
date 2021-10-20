@@ -15622,11 +15622,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2573486992512524748, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000022716913
+      value: -0.0000000022108613
       objectReference: {fileID: 0}
     - target: {fileID: 2573486992512524748, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 6.7625766e-11
+      value: 6.965475e-11
       objectReference: {fileID: 0}
     - target: {fileID: 3239340261672319321, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_Name
@@ -15658,15 +15658,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0046970146
+      value: 0.0046970183
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000020676378
+      value: 0.0000000015355258
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -9.711832e-12
+      value: -7.212475e-12
       objectReference: {fileID: 0}
     - target: {fileID: 5947432767770193495, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -50179,6 +50179,7 @@ MonoBehaviour:
   - {fileID: 1328402745}
   - {fileID: 1558947657}
   playerAimScript: {fileID: 718834487}
+  player: {fileID: 718834486}
   topSeed: {fileID: 7812825639662962999, guid: c8e5c5e176548834da4b40be94899e9f, type: 3}
   rightSeed: {fileID: 7812825639662962999, guid: a2b7b2312ba77714daada60081514f67, type: 3}
   bottomSeed: {fileID: 7812825639662962999, guid: 62fe75493207b9549804285c00d7342f, type: 3}

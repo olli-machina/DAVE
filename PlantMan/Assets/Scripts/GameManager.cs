@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -18,11 +19,16 @@ public class GameManager : MonoBehaviour
     private seed seedChoice;
 
     public PlayerAim playerAimScript;
+    public GameObject player;
 
     public GameObject topSeed;
     public GameObject rightSeed;
     public GameObject bottomSeed;
     public GameObject leftSeed;
+
+    private Transform checkpoint;
+    private int checkpointPriority;
+    private Scene currentScene;
 
     enum seed
     {
@@ -35,8 +41,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         currentlyActive = false;
-        seedChoice = seed.Y; 
-
+        seedChoice = seed.Y;
+        checkpointPriority = -1;
+        currentScene = SceneManager.GetActiveScene();
     }
 
 
@@ -215,5 +222,43 @@ public class GameManager : MonoBehaviour
         col.a = 1.0f;
 
         guiColors[(int)seedChoice].GetComponent<Image>().color = col;
+    }
+
+    /*
+    * Purpose: Handles Death when a player touches a trap.
+    * References: Called by TrapScript
+    * Scripts Called: None
+    * Status: in progress
+    * Contributers: Brandon L'Abbe
+    */
+    public void PlayerDeath()
+    {
+
+        if(checkpoint == null)
+        {
+            SceneManager.LoadScene(currentScene.buildIndex);
+        }
+        else
+        {
+            Debug.Log("PLAYER TRIGGER");
+
+            player.transform.position = checkpoint.transform.position;
+        }
+    }
+
+    /*
+    * Purpose: Set a new checkpoint when the player passes one. Uses a priority system so the player cannot go backwards in checkpoints.
+    * References: Called by CheckpointScript
+    * Scripts Called: None
+    * Status: in progress
+    * Contributers: Brandon L'Abbe
+    */
+    public void SetCheckpoint(Transform loc, int priority)
+    {
+        if(priority > checkpointPriority)
+        {
+            checkpoint = loc;
+            checkpointPriority = priority;
+        }
     }
 }
