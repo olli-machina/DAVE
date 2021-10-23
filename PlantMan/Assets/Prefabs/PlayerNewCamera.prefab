@@ -432,6 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2573486992291685130}
   - component: {fileID: 2573486992291685131}
+  - component: {fileID: 1580275792004568690}
   - component: {fileID: 961984133415603924}
   - component: {fileID: 7420180205619718666}
   - component: {fileID: 2725527764723259557}
@@ -477,9 +478,21 @@ MonoBehaviour:
   jumpForce: 200
   fallMultiplier: 2.5
   isGrounded: 0
-  aimTarget: {fileID: 0}
   sapRun: 0
   sapSlow: 0
+--- !u!114 &1580275792004568690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573486992291685133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2419166d7926691468e7fb0ce74472ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRadius: 8
 --- !u!136 &961984133415603924
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -787,7 +800,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573486992512524752}
-  m_LocalRotation: {x: 0.033335805, y: -0.0000000022009448, z: 6.998577e-11, w: 0.99944425}
+  m_LocalRotation: {x: 0.033335805, y: -0.0000000022716913, z: 6.7626266e-11, w: 0.99944425}
   m_LocalPosition: {x: 5.267377, y: -0.7289314, z: -4.07436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1267,9 +1280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnSpeed: 2
   invertY: 1
-  aiming: 0
-  aimTarget: {fileID: 0}
-  player: {fileID: 2573486992291685133}
 --- !u!1 &7089436711728338008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1504,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7488075645857124023}
-  m_LocalRotation: {x: 0.0046970164, y: -2.1059031e-10, z: 9.891572e-13, w: 0.999989}
+  m_LocalRotation: {x: 0.004697017, y: -2.3170421e-17, z: 2.1638362e-19, w: 0.999989}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
