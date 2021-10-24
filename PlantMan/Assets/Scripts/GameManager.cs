@@ -26,9 +26,12 @@ public class GameManager : MonoBehaviour
     public GameObject bottomSeed;
     public GameObject leftSeed;
 
-    private Transform checkpoint;
+    private Vector3 checkpoint;
     private int checkpointPriority;
     private Scene currentScene;
+
+    private GameObject[] resetObjects;
+    private Transform[] resetTransforms;
 
     enum seed
     {
@@ -236,13 +239,18 @@ public class GameManager : MonoBehaviour
 
         if(checkpoint == null)
         {
-            SceneManager.LoadScene(currentScene.buildIndex);
+            player.transform.position = new Vector3(0, 0, 0);
         }
         else
         {
-            Debug.Log("PLAYER TRIGGER");
+            player.transform.position = checkpoint;
+        }
 
-            player.transform.position = checkpoint.transform.position;
+        for (int i = 0; i < resetObjects.Length; i++)
+        {
+            resetObjects[i].transform.position = resetTransforms[i].position;
+            resetObjects[i].transform.rotation = resetTransforms[i].rotation;
+            resetObjects[i].transform.localScale = resetTransforms[i].localScale;
         }
     }
 
@@ -253,12 +261,32 @@ public class GameManager : MonoBehaviour
     * Status: in progress
     * Contributers: Brandon L'Abbe
     */
-    public void SetCheckpoint(Transform loc, int priority)
+    public void SetCheckpoint(Vector3 loc, int priority)
     {
         if(priority > checkpointPriority)
         {
             checkpoint = loc;
             checkpointPriority = priority;
+        }
+    }
+
+    public void SetCheckpoint(Vector3 loc, int priority, GameObject[] objs)
+    {
+        if (priority > checkpointPriority)
+        {
+            checkpoint = loc;
+            checkpointPriority = priority;
+            resetObjects = objs;
+            resetTransforms = new Transform[objs.Length];
+
+            for(int i = 0; i<objs.Length; i++)
+            {
+                resetTransforms[i] = new GameObject().transform;
+                resetTransforms[i].position = objs[i].transform.position;
+                resetTransforms[i].rotation = objs[i].transform.rotation;
+                resetTransforms[i].localScale = objs[i].transform.localScale;
+            }
+
         }
     }
 }

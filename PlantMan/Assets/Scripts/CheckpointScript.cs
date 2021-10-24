@@ -5,6 +5,9 @@ using UnityEngine;
 public class CheckpointScript : MonoBehaviour
 {
     public int priority;
+    public GameObject[] resetObjects;
+
+    public Vector3 spawnOffset;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,13 @@ public class CheckpointScript : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    { 
         if (other.gameObject.tag == "Player")
         {
-            GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform, priority);
+            if(resetObjects.Length == 0)
+                GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority);
+            else
+                GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority, resetObjects);
         }
     }
 }
