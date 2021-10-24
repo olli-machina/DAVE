@@ -97,6 +97,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Grapple"",
+                    ""type"": ""Button"",
+                    ""id"": ""a322d949-1688-4ef4-9d6f-9d7118348615"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -311,17 +319,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b65d3a1b-a5ec-4043-9bfb-8a63e3693dbe"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Restart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""30025f03-5506-4741-a5ea-d9f5ace01dc4"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -350,6 +347,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SeedSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4375e7c-c932-44a1-8adf-657b77faae44"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Grapple"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c48cdd0f-0567-4a8a-9061-2b496a95f040"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Grapple"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -398,6 +417,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerControlScheme_Restart = m_PlayerControlScheme.FindAction("Restart", throwIfNotFound: true);
         m_PlayerControlScheme_Pause = m_PlayerControlScheme.FindAction("Pause", throwIfNotFound: true);
         m_PlayerControlScheme_SeedSwitch = m_PlayerControlScheme.FindAction("SeedSwitch", throwIfNotFound: true);
+        m_PlayerControlScheme_Grapple = m_PlayerControlScheme.FindAction("Grapple", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -457,6 +477,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControlScheme_Restart;
     private readonly InputAction m_PlayerControlScheme_Pause;
     private readonly InputAction m_PlayerControlScheme_SeedSwitch;
+    private readonly InputAction m_PlayerControlScheme_Grapple;
     public struct PlayerControlSchemeActions
     {
         private @PlayerControls m_Wrapper;
@@ -471,6 +492,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Restart => m_Wrapper.m_PlayerControlScheme_Restart;
         public InputAction @Pause => m_Wrapper.m_PlayerControlScheme_Pause;
         public InputAction @SeedSwitch => m_Wrapper.m_PlayerControlScheme_SeedSwitch;
+        public InputAction @Grapple => m_Wrapper.m_PlayerControlScheme_Grapple;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlScheme; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -510,6 +532,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SeedSwitch.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
                 @SeedSwitch.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
                 @SeedSwitch.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnSeedSwitch;
+                @Grapple.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnGrapple;
+                @Grapple.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnGrapple;
+                @Grapple.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnGrapple;
             }
             m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface = instance;
             if (instance != null)
@@ -544,6 +569,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SeedSwitch.started += instance.OnSeedSwitch;
                 @SeedSwitch.performed += instance.OnSeedSwitch;
                 @SeedSwitch.canceled += instance.OnSeedSwitch;
+                @Grapple.started += instance.OnGrapple;
+                @Grapple.performed += instance.OnGrapple;
+                @Grapple.canceled += instance.OnGrapple;
             }
         }
     }
@@ -578,5 +606,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnRestart(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnSeedSwitch(InputAction.CallbackContext context);
+        void OnGrapple(InputAction.CallbackContext context);
     }
 }

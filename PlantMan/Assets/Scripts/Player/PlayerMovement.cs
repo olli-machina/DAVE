@@ -34,35 +34,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        //if(sapSlow)
-        //{
-        //    speed = originalSpeed/3;
-        //}
-        //else
-        //{
-        //    speed = originalSpeed;
-        //}
     }
 
-    /**
-     * Purpose: If the aim box target collides with the wall, change direction to be x,y ranther than x,z
-     * References: 
-     * Scripts Called: AimBoxScript
-     * Status: Find It***
-     */
-    //public void SetAimDirection(Vector2 input)
-    //{
-    //    rawInput = input;
-
-    //    if (aimTarget.GetComponent<AimBoxScript>().onWall)
-    //    {
-    //        aimMovement = new Vector3(0, rawInput.y, 0);
-    //    }
-    //    else
-    //    {
-    //        aimMovement = new Vector3(rawInput.x, 0, rawInput.y);
-    //    }
-    //}
 
     /**
      * Purpose: Allow player to exit game by pressing esc through input manager
@@ -124,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
      * References: Update()
      * Scripts Called: ---
      * Status: working
-     * Contributers: ???, Brandon L'Abbe
+     * Contributers: Christian Roby, Brandon L'Abbe
      */
     public void OnMove()
     {
@@ -185,33 +158,5 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
         }
     }
-
-    /**
-     * Purpose: Move the aim target when the player is in an aim mode
-     * References: Update()
-     * Scripts Called: AimBoxScript
-     * Status: working
-     */
-    //public void MoveTarget()
-    //{
-    //    //if the box is not on the wall, move on x and z plane
-    //    if (!aimTarget.GetComponent<AimBoxScript>().onWall)
-    //    {
-    //        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
-    //        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-    //        Vector3 moveDir = new Vector3(0, aimMovement.y, aimTarget.transform.forward.z * aimMovement.z);
-
-    //        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
-    //    }
-
-    //    //if the box is on the wall, move on the x and y plane
-    //    else
-    //    {
-    //        float angle = Vector3.Angle(aimTarget.transform.position, transform.position);
-    //        aimTarget.transform.rotation = Quaternion.Euler(0, angle, 0);
-    //        Vector3 moveDir = new Vector3(0, aimMovement.y, 0);
-    //        aimTarget.transform.localPosition += moveDir * Time.deltaTime * 10f;
-    //    }
-    //}
 
 }
