@@ -84,6 +84,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "a322d949-1688-4ef4-9d6f-9d7118348615",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -298,17 +306,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b65d3a1b-a5ec-4043-9bfb-8a63e3693dbe",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "30025f03-5506-4741-a5ea-d9f5ace01dc4",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -337,6 +334,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "SeedSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4375e7c-c932-44a1-8adf-657b77faae44",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c48cdd0f-0567-4a8a-9061-2b496a95f040",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Grapple",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

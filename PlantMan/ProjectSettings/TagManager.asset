@@ -9,6 +9,8 @@ TagManager:
   - Wall
   - Ground
   - Seed
+  - Plant
+  - GrapplePoint
   layers:
   - Default
   - TransparentFX

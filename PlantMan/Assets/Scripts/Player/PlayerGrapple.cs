@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerGrapple : MonoBehaviour
 {
-    public float maxAngle, maxRadius;
+    public float maxAngle, maxRadius, timeToGrapple = 0.2f;
     public Material glowMat, baseMat;
-    private bool isInFOV = false;
-    private Transform seenGrapple;
+    [SerializeField]
+    private bool isInFOV = false, grappleToObj = false;
+    private Transform /*seenGrapple*/ startPosition;
+    private float grappleTime = 0f;
+    private GameObject seenGrapple;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +37,7 @@ public class PlayerGrapple : MonoBehaviour
                 Gizmos.color = Color.red; //ray to player if not seen
             else
                 Gizmos.color = Color.green; //ray to player if seen
-            Gizmos.DrawRay(transform.position, (seenGrapple.position - transform.position).normalized * maxRadius);
+            Gizmos.DrawRay(transform.position, (seenGrapple.transform.position - transform.position).normalized * maxRadius);
         }
 
         Gizmos.color = Color.black; //ray facing forward
@@ -51,9 +55,9 @@ public class PlayerGrapple : MonoBehaviour
             {
                 if (overlaps[i].tag == "GrapplePoint") //if the target is in the FOV
                 {
-                    Transform target = overlaps[i].transform;
+                    GameObject target = overlaps[i].gameObject;
                     seenGrapple = target;
-                    Vector3 directionBetween = (target.position - checkingObj.position).normalized;
+                    Vector3 directionBetween = (target.transform.position - checkingObj.position).normalized;
                     directionBetween.y *= 0; //height not a factor
 
                     float angle = Vector3.Angle(checkingObj.forward, directionBetween);
@@ -73,10 +77,25 @@ public class PlayerGrapple : MonoBehaviour
         return false;
     }
 
+    public void OnGrapple(InputAction.CallbackContext context)
+    {
+        startPosition = transform;
+        if(seenGrapple != null)
+        {
+            grappleToObj = true;
+            //transform.position = Vector3.Lerp(startPosition, seenGrapple.position, Time.deltaTime);
+        }
+        else
+        {
+            grappleToObj = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         isInFOV = inFOV(transform, maxRadius);
+
         if (isInFOV)
             seenGrapple.GetComponent<MeshRenderer>().material = glowMat;
         else
@@ -85,6 +104,25 @@ public class PlayerGrapple : MonoBehaviour
             {
                 seenGrapple.GetComponent<MeshRenderer>().material = baseMat;
                 seenGrapple = null;
+            }
+        }
+
+        if(grappleToObj)
+        {
+            if (grappleTime < 1.0f)
+            {
+                grappleTime += Time.deltaTime/timeToGrapple;
+                gameObject.GetComponent<Rigidbody>().useGravity = false;
+                Vector3 newPos = seenGrapple.transform.position + (seenGrapple.transform.forward * -3f) + (seenGrapple.transform.up * 3);
+                transform.position = Vector3.Lerp(startPosition.position, seenGrapple.transform.position, grappleTime);
+            }
+            else
+            {
+                grappleToObj = false;
+                seenGrapple = null;
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                grappleTime = 0f;
+                return;
             }
         }
     }
