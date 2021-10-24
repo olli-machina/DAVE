@@ -11,6 +11,7 @@ public class PlayerGrapple : MonoBehaviour
     private Vector3 startPosition; /**< For lerp, CANNOT BE A TRANSFORM*/
     private float grappleTime = 0f;
     private GameObject seenGrapple; /**< player's seen grapple point*/
+    public GameObject grappleLine;
 
     // Start is called before the first frame update
     void Start()
@@ -124,6 +125,7 @@ public class PlayerGrapple : MonoBehaviour
             }
         }
 
+        LineRenderUpdate();
         if(grappleToObj)
         {
             if (grappleTime < 1.0f)
@@ -140,6 +142,28 @@ public class PlayerGrapple : MonoBehaviour
                 grappleTime = 0f;
                 return;
             }
+        }
+    }
+
+    public void LineRenderUpdate()
+    {
+        if(grappleToObj)
+        {
+            grappleLine.SetActive(true);
+            LineRenderer grappleLinerender = grappleLine.GetComponent<LineRenderer>();
+
+            Vector3[] points = new Vector3[2];
+
+            points[0] = transform.position;
+            points[1] = seenGrapple.transform.position;
+
+            grappleLinerender.SetPositions(points);
+
+        }
+
+        else
+        {
+            grappleLine.SetActive(false);
         }
     }
 }
