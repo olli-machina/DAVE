@@ -7,6 +7,9 @@ using UnityEngine.Animations;
 
 public class NewInputLook : MonoBehaviour
 {
+    public float xRotateSpeed = 40f;
+    public float yRotateSpeed;
+
     public float turnSpeed = 15;
     public bool invertY = false;
     private CinemachineFreeLook freeLookComponent;
@@ -30,13 +33,19 @@ public class NewInputLook : MonoBehaviour
      * References: in scene attached to cameras, called by player input on player object
      * Scripts Called: PlayerMovement from player obj
      * Status: working 
+     * Contributor(s): Christian Roby
      */
     public void OnLook(InputAction.CallbackContext context)
     {
-        lookMovement = context.ReadValue<Vector2>().normalized; //read values
+        lookMovement = context.ReadValue<Vector2>(); //read values
+
+        lookMovement.y = lookMovement.y > 1.0f ? 1.0f : lookMovement.y;
+        lookMovement.y = lookMovement.y < -1.0f ? -1.0f : lookMovement.y;
+
         lookMovement.y = invertY ? -lookMovement.y : lookMovement.y; //set y camera movement
 
-        lookMovement.x *= 180f; //set x camera movement
+        lookMovement.x *= xRotateSpeed; //set x camera movement
+        lookMovement.y *= yRotateSpeed;
     }
 
     /**
@@ -44,6 +53,7 @@ public class NewInputLook : MonoBehaviour
      * References: Update()
      * Scripts Called: ---
      * Status: working 
+     * Contributor(s): Christian Roby
      */
     public void Move()
     {

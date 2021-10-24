@@ -30,6 +30,9 @@ public class PlayerAim : MonoBehaviour
     private float timer;
     private bool isCharging;
 
+    public float aimLineStartPointAlpha = 0.6f;
+    public float aimLineEndPointAlpha = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -187,6 +190,14 @@ public class PlayerAim : MonoBehaviour
             float angleOffset = (activeCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value - 0.5f) * 2 * maximumAngleOffset;
             theta = startingTheta - angleOffset;
 
+            LineRenderer alr = aimLine.GetComponent<LineRenderer>();
+            Color c = alr.startColor;
+            c.a = aimLineStartPointAlpha;
+            alr.startColor = c;
+
+            c = alr.endColor;
+            c.a = aimLineEndPointAlpha;
+            alr.endColor = c;
 
             chargeLine.SetActive(true);
             LineRenderer lr = chargeLine.GetComponent<LineRenderer>();
