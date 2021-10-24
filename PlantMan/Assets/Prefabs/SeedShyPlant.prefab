@@ -277,7 +277,7 @@ MonoBehaviour:
   timeToDeath: 5
   timeToMax: 2
   timeToHide: 3
-  launchForce: 500
+  launchForce: 120
   sideLaunchMultiplier: 6
   foliageDimentions: {x: 0, y: 0}
   growMultiplier: 5

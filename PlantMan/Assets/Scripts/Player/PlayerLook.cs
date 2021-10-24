@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    public float turnSpeed = 15;
+    public float turnSpeed;
 
     Camera mainCamera;
 
