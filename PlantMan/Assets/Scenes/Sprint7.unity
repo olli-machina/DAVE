@@ -6774,6 +6774,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 317062444331612011, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
+      propertyPath: xRotateSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 317062444331612011, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
+      propertyPath: yRotateSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 961984133415603924, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_Height
       value: 2.34
@@ -6852,11 +6860,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2573486992512524748, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000022716913
+      value: 0.000000002271691
       objectReference: {fileID: 0}
     - target: {fileID: 2573486992512524748, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 6.762607e-11
+      value: -6.762627e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2573486992512524753, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
+      propertyPath: m_DefaultBlend.m_Time
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3239340261672319321, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_Name
@@ -6888,15 +6900,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.004697016
+      value: 0.0046970155
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 4.0953296e-10
+      value: 8.541746e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4681902030307648306, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.9236043e-12
+      value: -4.0121157e-12
       objectReference: {fileID: 0}
     - target: {fileID: 5947432767770193495, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6920,11 +6932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5947432767770193495, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000021496025
+      value: 0.000000002149602
       objectReference: {fileID: 0}
     - target: {fileID: 5947432767770193495, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.169859e-11
+      value: -7.169858e-11
       objectReference: {fileID: 0}
     - target: {fileID: 8807844419965751322, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6944,15 +6956,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8807844419965751322, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.062137432
+      value: 0.06213745
       objectReference: {fileID: 0}
     - target: {fileID: 8807844419965751322, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000017040009
+      value: -0.000000017440932
       objectReference: {fileID: 0}
     - target: {fileID: 8807844419965751322, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000010608723
+      value: 0.0000000010858333
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5493918970895589931, guid: 3056e3ae807eeec49b69663d1fdb67b3, type: 3}
@@ -47905,6 +47917,8 @@ MonoBehaviour:
   aimOffset: {x: 2, y: 0, z: 0}
   activeCamera: {fileID: 268209914}
   perspectiveMultiply: 15
+  aimLineStartPointAlpha: 0.6
+  aimLineEndPointAlpha: 0
 --- !u!1 &1408662875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f3a4a51e3614c5345b59e8992598d8b4, type: 3}
