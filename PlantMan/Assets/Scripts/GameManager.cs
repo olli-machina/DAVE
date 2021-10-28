@@ -4,17 +4,24 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
 
     public Canvas pauseUI;
     public Canvas seedSwitchUI;
+    public Canvas gameUI;
 
     private bool currentlyActive;
     private Vector2 dir;
 
-    public GameObject[] guiColors;
+    public GameObject[] slice, highlight;
+    public string[] names, descriptions;
+    public TextMeshProUGUI seedName, description;
+
+    public Sprite[] icons;
+    public Image seedIcon;
 
     private seed seedChoice;
 
@@ -136,12 +143,14 @@ public class GameManager : MonoBehaviour
         if(Time.timeScale == 1.0f && !currentlyActive)
         {
             Time.timeScale = 0.0f;
+            gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(true);
             currentlyActive = true;
         }
         else if(pauseUI.gameObject.activeInHierarchy && currentlyActive)
         {
             Time.timeScale = 1.0f;
+            gameUI.gameObject.SetActive(true);
             pauseUI.gameObject.SetActive(false);
             currentlyActive = false;
         }
@@ -159,6 +168,7 @@ public class GameManager : MonoBehaviour
         if(context.started && !currentlyActive)
         {
             Time.timeScale = 0.0f;
+            gameUI.gameObject.SetActive(false);
             seedSwitchUI.gameObject.SetActive(true);
             currentlyActive = true;
         }
@@ -184,6 +194,7 @@ public class GameManager : MonoBehaviour
                     break;
             }
 
+            gameUI.gameObject.SetActive(true);
             seedSwitchUI.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
             currentlyActive = false;
@@ -213,18 +224,17 @@ public class GameManager : MonoBehaviour
     private void updateSeed(seed newSeed)
     {
         
-
-        Color col = guiColors[(int)seedChoice].GetComponent<Image>().color;
-        col.a = 0.0f;
-
-        guiColors[(int)seedChoice].GetComponent<Image>().color = col;
+        slice[(int)seedChoice].SetActive(true);
+        highlight[(int)seedChoice].SetActive(false);
 
         seedChoice = newSeed;
 
-        col = guiColors[(int)seedChoice].GetComponent<Image>().color;
-        col.a = 1.0f;
+        slice[(int)seedChoice].SetActive(false);
+        highlight[(int)seedChoice].SetActive(true);
+        seedName.text = names[(int)seedChoice];
+        description.text = descriptions[(int)seedChoice];
+        seedIcon.sprite = icons[(int)seedChoice]; 
 
-        guiColors[(int)seedChoice].GetComponent<Image>().color = col;
     }
 
     /*
