@@ -89,7 +89,10 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if(isGrounded)
+        {
             rb.AddForce(new Vector3(0, jumpForce, 0));
+            GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
+        }
     }
 
     /**
