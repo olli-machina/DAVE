@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Player\NewInputLook.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAim.cs" />
     <Compile Include="Assets\Scripts\Plants\PlantManager.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerGrapple.cs" />
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Plants\ParabolaPath.cs" />
