@@ -11,6 +11,7 @@ public class LaunchingPlant : PlantType
     public float growMultiplier;
     public float launchCoolDown;
 
+    private float maxForce;
     public GameObject foliage;
     public GameObject shrinkFoliage;
 
@@ -25,7 +26,9 @@ public class LaunchingPlant : PlantType
     private float deathTimer;
 
     public bool playerInRange;
+    [SerializeField]
     private bool fullGrown;
+    [SerializeField]
     private bool launching;
 
     private float timer;
@@ -46,10 +49,13 @@ public class LaunchingPlant : PlantType
             Hide();
         }
 
-        else if (isInLight)
+        if (isInLight)
         {
-            if(!fullGrown)
+            if (!fullGrown && !launching)
+            {
+                Debug.Log("WHY");
                 Grow();
+            }
         }
         else
         {
@@ -78,6 +84,7 @@ public class LaunchingPlant : PlantType
     {
         startingScale = foliage.transform.localScale;
         fullGrown = false;
+        maxForce = launchForce;
     }
 
     /*
@@ -90,6 +97,7 @@ public class LaunchingPlant : PlantType
     {
         //mark that the plant is full grown for after player leaves range
         //Plant should not reset- just grow back to the full size
+        Debug.Log("Frow");
         if (growingTimer > 1f)
         {
             fullGrown = true;
@@ -195,7 +203,9 @@ public class LaunchingPlant : PlantType
         {
             foliage.transform.localScale = growScale;
             Vector3 forceDirection = transform.up * launchForce;
-            player.GetComponentInChildren<Rigidbody>().AddForce(forceDirection * sideLaunchMultiplier); 
+            Vector3 playervel = player.GetComponentInChildren<Rigidbody>().velocity;
+            if (playervel.x < maxForce && playervel.y < maxForce && playervel.z < maxForce)
+                player.GetComponentInChildren<Rigidbody>().AddForce(forceDirection * sideLaunchMultiplier);
             launching = false;
             playerInRange = false; //make sure player is not still in range after launching, may need to delete later**
             hideTimer = 0f;
@@ -233,6 +243,9 @@ public class LaunchingPlant : PlantType
         if (other.gameObject.tag == "Player")
         {
             playerInRange = false;
+            launching = false;
+            startingScale = foliage.transform.localScale;
+            fullGrown = false;
         }
     }
 }
