@@ -285,6 +285,8 @@ MonoBehaviour:
   foliage: {fileID: 7812825638619357302}
   shrinkFoliage: {fileID: 7812825638697625284}
   playerInRange: 0
+  fullGrown: 0
+  launching: 0
 --- !u!135 &1378298206832539027
 SphereCollider:
   m_ObjectHideFlags: 0
