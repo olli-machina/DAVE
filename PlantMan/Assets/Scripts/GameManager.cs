@@ -64,6 +64,8 @@ public class GameManager : MonoBehaviour
         {
             Vector2 dirNorm = dir.normalized;
 
+            
+
             bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x)); //Determine which quadrant our movement selection is in
 
             bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));//Determine which quadrant our movement selection is in
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour
             }
             else if (dirNorm.y > 0.0f && dirNorm.x < 0.0f) //Q2
             {
+                Debug.Log("Q2");
                 if (yGreater)
                 {
                     updateSeed(seed.Y);
@@ -223,7 +226,7 @@ public class GameManager : MonoBehaviour
     */
     private void updateSeed(seed newSeed)
     {
-        
+       // Debug.Log(seedChoice);
         slice[(int)seedChoice].SetActive(true);
         highlight[(int)seedChoice].SetActive(false);
 
