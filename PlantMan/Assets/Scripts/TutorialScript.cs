@@ -10,6 +10,7 @@ public class TutorialScript : MonoBehaviour
     public Canvas tutorialCanvas;
     public TextMeshProUGUI title, description;
     public string titleText, descrText;
+    static GameObject obj;
     GameObject gamemanager;
 
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class TutorialScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            obj = gameObject;
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(false);
             tutorialCanvas.gameObject.SetActive(true);
             Time.timeScale = 0.0f;
@@ -52,7 +54,7 @@ public class TutorialScript : MonoBehaviour
             tutorialCanvas.gameObject.SetActive(false);
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(true);
             Time.timeScale = 1.0f;
-            Destroy(this.gameObject);
+            Destroy(obj);
         }
     }
 }
