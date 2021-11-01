@@ -43,7 +43,7 @@ public class SapPlant : PlantType
     private void Start()
     {
         dripTimer = 0;
-        dripDist = transform.position.y - 3;
+        dripDist = transform.position.y + 1.5f;
         dripScale = new Vector3(dripDist, 0.01f, 1f);
         startPos = sap.transform.localPosition;
     }
