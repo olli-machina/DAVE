@@ -116,7 +116,8 @@ public class PlayerAim : MonoBehaviour
      */
     public void OnAim(InputAction.CallbackContext context)
     {
-        isAiming = true;
+        if(GetComponent<PlayerMovement>().IsGrounded())
+            isAiming = true;
 
 
         if (context.canceled)

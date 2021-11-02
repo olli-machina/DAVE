@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
      */
     public void Jump(InputAction.CallbackContext context)
     {
-        if(isGrounded)
+        if(isGrounded && !GetComponent<PlayerAim>().getIsAiming())
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
             GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
@@ -160,6 +160,11 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
     }
 
 }
