@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scripts\Player\FovSetting.cs" />
     <Compile Include="Assets\Scripts\Plants\SapPlant.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

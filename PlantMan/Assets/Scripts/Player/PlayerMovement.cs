@@ -67,6 +67,17 @@ public class PlayerMovement : MonoBehaviour
      */
     public void Direction(InputAction.CallbackContext context)
     {
+
+        if(context.started)
+        {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayLoop(1);
+        }
+
+        if(context.canceled)
+        {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().StopLoop(1);
+        }
+
         Vector2 inputVec = context.ReadValue<Vector2>();
 
         if (sapRun) //if running on sap wall, move up
@@ -91,7 +102,9 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded && !GetComponent<PlayerAim>().getIsAiming())
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
-            GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
+            Debug.LogWarning("AchievementManager Missing");
+            //GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(0);
         }
     }
 
