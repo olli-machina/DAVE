@@ -121,7 +121,10 @@ public class PlayerAim : MonoBehaviour
 
 
         if (context.canceled)
+        {
             isAiming = false;
+            aimLine.SetActive(false);
+        }
     }
 
     /**
@@ -138,11 +141,6 @@ public class PlayerAim : MonoBehaviour
             //Get Theta Value
             float angleOffset = (activeCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value - 0.5f) * 2 * maximumAngleOffset;
             theta = startingTheta - angleOffset;
-
- 
- 
-
-            
 
             aimLine.SetActive(true);
             LineRenderer lr = aimLine.GetComponent<LineRenderer>();
