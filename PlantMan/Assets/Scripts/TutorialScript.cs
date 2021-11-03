@@ -33,6 +33,7 @@ public class TutorialScript : MonoBehaviour
             obj = gameObject;
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(false);
             tutorialCanvas.gameObject.SetActive(true);
+            gamemanager.GetComponent<GameManager>().isPaused = true;
             Time.timeScale = 0.0f;
             title.text = titleText;
             description.text = descrText;
@@ -53,6 +54,7 @@ public class TutorialScript : MonoBehaviour
         {
             tutorialCanvas.gameObject.SetActive(false);
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(true);
+            gamemanager.GetComponent<GameManager>().isPaused = false;
             Time.timeScale = 1.0f;
             Destroy(obj);
         }
