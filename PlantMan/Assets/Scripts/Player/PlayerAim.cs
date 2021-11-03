@@ -82,28 +82,29 @@ public class PlayerAim : MonoBehaviour
      */
     public void OnShoot(InputAction.CallbackContext context)
     {
-        
-        if(context.performed)
+        if (isAiming)
         {
-            isCharging = true;
+            if (context.performed)
+            {
+                isCharging = true;
+            }
+
+            if (context.canceled)
+            {
+                //Debug.Log(theta);
+                Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
+                dir.Normalize();
+                dir *= force;
+
+
+                GameObject seed = Instantiate(seedToShoot);
+                seed.transform.position = gameObject.transform.position + getOffset();
+                seed.GetComponent<Rigidbody>().velocity = dir;
+
+                isCharging = false;
+                timer = 0f;
+            }
         }
-
-        if(context.canceled)
-        {
-            //Debug.Log(theta);
-            Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
-            dir.Normalize();
-            dir *= force;
-
-
-            GameObject seed = Instantiate(seedToShoot);
-            seed.transform.position = gameObject.transform.position + getOffset();
-            seed.GetComponent<Rigidbody>().velocity = dir;
-
-            isCharging = false;
-            timer = 0f;
-        }
-        
 
     }
 
