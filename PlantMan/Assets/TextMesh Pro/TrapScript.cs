@@ -22,5 +22,10 @@ public class TrapScript : MonoBehaviour
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().PlayerDeath();
         }
+
+        if(other.gameObject.tag == "Plant" || other.gameObject.tag == "Seed")
+        {
+            Destroy(other.transform.parent.gameObject);
+        }
     }
 }
