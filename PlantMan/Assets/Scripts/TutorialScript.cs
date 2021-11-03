@@ -24,9 +24,9 @@ public class TutorialScript : MonoBehaviour
     * References: None
     * Scripts Called: None
     * Status: 
-    * Contributor(s): Carter Ivancic
+    * Contributor(s): Carter Ivancic, debugged by Olli
     */
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
