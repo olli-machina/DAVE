@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Plants\ParabolaPath.cs" />
+    <Compile Include="Assets\Scripts\AchievementManager.cs" />
     <Compile Include="Assets\Scripts\Plants\SapObjScript.cs" />
     <Compile Include="Assets\Scripts\NextSemester\AIMovement.cs" />
     <Compile Include="Assets\Scripts\Plants\PlatformPlant.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="Assets\Scripts\Player\FovSetting.cs" />
     <Compile Include="Assets\Scripts\Plants\SapPlant.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\AchievementManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
