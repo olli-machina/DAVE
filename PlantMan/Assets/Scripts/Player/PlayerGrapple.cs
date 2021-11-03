@@ -7,7 +7,8 @@ public class PlayerGrapple : MonoBehaviour
 {
     public float maxAngle, maxRadius, timeToGrapple = 0.2f; /**< Public variables for designers*/
     public Material glowMat, baseMat; /**< Materials between glowing in view and not when out of view*/
-    private bool isInFOV = false, grappleToObj = false; 
+    private bool isInFOV = false;
+    public bool grappleToObj = false; 
     private Vector3 startPosition; /**< For lerp, CANNOT BE A TRANSFORM*/
     private float grappleTime = 0f;
     private GameObject seenGrapple; /**< player's seen grapple point*/

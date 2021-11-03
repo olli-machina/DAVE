@@ -14,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     //public GameObject aimTarget;
     public bool sapRun, sapSlow;
+    private GameManager gameManager;
     private float originalSpeed;
 
     Vector2 rawInput;
 
     private void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = gameObject.GetComponent<Rigidbody>();
         sapRun = false;
         originalSpeed = speed;
@@ -32,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (rb.velocity.y < 0)
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            if(!gameManager.isPaused && !gameManager.isGrappling)
+                rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 

@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     public Sprite[] icons;
     public Image seedIcon;
 
+    public bool isPaused;
+    public bool isGrappling;
+
     private seed seedChoice;
 
     public PlayerAim playerAimScript;
@@ -59,12 +62,10 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        isGrappling = player.GetComponent<PlayerGrapple>().grappleToObj;
         if (currentlyActive && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
         {
             Vector2 dirNorm = dir.normalized;
-
-            
 
             bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x)); //Determine which quadrant our movement selection is in
 
@@ -145,6 +146,7 @@ public class GameManager : MonoBehaviour
     {
         if(Time.timeScale == 1.0f && !currentlyActive)
         {
+            isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(true);
@@ -152,6 +154,7 @@ public class GameManager : MonoBehaviour
         }
         else if(pauseUI.gameObject.activeInHierarchy && currentlyActive)
         {
+            isPaused = false;
             Time.timeScale = 1.0f;
             gameUI.gameObject.SetActive(true);
             pauseUI.gameObject.SetActive(false);
@@ -170,6 +173,7 @@ public class GameManager : MonoBehaviour
     {
         if(context.started && !currentlyActive)
         {
+            isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             seedSwitchUI.gameObject.SetActive(true);
@@ -196,7 +200,7 @@ public class GameManager : MonoBehaviour
                     playerAimScript.seedToShoot = topSeed;
                     break;
             }
-
+            isPaused = false;
             gameUI.gameObject.SetActive(true);
             seedSwitchUI.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
