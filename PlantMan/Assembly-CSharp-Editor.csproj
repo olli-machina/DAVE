@@ -53,6 +53,7 @@
     <UnityVersion>2020.3.17f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\PrefabSwapEditor.cs" />
     <Compile Include="Assets\Editor\ObjectManagerEditor.cs" />
   </ItemGroup>
   <ItemGroup>
