@@ -492,11 +492,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2419166d7926691468e7fb0ce74472ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 0
-  maxRadius: 0
-  timeToGrapple: 0.2
+  maxAngle: 75
+  maxRadius: 8
+  timeToGrapple: 1
   glowMat: {fileID: 2100000, guid: dbf5203729784634c8050a074170b094, type: 2}
   baseMat: {fileID: 2100000, guid: 85279404b246d1549ad8d4f7d862ca25, type: 2}
+  grappleToObj: 0
   grappleLine: {fileID: 0}
 --- !u!136 &961984133415603924
 CapsuleCollider:
@@ -782,6 +783,8 @@ MonoBehaviour:
   aimOffset: {x: 2, y: 0, z: 0}
   activeCamera: {fileID: 4303006816223997248}
   perspectiveMultiply: 15
+  aimLineStartPointAlpha: 0.6
+  aimLineEndPointAlpha: 0
 --- !u!1 &2573486992512524752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb2dfa3ad87d4440bb7c1498951575b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 2
+  xRotateSpeed: 80
+  yRotateSpeed: 1
+  turnSpeed: 1
   invertY: 1
 --- !u!1 &7089436711728338008
 GameObject:
