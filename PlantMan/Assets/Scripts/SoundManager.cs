@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void Play(int id)
+    public void Play(int id, float volume = 1.0f)
     {
         AudioSource[] pas = GameObject.Find("GameManager").GetComponent<GameManager>().player.GetComponents<AudioSource>();
         for (int i = 0; i < pas.Length; i++)
@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
             {
                 pas[i].clip = soundClips[id];
                 pas[i].loop = false;
+                pas[i].volume = volume;
                 pas[i].Play();
                 break;
             }
@@ -63,7 +64,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayLoop(int id)
+    public void PlayLoop(int id, float volume = 1.0f)
     {
         AudioSource[] pas = GameObject.Find("GameManager").GetComponent<GameManager>().player.GetComponents<AudioSource>();
         for (int i = 0; i < pas.Length; i++)
@@ -74,6 +75,7 @@ public class SoundManager : MonoBehaviour
             {
                 pas[i].clip = soundClips[id];
                 pas[i].loop = true;
+                pas[i].volume = volume;
                 pas[i].Play();
                 break;
             }

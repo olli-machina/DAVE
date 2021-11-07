@@ -92,6 +92,7 @@ public class PlayerAim : MonoBehaviour
             if (context.canceled)
             {
                 //Debug.Log(theta);
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(1, .5f);
                 Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
                 dir.Normalize();
                 dir *= force;

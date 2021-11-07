@@ -73,12 +73,12 @@ public class PlayerMovement : MonoBehaviour
 
         if(context.started)
         {
-            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayLoop(1);
+            //GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayLoop(1);
         }
 
         if(context.canceled)
         {
-            GameObject.Find("SoundManager").GetComponent<SoundManager>().StopLoop(1);
+            //GameObject.Find("SoundManager").GetComponent<SoundManager>().StopLoop(1);
         }
 
         Vector2 inputVec = context.ReadValue<Vector2>();
