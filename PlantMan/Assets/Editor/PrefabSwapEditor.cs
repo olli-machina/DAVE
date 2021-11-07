@@ -53,7 +53,7 @@ public class PrefabSwapEditor : EditorWindow
         if (overrideScale)
             newScale = EditorGUILayout.Vector3Field("New Scale: ", newScale);
 
-        if(lastSwapObjects.Length > 0)
+        if(lastSwapObjects != null && lastSwapObjects.Length > 0)
         {
             if(GUILayout.Button("Undo Swap"))
             {
