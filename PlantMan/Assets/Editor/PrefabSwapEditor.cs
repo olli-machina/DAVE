@@ -36,11 +36,14 @@ public class PrefabSwapEditor : EditorWindow
         EditorGUILayout.LabelField("Prefab Swap", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(prefabsProperty, true);
         serialized.ApplyModifiedProperties();
-        EditorGUILayout.LabelField("Selected Objects", selectedObjects.Length.ToString());
+
+        if(selectedObjects != null)
+            EditorGUILayout.LabelField("Selected Objects", selectedObjects.Length.ToString());
 
         if (GUILayout.Button("Swap Selected Objects w/ Prefab"))
         {
-            Swap();
+            if(selectedObjects != null && selectedObjects.Length > 0 && prefab != null)
+                Swap();
         }
 
         usePositionalOffset = EditorGUILayout.Toggle("Use Positional Offset?", usePositionalOffset);
@@ -87,7 +90,7 @@ public class PrefabSwapEditor : EditorWindow
 
     void Swap()
     {
-
+        if(deletedObjects != null && deletedObjects.Length > 0)
         for(int i = 0; i < deletedObjects.Length; i++)
         {
             DestroyImmediate(deletedObjects[i]);
@@ -132,12 +135,14 @@ public class PrefabSwapEditor : EditorWindow
 
     void UndoSwap()
     {
-        for(int i = 0; i < lastSwapObjects.Length; i++)
+        if (lastSwapObjects != null && lastSwapObjects.Length > 0)
+        for (int i = 0; i < lastSwapObjects.Length; i++)
         {
             DestroyImmediate(lastSwapObjects[i]);
         }
 
-        for(int i = 0; i < deletedObjects.Length; i++)
+        if (deletedObjects != null && deletedObjects.Length > 0)
+        for (int i = 0; i < deletedObjects.Length; i++)
         {
             deletedObjects[i].SetActive(true);
         }
@@ -149,6 +154,7 @@ public class PrefabSwapEditor : EditorWindow
 
     void Cleanup()
     {
+        if (deletedObjects != null && deletedObjects.Length > 0)
         for (int i = 0; i < deletedObjects.Length; i++)
         {
             DestroyImmediate(deletedObjects[i]);
