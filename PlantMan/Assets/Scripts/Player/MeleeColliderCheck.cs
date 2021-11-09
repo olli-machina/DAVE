@@ -30,6 +30,14 @@ public class MeleeColliderCheck : MonoBehaviour
             plantInRange = true;
             otherPlant = other.transform.parent.gameObject; //get the parent to destroy the whole plant
         }
+        if(gameObject.tag == "Seed")
+        {
+            if(plantInRange)
+            {
+                Destroy(otherPlant);
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
