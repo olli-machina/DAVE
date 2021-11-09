@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &3907738668835989174
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438044246783885905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1460935284116487732, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
 --- !u!1 &2628067832295527535
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,9 +23,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1680393287341547152}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: B2_W1_BottomMid
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,6 +53,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1680393287341547152}
     m_Modifications:
+    - target: {fileID: -9104123177145960229, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -9104123177145960229, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -87,11 +109,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: S_b02_windows_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
 --- !u!4 &1574541153199725921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
+  m_PrefabInstance: {fileID: 1320502106213939850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1438044246783885905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -9104123177145960229, guid: 82a4d932b71e89046aa0a4219cd246d0, type: 3}
   m_PrefabInstance: {fileID: 1320502106213939850}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3783986374561030255
@@ -148,6 +183,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b1fac80d4f6c4334a9f4f15b6419c47a, type: 3}
       propertyPath: m_Name
       value: S_b02_windows_01_trim
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1fac80d4f6c4334a9f4f15b6419c47a, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b1fac80d4f6c4334a9f4f15b6419c47a, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550607827574503940, guid: b1fac80d4f6c4334a9f4f15b6419c47a, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8886066524659874940, guid: b1fac80d4f6c4334a9f4f15b6419c47a, type: 3}
       propertyPath: m_LocalPosition.x

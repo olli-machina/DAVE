@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1968511548812674826}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: B2_Cor_In_Bottom 1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +33,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!64 &7732482676168809661
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7003885878215146948}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1171749130550012458, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
 --- !u!1001 &1651582356582400716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,6 +101,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
       propertyPath: m_Name
       value: S_b02_windows_02_trim_half (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
@@ -150,6 +172,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: S_b02_windows_02_trim_half
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 984ddc491d04ab941a1eb0f7c2498a4b, type: 3}
 --- !u!4 &6024786366976898344 stripped
@@ -212,8 +242,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: S_b02_cornerint
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
+--- !u!1 &7003885878215146948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
+  m_PrefabInstance: {fileID: 7922857352643887253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7672196105589958526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d51e8a582f66e3e4099e399eaffd4e53, type: 3}
