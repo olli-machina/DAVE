@@ -50,9 +50,7 @@ public class PauseMenuScript : MonoBehaviour
      */
     public void Resume()
     {
-        Time.timeScale = 1.0f;
-        gameManager.GetComponent<GameManager>().gameUI.gameObject.SetActive(true);
-        gameManager.GetComponent<GameManager>().isPaused = false;
+        gameManager.GetComponent<GameManager>().Play();
         gameObject.SetActive(false);
     }
 

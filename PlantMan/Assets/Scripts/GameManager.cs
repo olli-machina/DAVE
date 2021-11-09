@@ -74,28 +74,35 @@ public class GameManager : MonoBehaviour
     }
 
     /*
-    * Purpose: Pauses or unpauses the game, and activates the Pause UI
+    * Purpose: Pauses the game and activates the Pause UI
     * References: called by InputManager attached to player object
     * Scripts Called: None
     * Status: working
     */
     public void Pause(InputAction.CallbackContext context)
     {
-        if(Time.timeScale == 1.0f && !isPaused)
+        if (Time.timeScale == 1.0f)
         {
             isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(true);
+            pauseUI.gameObject.GetComponent<PauseMenuScript>().SetButton();
+            player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
         }
-        else if(pauseUI.gameObject.activeInHierarchy && isPaused)
+
+    }
+
+    public void Play()
+    {
+        if (Time.timeScale == 0.0f)
         {
-            isPaused = false;
             Time.timeScale = 1.0f;
             gameUI.gameObject.SetActive(true);
-            pauseUI.gameObject.SetActive(false);
+            isPaused = false;
+            player.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerControlScheme");
         }
-        
+ 
     }
 
     /*
