@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public bool sapRun, sapSlow;
     private GameManager gameManager;
     private float originalSpeed;
+    private CheckTrigger groundTrigger;
 
     Vector2 rawInput;
 
@@ -25,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         sapRun = false;
         originalSpeed = speed;
+
+        groundTrigger = gameObject.GetComponentInChildren<CheckTrigger>();
     }
 
     void FixedUpdate()
@@ -37,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
             if(!gameManager.isPaused && !gameManager.isGrappling)
                 rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
+    }
+
+    private void Update()
+    {
+        updateGroundState();
     }
 
 
@@ -102,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
      */
     public void Jump(InputAction.CallbackContext context)
     {
-        if(isGrounded && !GetComponent<PlayerAim>().getIsAiming())
+        if(isGrounded && !GetComponent<PlayerAim>().getIsAiming() && !(GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused()))
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
             Debug.LogWarning("AchievementManager Missing");
@@ -154,28 +162,12 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void updateGroundState()
     {
-        if(collision.gameObject.tag == "Ground")
-        {
+        if (groundTrigger.getTriggerState() && groundTrigger.getCollidingTag() == "Ground")
             isGrounded = true;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
+        else
             isGrounded = false;
-        }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = true;
-        }
     }
 
     public bool IsGrounded()

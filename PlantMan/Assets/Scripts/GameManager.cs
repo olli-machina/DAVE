@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public Canvas seedSwitchUI;
     public Canvas gameUI;
 
-    private bool currentlyActive;
     private Vector2 dir;
 
     public GameObject[] slice, highlight;
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        currentlyActive = false;
+        isPaused = false;
         seedChoice = seed.Y;
         checkpointPriority = -1;
         currentScene = SceneManager.GetActiveScene();
@@ -63,7 +62,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         isGrappling = player.GetComponent<PlayerGrapple>().grappleToObj;
-        if (currentlyActive && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
+        if (isPaused && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
         {
             Vector2 dirNorm = dir.normalized;
 
@@ -144,21 +143,19 @@ public class GameManager : MonoBehaviour
     */
     public void Pause(InputAction.CallbackContext context)
     {
-        if(Time.timeScale == 1.0f && !currentlyActive)
+        if(Time.timeScale == 1.0f && !isPaused)
         {
             isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(true);
-            currentlyActive = true;
         }
-        else if(pauseUI.gameObject.activeInHierarchy && currentlyActive)
+        else if(pauseUI.gameObject.activeInHierarchy && isPaused)
         {
             isPaused = false;
             Time.timeScale = 1.0f;
             gameUI.gameObject.SetActive(true);
             pauseUI.gameObject.SetActive(false);
-            currentlyActive = false;
         }
         
     }
@@ -171,15 +168,14 @@ public class GameManager : MonoBehaviour
     */
     public void SeedSwitch(InputAction.CallbackContext context)
     {
-        if(context.started && !currentlyActive)
+        if(context.started && !isPaused)
         {
             isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             seedSwitchUI.gameObject.SetActive(true);
-            currentlyActive = true;
         }
-        else if(context.canceled && seedSwitchUI.gameObject.activeInHierarchy && currentlyActive)
+        else if(context.canceled && seedSwitchUI.gameObject.activeInHierarchy && isPaused)
         {
             Debug.Log("OFF");
             switch(seedChoice)
@@ -204,7 +200,6 @@ public class GameManager : MonoBehaviour
             gameUI.gameObject.SetActive(true);
             seedSwitchUI.gameObject.SetActive(false);
             Time.timeScale = 1.0f;
-            currentlyActive = false;
         }
 
     }
@@ -263,11 +258,24 @@ public class GameManager : MonoBehaviour
             player.transform.position = checkpoint;
         }
 
-        for (int i = 0; i < resetObjects.Length; i++)
+        if(resetObjects != null)
+            for (int i = 0; i < resetObjects.Length; i++)
+            {
+                resetObjects[i].transform.position = resetTransforms[i].position;
+                resetObjects[i].transform.rotation = resetTransforms[i].rotation;
+                resetObjects[i].transform.localScale = resetTransforms[i].localScale;
+            }
+
+        KillAllPlants();
+    }
+
+    void KillAllPlants()
+    {
+        GameObject[] plants = GameObject.FindGameObjectsWithTag("Seed");
+        Debug.Log("HERE");
+        for (int i = 0; i < plants.Length; i++)
         {
-            resetObjects[i].transform.position = resetTransforms[i].position;
-            resetObjects[i].transform.rotation = resetTransforms[i].rotation;
-            resetObjects[i].transform.localScale = resetTransforms[i].localScale;
+            Destroy(plants[i]);
         }
     }
 
@@ -305,5 +313,10 @@ public class GameManager : MonoBehaviour
             }
 
         }
+    }
+
+    public bool getIsPaused()
+    {
+        return isPaused;
     }
 }
