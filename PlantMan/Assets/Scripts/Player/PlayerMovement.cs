@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        updateGroundState();
+        //updateGroundState();
     }
 
 
@@ -162,12 +162,31 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
+    /*
     private void updateGroundState()
     {
         if (groundTrigger.getTriggerState() && groundTrigger.getCollidingTag() == "Ground")
             isGrounded = true;
         else
             isGrounded = false;
+    }*/
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+            isGrounded = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+            isGrounded = false;
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Ground")
+            isGrounded = true;
     }
 
     public bool IsGrounded()
