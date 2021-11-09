@@ -25,15 +25,10 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public bool isGrappling;
 
-    private seed seedChoice;
-
     public PlayerAim playerAimScript;
     public GameObject player;
 
-    public GameObject topSeed;
-    public GameObject rightSeed;
-    public GameObject bottomSeed;
-    public GameObject leftSeed;
+    public GameObject[] seedPrefabs;
 
     private Vector3 checkpoint;
     private int checkpointPriority;
@@ -42,18 +37,12 @@ public class GameManager : MonoBehaviour
     private GameObject[] resetObjects;
     private Transform[] resetTransforms;
 
-    enum seed
-    {
-        Y,
-        G,
-        R,
-        B
-    }
+    private int seedChoice;
 
     private void Start()
     {
         isPaused = false;
-        seedChoice = seed.Y;
+        seedChoice = 0;
         checkpointPriority = -1;
         currentScene = SceneManager.GetActiveScene();
     }
@@ -70,68 +59,17 @@ public class GameManager : MonoBehaviour
 
             bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));//Determine which quadrant our movement selection is in
 
-            //Y is top, G is right, R is down, B ir left
-            if (dirNorm.y > 0.0f && dirNorm.x > 0.0f) //Q1
-            {
-                if (yGreater)
-                {
-                    updateSeed(seed.Y);
-                }
-                else if (xGreater)
-                {
-                    updateSeed(seed.G);
-                }
-            }
-            else if (dirNorm.y > 0.0f && dirNorm.x < 0.0f) //Q2
-            {
-                Debug.Log("Q2");
-                if (yGreater)
-                {
-                    updateSeed(seed.Y);
-                }
-                else if (xGreater)
-                {
-                    updateSeed(seed.B);
-                }
-            }
-            else if (dirNorm.y < 0.0f && dirNorm.x < 0.0f) //Q3
-            {
-                if (yGreater)
-                {
-                    updateSeed(seed.R);
-                }
-                else if (xGreater)
-                {
-                    updateSeed(seed.B);
-                }
-            }
-            else if (dirNorm.y < 0.0f && dirNorm.x > 0.0f) //Q4
-            {
-                if (yGreater)
-                {
-                    updateSeed(seed.R);
-                }
-                else if (xGreater)
-                {
-                    updateSeed(seed.G);
-                }
-            }
-            else if (dirNorm.y > 0.0f && dirNorm.x == 0.0f)
-            {
-                updateSeed(seed.Y);
-            }
-            else if (dirNorm.y < 0.0f && dirNorm.x == 0.0f)
-            {
-                updateSeed(seed.R);
-            }
-            else if (dirNorm.y == 0.0f && dirNorm.x > 0.0f)
-            {
-                updateSeed(seed.G);
-            }
-            else if (dirNorm.y == 0.0f && dirNorm.x < 0.0f)
-            {
-                updateSeed(seed.B);
-            }
+            float deg = ((-(Mathf.Atan2(dirNorm.y, dirNorm.x)) * Mathf.Rad2Deg) + 180);
+            deg -= 67.5f;
+            if (deg < 0.0f)
+                deg += 360;
+
+            int selection = (int)(deg / 45.0f);
+
+            Debug.Log(selection);
+
+            updateSeed(selection);
+            
         }
     }
 
@@ -178,24 +116,7 @@ public class GameManager : MonoBehaviour
         else if(context.canceled && seedSwitchUI.gameObject.activeInHierarchy && isPaused)
         {
             Debug.Log("OFF");
-            switch(seedChoice)
-            {
-                case seed.Y:
-                    playerAimScript.seedToShoot = topSeed;
-                    break;            
-                case seed.G:          
-                    playerAimScript.seedToShoot = rightSeed;
-                    break;            
-                case seed.R:          
-                    playerAimScript.seedToShoot = bottomSeed;
-                    break;            
-                case seed.B:          
-                    playerAimScript.seedToShoot = leftSeed;
-                    break;            
-                default:              
-                    playerAimScript.seedToShoot = topSeed;
-                    break;
-            }
+            playerAimScript.seedToShoot = seedPrefabs[seedChoice];
             isPaused = false;
             gameUI.gameObject.SetActive(true);
             seedSwitchUI.gameObject.SetActive(false);
@@ -223,19 +144,19 @@ public class GameManager : MonoBehaviour
     * Scripts Called: None
     * Status: working
     */
-    private void updateSeed(seed newSeed)
+    private void updateSeed(int newSeed)
     {
        // Debug.Log(seedChoice);
-        slice[(int)seedChoice].SetActive(true);
-        highlight[(int)seedChoice].SetActive(false);
+        slice[seedChoice].SetActive(true);
+        highlight[seedChoice].SetActive(false);
 
         seedChoice = newSeed;
 
-        slice[(int)seedChoice].SetActive(false);
-        highlight[(int)seedChoice].SetActive(true);
-        seedName.text = names[(int)seedChoice];
-        description.text = descriptions[(int)seedChoice];
-        seedIcon.sprite = icons[(int)seedChoice]; 
+        slice[seedChoice].SetActive(false);
+        highlight[seedChoice].SetActive(true);
+        seedName.text = names[seedChoice];
+        description.text = descriptions[seedChoice];
+        seedIcon.sprite = icons[seedChoice]; 
 
     }
 
