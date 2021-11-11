@@ -24,6 +24,8 @@ public class PlayerAim : MonoBehaviour
     public GameObject activeCamera;
     public float perspectiveMultiply;
 
+    private GameManager gameManager;
+
     private bool isAiming;
     private float theta;
     private float force;
@@ -41,6 +43,8 @@ public class PlayerAim : MonoBehaviour
         force = 0f;
         timer = 0f;
         isCharging = false;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,14 @@ public class PlayerAim : MonoBehaviour
     {
         ChargeShot();
         UpdateLine();
+
+        if(gameManager.isPaused)
+        {
+            isAiming = false;
+            isCharging = false;
+            timer = 0f;
+            aimLine.SetActive(false);
+        }
     }
 
     /**
@@ -59,18 +71,19 @@ public class PlayerAim : MonoBehaviour
     */
     void ChargeShot()
     {
-
-        if(isCharging)
+        if (!gameManager.isPaused)
         {
-            if (timer < timeToCharge)
-                timer += Time.deltaTime;
+            if (isCharging)
+            {
+                if (timer < timeToCharge)
+                    timer += Time.deltaTime;
 
-            if (timer > timeToCharge)
-                timer = timeToCharge;
+                if (timer > timeToCharge)
+                    timer = timeToCharge;
 
-            force = maxForce * (timer / timeToCharge);
+                force = maxForce * (timer / timeToCharge);
+            }
         }
-
     }
 
     /**
@@ -82,28 +95,31 @@ public class PlayerAim : MonoBehaviour
      */
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (isAiming)
+        if (!gameManager.isPaused)
         {
-            if (context.performed)
+            if (isAiming)
             {
-                isCharging = true;
-            }
+                if (context.performed)
+                {
+                    isCharging = true;
+                }
 
-            if (context.canceled)
-            {
-                //Debug.Log(theta);
-                GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(1, .5f);
-                Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
-                dir.Normalize();
-                dir *= force;
+                if (context.canceled)
+                {
+                    //Debug.Log(theta);
+                    GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(1, .5f);
+                    Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
+                    dir.Normalize();
+                    dir *= force;
 
 
-                GameObject seed = Instantiate(seedToShoot);
-                seed.transform.position = gameObject.transform.position + getOffset();
-                seed.GetComponent<Rigidbody>().velocity = dir;
+                    GameObject seed = Instantiate(seedToShoot);
+                    seed.transform.position = gameObject.transform.position + getOffset();
+                    seed.GetComponent<Rigidbody>().velocity = dir;
 
-                isCharging = false;
-                timer = 0f;
+                    isCharging = false;
+                    timer = 0f;
+                }
             }
         }
 
@@ -118,14 +134,58 @@ public class PlayerAim : MonoBehaviour
      */
     public void OnAim(InputAction.CallbackContext context)
     {
-        if(GetComponent<PlayerMovement>().IsGrounded())
-            isAiming = true;
-
-
-        if (context.canceled)
+        if (!gameManager.isPaused)
         {
-            isAiming = false;
-            aimLine.SetActive(false);
+            if (GetComponent<PlayerMovement>().IsGrounded())
+            {
+                isAiming = true;
+                TurnOnLine();
+            }
+
+            if (context.canceled)
+            {
+                isAiming = false;
+                isCharging = false;
+                timer = 0f;
+                aimLine.SetActive(false);
+            }
+        }
+    }
+
+    void TurnOnLine()
+    {
+        if (!gameManager.isPaused)
+        {
+            if (isAiming)
+            {
+                //Get Theta Value
+                float angleOffset = (activeCamera.GetComponent<CinemachineFreeLook>().m_YAxis.Value - 0.5f) * 2 * maximumAngleOffset;
+                theta = startingTheta - angleOffset;
+
+                aimLine.SetActive(true);
+                LineRenderer lr = aimLine.GetComponent<LineRenderer>();
+
+                float xForce = maxForce * Mathf.Cos(theta * Mathf.Deg2Rad);
+                float yForce = maxForce * Mathf.Sin(theta * Mathf.Deg2Rad);
+                float time = 2 * yForce / -Physics.gravity.y;
+
+                float timeScale = time / numOfLinePoints;
+                Vector3[] pos = new Vector3[numOfLinePoints + 5];
+
+                pos[0] = transform.position + getOffset();
+                for (int i = 1; i < numOfLinePoints + 5; i++)
+                {
+                    float t = timeScale * i;
+
+                    Vector3 relPos = transform.forward * (xForce * t);
+                    relPos.y = (yForce * t) + 0.5f * Physics.gravity.y * t * t;
+
+                    pos[i] = transform.position + relPos + getOffset();
+                }
+
+
+                lr.SetPositions(pos);
+            }
         }
     }
 
