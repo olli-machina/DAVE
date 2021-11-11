@@ -24,5 +24,12 @@ public class PlantDrag : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody>().drag = 30f;
         }
+
+        if(other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
+        {
+            Debug.Log(other.gameObject.name);
+            Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other);
+        }
+
     }
 }
