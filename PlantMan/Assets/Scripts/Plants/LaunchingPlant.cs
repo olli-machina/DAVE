@@ -31,11 +31,25 @@ public class LaunchingPlant : PlantType
     [SerializeField]
     private bool launching;
 
+    static bool hasOneLaunched = false;
+    private float resetTimer;
+
     private float timer;
 
     public override void Update()
     {
         timer += Time.deltaTime;
+
+        if (hasOneLaunched)
+            resetTimer += Time.deltaTime;
+        else
+            resetTimer = 0.0f;
+
+        if(resetTimer > 1.0f)
+        {
+            hasOneLaunched = false;
+            resetTimer = 0.0f;
+        }
 
         if (timer > timeBetweenChecks)
         {
@@ -85,6 +99,7 @@ public class LaunchingPlant : PlantType
         startingScale = foliage.transform.localScale;
         fullGrown = false;
         maxForce = launchForce;
+        resetTimer = 0.0f;
     }
 
     /*
@@ -199,7 +214,7 @@ public class LaunchingPlant : PlantType
     */
     private void Launch()
     {
-        if (launching)
+        if (launching && !hasOneLaunched && player.GetComponentInChildren<Rigidbody>().velocity.y < 0.1)
         {
             foliage.transform.localScale = growScale;
             Vector3 forceDirection = transform.up * launchForce;
@@ -207,6 +222,7 @@ public class LaunchingPlant : PlantType
             if (playervel.x < maxForce && playervel.y < maxForce && playervel.z < maxForce)
                 player.GetComponentInChildren<Rigidbody>().AddForce(forceDirection * sideLaunchMultiplier);
             launching = false;
+            hasOneLaunched = true;
             playerInRange = false; //make sure player is not still in range after launching, may need to delete later**
             hideTimer = 0f;
             growingTimer = 1f;
