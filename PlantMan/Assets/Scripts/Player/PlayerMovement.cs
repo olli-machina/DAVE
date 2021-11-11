@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private float originalSpeed;
     private CheckTrigger groundTrigger;
 
+    private bool midAir;
+
     Vector2 rawInput;
 
     private void Start()
@@ -26,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         sapRun = false;
         originalSpeed = speed;
+        midAir = false;
 
         groundTrigger = gameObject.GetComponentInChildren<CheckTrigger>();
     }
@@ -44,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //updateGroundState();
+        updateGroundState();
     }
 
 
@@ -112,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded && !GetComponent<PlayerAim>().getIsAiming() && !(GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused()))
         {
+            midAir = true;
             rb.AddForce(new Vector3(0, jumpForce, 0));
             Debug.LogWarning("AchievementManager Missing");
             //GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
@@ -162,15 +166,20 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
-    /*
+    
     private void updateGroundState()
     {
-        if (groundTrigger.getTriggerState() && groundTrigger.getCollidingTag() == "Ground")
+        if (groundTrigger.getTriggerState() && groundTrigger.getGroundCheck())
+        {
+            //groundTrigger.resetGround();
             isGrounded = true;
+            midAir = false;
+        }
         else
             isGrounded = false;
-    }*/
+    }
 
+    /*
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ground")
@@ -187,11 +196,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
             isGrounded = true;
-    }
+    }*/
 
     public bool IsGrounded()
     {
         return isGrounded;
+    }
+
+    public bool IsMidAir()
+    {
+        return midAir;
     }
 
 }

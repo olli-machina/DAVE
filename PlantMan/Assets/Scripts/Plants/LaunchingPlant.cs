@@ -214,7 +214,7 @@ public class LaunchingPlant : PlantType
     */
     private void Launch()
     {
-        if (launching && !hasOneLaunched && player.GetComponentInChildren<Rigidbody>().velocity.y < 0.1)
+        if (launching && !hasOneLaunched && !player.GetComponentInChildren<PlayerMovement>().IsMidAir())
         {
             foliage.transform.localScale = growScale;
             Vector3 forceDirection = transform.up * launchForce;
