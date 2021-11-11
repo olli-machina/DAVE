@@ -3,7 +3,12 @@ guid: 6d5782f390facf945a509cb6e86bd768
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: poison1
+    second: {fileID: 2100000, guid: 5c978f431d4e4a746be944cc3f656111, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
