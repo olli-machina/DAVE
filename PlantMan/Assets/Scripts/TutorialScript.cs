@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Playables;
 
 public class TutorialScript : MonoBehaviour
 {    
@@ -12,6 +13,7 @@ public class TutorialScript : MonoBehaviour
     public string titleText, descrText;
     static GameObject obj;
     GameObject gamemanager;
+    public GameObject timelineObj1, timelineObj2;
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +26,16 @@ public class TutorialScript : MonoBehaviour
     * References: None
     * Scripts Called: None
     * Status: 
-    * Contributor(s): Carter Ivancic, debugged by Olli
+    * Contributor(s): Carter Ivancic, Christian Roby, debugged by Olli
     */
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            if (timelineObj1 != null)
+            {
+                timelineObj1.GetComponent<PlayableDirector>().Play();
+            }
             obj = gameObject;
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(false);
             tutorialCanvas.gameObject.SetActive(true);
@@ -46,12 +52,16 @@ public class TutorialScript : MonoBehaviour
     * References: called by InputManager attached to player object
     * Scripts Called: None
     * Status: 
-    * Contributor(s): Carter Ivancic
+    * Contributor(s): Carter Ivancic, Christian Roby
     */
     public void CloseTutorial(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0.0f)
         {
+            if (timelineObj2 != null)
+            {
+                timelineObj2.GetComponent<PlayableDirector>().Play();
+            }
             tutorialCanvas.gameObject.SetActive(false);
             gamemanager.GetComponent<GameManager>().gameUI.gameObject.SetActive(true);
             gamemanager.GetComponent<GameManager>().isPaused = false;
