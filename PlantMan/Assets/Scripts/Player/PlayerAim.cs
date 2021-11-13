@@ -286,7 +286,6 @@ public class PlayerAim : MonoBehaviour
         }
         else
         {
-            OnLook(new InputAction.CallbackContext());
             chargeLine.SetActive(false);
         }
     }
