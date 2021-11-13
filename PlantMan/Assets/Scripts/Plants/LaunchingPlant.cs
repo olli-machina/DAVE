@@ -67,7 +67,7 @@ public class LaunchingPlant : PlantType
         {
             if (!fullGrown && !launching)
             {
-                Debug.Log("WHY");
+                //Debug.Log("WHY");
                 Grow();
             }
         }
@@ -112,7 +112,7 @@ public class LaunchingPlant : PlantType
     {
         //mark that the plant is full grown for after player leaves range
         //Plant should not reset- just grow back to the full size
-        Debug.Log("Frow");
+        //Debug.Log("Frow");
         if (growingTimer > 1f)
         {
             fullGrown = true;

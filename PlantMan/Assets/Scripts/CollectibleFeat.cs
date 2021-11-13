@@ -24,18 +24,19 @@ public class CollectibleFeat : MonoBehaviour
 
     public void Collect(CollectibleData data)
     {
+        Debug.Log("Collect! ID:" + data.ID);
         int ID = data.ID;
 
         collectiblesCollected[ID] = true;
         
         for(int i = 0; i< numOfCollectibles; i++)
         {
-            if (!collectiblesCollected[ID])
+            if (!collectiblesCollected[i])
                 return;
         }
 
         //Will only get here if all achievements have been collected
-        GameObject.Find("FeatManager").GetComponent<FeatManager>().fireFeat("Collectables");
+        GameObject.Find("FeatManager").GetComponent<FeatManager>().fireFeat("Collectibles");
     }
 
     public bool getCollectableState(int ID)

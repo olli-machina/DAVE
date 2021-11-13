@@ -117,8 +117,6 @@ public class PlayerMovement : MonoBehaviour
         {
             midAir = true;
             rb.AddForce(new Vector3(0, jumpForce, 0));
-            Debug.LogWarning("AchievementManager Missing");
-            //GameObject.Find("AchievementManager").GetComponent<AchievementManager>().fireAchievement("Jump");
             GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(0);
         }
     }

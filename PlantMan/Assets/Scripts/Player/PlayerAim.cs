@@ -286,7 +286,8 @@ public class PlayerAim : MonoBehaviour
         }
         else
         {
-            chargeLine.SetActive(false);
+            if(chargeLine != null)
+                chargeLine.SetActive(false);
         }
     }
 
