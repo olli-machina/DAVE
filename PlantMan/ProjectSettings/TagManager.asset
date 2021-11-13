@@ -11,6 +11,7 @@ TagManager:
   - Seed
   - Plant
   - GrapplePoint
+  - Collectible
   layers:
   - Default
   - TransparentFX
