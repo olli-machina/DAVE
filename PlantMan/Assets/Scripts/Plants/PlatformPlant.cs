@@ -130,8 +130,10 @@ class PlatformPlant : PlantType
             deathTimer += Time.deltaTime;
 
             if (deathTimer > timeToDeath)
+            {
+                GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Sniper");
                 Destroy(gameObject);
-
+            }
             return;
         }
         else
