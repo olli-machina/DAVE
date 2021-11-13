@@ -64,7 +64,7 @@ public class FeatManager : MonoBehaviour
         switch(index)
         {
             case 0:
-                JumpAchievment();
+                HiddenAreasAchievment();
                 break;
 
         }
@@ -77,7 +77,7 @@ public class FeatManager : MonoBehaviour
     * Status: working
     * Contributers: Brandon L'Abbe
     */
-    void JumpAchievment()
+    void HiddenAreasAchievment()
     {
         Debug.Log("ACHIEVEMENT UNLOCKED: \"Aaaapple\" ");
     }
