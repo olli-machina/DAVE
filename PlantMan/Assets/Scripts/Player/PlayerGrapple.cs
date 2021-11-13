@@ -146,6 +146,7 @@ public class PlayerGrapple : MonoBehaviour
         }
     }
 
+    // Changed the point[0] to have a hard coded transform so the line wouldn't spawn in DAVES crotch
     public void LineRenderUpdate()
     {
         if(grappleToObj)
@@ -155,7 +156,7 @@ public class PlayerGrapple : MonoBehaviour
 
             Vector3[] points = new Vector3[2];
 
-            points[0] = transform.position;
+            points[0] = new Vector3(transform.position.x -.75f, transform.position.y + .35f, transform.position.z);
             points[1] = seenGrapple.transform.position;
 
             grappleLinerender.SetPositions(points);
