@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     private GameObject[] resetObjects;
     private Transform[] resetTransforms;
 
+    private float levelTimer;
+    public float completionTimeFeatTime;
+
     private int seedChoice;
 
     private void Start()
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
         seedChoice = 0;
         checkpointPriority = -1;
         currentScene = SceneManager.GetActiveScene();
+        levelTimer = 0.0f;
     }
 
 
@@ -71,6 +75,11 @@ public class GameManager : MonoBehaviour
             updateSeed(selection);
             
         }
+
+        levelTimer += Time.deltaTime;
+
+        if(levelTimer > completionTimeFeatTime)
+            GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
     }
 
     /*
@@ -193,6 +202,8 @@ public class GameManager : MonoBehaviour
                 resetObjects[i].transform.rotation = resetTransforms[i].rotation;
                 resetObjects[i].transform.localScale = resetTransforms[i].localScale;
             }
+
+        GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Survivalist");
 
         KillAllPlants();
     }

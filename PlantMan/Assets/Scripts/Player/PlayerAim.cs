@@ -58,7 +58,8 @@ public class PlayerAim : MonoBehaviour
             isAiming = false;
             isCharging = false;
             timer = 0f;
-            aimLine.SetActive(false);
+            if(aimLine != null)
+                aimLine.SetActive(false);
         }
     }
 
