@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208357727945419921}
-  m_LocalRotation: {x: 0.023572009, y: 0.7067127, z: -0.023571938, w: 0.70671487}
+  m_LocalRotation: {x: 0.03333581, y: 0.000000002149602, z: -7.169858e-11, w: 0.99944425}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -442,6 +442,7 @@ GameObject:
   - component: {fileID: 7067256301782778026}
   - component: {fileID: 6257237738310528549}
   - component: {fileID: 3891127437070379472}
+  - component: {fileID: 1220903664527885537}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -498,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 75
-  maxRadius: 8
+  maxRadius: 10
   timeToGrapple: 1
   glowMat: {fileID: 2100000, guid: dbf5203729784634c8050a074170b094, type: 2}
   baseMat: {fileID: 2100000, guid: 85279404b246d1549ad8d4f7d862ca25, type: 2}
@@ -764,6 +765,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6a7de0d8-bfce-4a41-8b39-9bec4272168a
     m_ActionName: PlayerControlScheme/Close[/Keyboard/backspace]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4bdad841-2f77-4257-96be-e1f5f2b48754
+    m_ActionName: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ef80781-e6d6-4ffe-bec9-201c42d741e5
+    m_ActionName: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a0f9bad-c804-4f75-ba28-534cb3f8dbe3
+    m_ActionName: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a981e120-00d9-4c25-aed3-dbf6edfd7593
+    m_ActionName: UI/Close[/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: PlayerControlScheme
@@ -1178,6 +1195,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1220903664527885537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2573486992291685133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d2d11f017ad9746a2ff58b09b00ade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingTheta: 30
+  maximumAngleOffset: 29
+  maxForce: 15
+  timeToCharge: 1
+  seedToShoot: {fileID: 7812825639662962999, guid: c8e5c5e176548834da4b40be94899e9f, type: 3}
+  aimLine: {fileID: 0}
+  chargeLine: {fileID: 0}
+  numOfLinePoints: 30
+  aimOffset: {x: 1, y: 0, z: 0}
+  activeCamera: {fileID: 4303006816223997248}
+  perspectiveMultiply: 15
+  aimLineStartPointAlpha: 0.6
+  aimLineEndPointAlpha: 1
 --- !u!1 &2573486992512524752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,8 +1247,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2573486992512524752}
-  m_LocalRotation: {x: 0.03333582, y: -0.0000014901161, z: 0.00000005029142, w: 0.99944425}
-  m_LocalPosition: {x: 0.5000173, y: 1.25, z: -5.9999986}
+  m_LocalRotation: {x: 0.033335805, y: 0.0000000022009448, z: -6.99856e-11, w: 0.99944425}
+  m_LocalPosition: {x: 0.25, y: 1.25, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 84390704109293730}
@@ -1516,7 +1558,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4303006816223997248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.000001, y: 1.25, z: -0.000017642975}
+  m_LocalPosition: {x: 0, y: 1.25, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8807844419965751322}
@@ -1837,8 +1879,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7181769816406495350}
-  m_LocalRotation: {x: 0.04393789, y: 0.7057393, z: -0.043937758, w: 0.70574147}
-  m_LocalPosition: {x: -0.0000038146973, y: 0, z: 0}
+  m_LocalRotation: {x: 0.06213745, y: 0.000000017438401, z: -0.0000000010856758, w: 0.9980676}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8252967522123156996}
@@ -2019,8 +2061,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7488075645857124023}
-  m_LocalRotation: {x: 0.003321297, y: 0.70709795, z: -0.003321287, w: 0.7071001}
-  m_LocalPosition: {x: -0.0000038146973, y: 0, z: 0}
+  m_LocalRotation: {x: 0.004697015, y: -7.152558e-10, z: 3.3596045e-12, w: 0.999989}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2138752741459339029}
