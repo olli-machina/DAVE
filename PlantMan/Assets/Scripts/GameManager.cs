@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     private int seedSelection;
 
+    private bool hasSelection;
+
     private void Start()
     {
         isPaused = false;
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
         checkpointPriority = -1;
         currentScene = SceneManager.GetActiveScene();
         levelTimer = 0.0f;
+        hasSelection = false;
     }
 
 
@@ -59,20 +62,28 @@ public class GameManager : MonoBehaviour
         isGrappling = player.GetComponent<PlayerGrapple>().grappleToObj;
         if (isPaused && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
         {
-            Vector2 dirNorm = dir.normalized;
+            if(dir == Vector2.zero)
+            {
+                updateSeed(-1);
+            }
+            else
+            {
+                Vector2 dirNorm = dir.normalized;
 
-            bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x)); //Determine which quadrant our movement selection is in
+                bool yGreater = (Mathf.Abs(dirNorm.y) > Mathf.Abs(dirNorm.x)); //Determine which quadrant our movement selection is in
 
-            bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));//Determine which quadrant our movement selection is in
+                bool xGreater = (Mathf.Abs(dirNorm.x) > Mathf.Abs(dirNorm.y));//Determine which quadrant our movement selection is in
 
-            float deg = ((-(Mathf.Atan2(dirNorm.y, dirNorm.x)) * Mathf.Rad2Deg) + 180);
-            deg -= 67.5f;
-            if (deg < 0.0f)
-                deg += 360;
+                float deg = ((-(Mathf.Atan2(dirNorm.y, dirNorm.x)) * Mathf.Rad2Deg) + 180);
+                deg -= 67.5f;
+                if (deg < 0.0f)
+                    deg += 360;
 
-            seedSelection = (int)(deg / 45.0f);
+                seedSelection = (int)(deg / 45.0f);
 
-            updateSeed(seedSelection);
+                updateSeed(seedSelection);
+            }
+
         }
 
         levelTimer += Time.deltaTime;
@@ -140,15 +151,18 @@ public class GameManager : MonoBehaviour
     */
     public void Direction(InputAction.CallbackContext context)
     {
-        
+       
         dir = context.ReadValue<Vector2>();
+        
+        if (context.canceled)
+            dir = Vector2.zero;
         
     }
 
     public void SelectSeed(InputAction.CallbackContext context)
     {
         Debug.Log("CALLED");
-        if (context.started && isPaused && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
+        if (context.started && isPaused && seedSwitchUI.gameObject.activeInHierarchy && hasSelection) //If in Seed Switching mode
         {
 
             playerAimScript.seedToShoot = seedPrefabs[seedChoice];
@@ -176,12 +190,21 @@ public class GameManager : MonoBehaviour
         slice[seedChoice].SetActive(true);
         highlight[seedChoice].SetActive(false);
 
-        seedChoice = seedSelection;
+        if(newSeed != -1)
+        {
+            hasSelection = true;
+            seedChoice = seedSelection;
 
-        slice[seedChoice].SetActive(false);
-        highlight[seedChoice].SetActive(true);
-        seedName.text = names[seedChoice];
-        description.text = descriptions[seedChoice];
+            slice[seedChoice].SetActive(false);
+            highlight[seedChoice].SetActive(true);
+            seedName.text = names[seedChoice];
+            description.text = descriptions[seedChoice];
+        }
+        else
+        {
+            hasSelection = false;
+        }
+        
 
     }
 
