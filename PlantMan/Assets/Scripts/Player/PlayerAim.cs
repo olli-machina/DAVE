@@ -63,7 +63,7 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    /**
+    /*
     * Purpose: When the player is shooting, charge a shot to be fired.
     * References: Update()
     * Scripts Called: None
@@ -87,7 +87,7 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    /**
+    /*
      * Purpose: When the player shoots, fire a seed using the angle and force
      * References: in input controller attached to player obj
      * Scripts Called: None
@@ -107,7 +107,6 @@ public class PlayerAim : MonoBehaviour
 
                 if (context.canceled)
                 {
-                    //Debug.Log(theta);
                     GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(1, .5f);
                     Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
                     dir.Normalize();
@@ -126,7 +125,7 @@ public class PlayerAim : MonoBehaviour
 
     }
 
-    /**
+    /*
      * Purpose: Determine whether the player is aiming.
      * References: in input controller attached to player obj
      * Scripts Called: None
@@ -190,7 +189,7 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    /**
+    /*
      * Purpose: Set the visual parabola to match the fire path of the seed
      * References: in input controller attached to player obj
      * Scripts Called: None
@@ -235,7 +234,7 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    /**
+    /*
     * Purpose: Set the visual parabola to match the fire path of the seed
     * References: None
     * Scripts Called: None
@@ -292,7 +291,7 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    /**
+    /*
      * Purpose: Getter function for private isAiming variable
      * References: None
      * Scripts Called: None

@@ -25,7 +25,6 @@ public class CheckTrigger : MonoBehaviour
         if (tag == "Ground")
             isGround = true;
 
-        //Debug.Log("Collided: " + other.gameObject.name);
     }
 
     private void OnTriggerExit(Collider other)

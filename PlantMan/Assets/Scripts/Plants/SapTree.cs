@@ -28,7 +28,6 @@ public class SapTree : PlantType
 
     SapTree() : base()
     {
-        //timer = 0f;
         dripTimer = 0f;
         isDripping = false;
     }
@@ -40,27 +39,26 @@ public class SapTree : PlantType
         startPos = sap.transform.localPosition;
     }
 
-    /**
-    * Purpose: if player shoots sap tree, drip the sap pool \n
-    * References: Update() called if isDripping is true \n
-    * Scripts Called: None \n
+    /*
+    * Purpose: if player shoots sap tree, drip the sap pool
+    * References: Update() called if isDripping is true
+    * Scripts Called: None
     * Status: ---
     */
     public void Drip()
     { 
-        //drip for correct duration
         if(dripTimer > timeDrip)
         {
             isDripping = false;
             dripTimer = 0;
-            return; //leave function if it is done dripping
+            return;
         }
         else
         {
             dripTimer += Time.deltaTime;
         }
 
-        Vector3 scale = Vector3.Lerp(startingScale, dripScale, dripTimer); //scale to radius size
+        Vector3 scale = Vector3.Lerp(startingScale, dripScale, dripTimer);
 
         sap.transform.localScale = scale;
     }

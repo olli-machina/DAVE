@@ -9,10 +9,9 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f, fallMultiplier = 2.5f;
-    private Vector3 direction;//, aimMovement;
+    private Vector3 direction;
     [SerializeField]
     private bool isGrounded;
-    //public GameObject aimTarget;
     public bool sapRun, sapSlow;
     private GameManager gameManager;
     private float originalSpeed;
@@ -36,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         OnMove();
-        //MoveTarget();
 
         if (rb.velocity.y < 0)
         {
@@ -51,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    /**
+    /*
      * Purpose: Allow player to exit game by pressing esc through input manager
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -62,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         Application.Quit();
     }
 
-    /**
+    /*
      * Purpose: Allow player to re-load the current level by pressing a button
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -73,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         SceneManager.LoadScene("MergeTesting");
     }
 
-    /**
+    /*
      * Purpose: Control player movement direction plane for sap plant
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -105,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    /**
+    /*
      * Purpose: Read player input to jump and execute action
      * References: Input manager attached to player
      * Scripts Called: ---
@@ -121,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /**
+    /*
      * Purpose: Update player movement every frame for smooth controls
      * References: Update()
      * Scripts Called: ---

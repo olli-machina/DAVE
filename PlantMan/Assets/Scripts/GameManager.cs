@@ -95,8 +95,9 @@ public class GameManager : MonoBehaviour
     /*
     * Purpose: Pauses the game and activates the Pause UI
     * References: called by InputManager attached to player object
-    * Scripts Called: None
+    * Scripts Called: PauseMenuScript
     * Status: working
+    * Contributor(s): Brandon L'Abbe
     */
     public void Pause(InputAction.CallbackContext context)
     {
@@ -112,6 +113,13 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /*
+    * Purpose: Play the game after pausing
+    * References: called by InputManager attached to player object
+    * Scripts Called: None
+    * Status: working
+    * Contributor(s): Brandon L'Abbe
+    */
     public void Play()
     {
         if (Time.timeScale == 0.0f)
@@ -129,6 +137,7 @@ public class GameManager : MonoBehaviour
     * References: called by InputManager attached to player object
     * Scripts Called: PlayerAttackScript on player object
     * Status: working
+    * Contributor(s): Brandon L'Abbe
     */
     public void SeedSwitch(InputAction.CallbackContext context)
     {
@@ -148,6 +157,7 @@ public class GameManager : MonoBehaviour
     * References: called by InputManager attached to player object
     * Scripts Called: None
     * Status: working
+    * Contributor(s): Brandon L'Abbe
     */
     public void Direction(InputAction.CallbackContext context)
     {
@@ -183,10 +193,10 @@ public class GameManager : MonoBehaviour
     * References: called by Update()
     * Scripts Called: None
     * Status: working
+    * Contributor(s): Brandon L'Abbe
     */
     private void updateSeed(int newSeed)
     {
-       // Debug.Log(seedChoice);
         slice[seedChoice].SetActive(true);
         highlight[seedChoice].SetActive(false);
 

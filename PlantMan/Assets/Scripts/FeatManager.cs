@@ -17,12 +17,6 @@ public class FeatManager : MonoBehaviour
         achievementDisabled = new bool[achievementNames.Length];
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /*
     * Purpose: Activates an achievement. This should be called when the condition for an achievement should be met
     * References: Called by PlayerMovement [add all places where achievements get fired]

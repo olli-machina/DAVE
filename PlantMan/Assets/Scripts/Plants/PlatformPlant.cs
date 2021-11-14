@@ -8,19 +8,21 @@ using UnityEngine;
 */
 class PlatformPlant : PlantType
 {
-    public float timeToPlatform = 2.0f; /**< Time it takes to fully grow platform flat surface*/
-    public float growHeight = 2.0f; /**< How tall the platform should be*/
-    public Vector2 platformDimentions; /**< size of platform flat surface*/
+    public float timeToPlatform = 2.0f;
+    public float growHeight = 2.0f;
+    public Vector2 platformDimentions;
     public GameObject stalk;
     public GameObject platform;
 
-    private float platformTimer; /**<private timer to keep track of platform flat surface growth*/
-    private Vector3 growScale; /**< keep track of how big platform structure should get*/
-    private Vector3 platScale; /**< keep track of how big platform flat surface should get*/
-    private float timer; /**< keep track of when to check for light source*/
+    private float platformTimer;
+    private Vector3 growScale;
+    private Vector3 platScale;
+    private float timer;
 
-    private float growingTimer; /**< private timer to keep track of platform structure growth*/
-    private float deathTimer; /**< private timer for plant to die when not in sunlight*/
+    private float growingTimer;
+    private float deathTimer;
+
+    private bool showGrowingModels;
 
     public override void Update()
     {
@@ -59,34 +61,42 @@ class PlatformPlant : PlantType
         growScale = startingScale;
         growScale.y = growHeight;
         platScale = platform.transform.localScale;
+        showGrowingModels = false;
     }
 
-    /**
-    * Purpose: Handles the animation for the plant growing \n
-    * References: called by Update() if isInLight \n
-    * Scripts Called: None \n
-    * Status: working \n
+    /*
+    * Purpose: Handles the animation for the plant growing 
+    * References: called by Update() if isInLight
+    * Scripts Called: None
+    * Status: working
     * Contributor(s): Brandon L'Abbe
     */
     public override void Grow()
     {
-        if (growingTimer > 1.0f) //If the stalk is done growing
+        if (growingTimer > 1.0f)
         {
-            if (platformTimer < 1.0f) //If platform is not done growing
+            if (platformTimer < 1.0f)
                 platformTimer += Time.deltaTime / timeToPlatform;
             else
-                return; //Growing completely done
+                return;
 
-            Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer); //Grow platform
+            Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
             platform.layer = 0;
             platform.transform.localScale = pScale;
-            platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up); //Make platform face upwards
+            platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
 
         }
         else
         {
             growingTimer += Time.deltaTime / timeToGrow;
+
+            if(!showGrowingModels)
+            {
+                showGrowingModels = true;
+                stalk.GetComponent<MeshRenderer>().enabled = true;
+                platform.GetComponent<MeshRenderer>().enabled = true;
+            }
         }
 
         Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
@@ -104,11 +114,11 @@ class PlatformPlant : PlantType
     }
 
 
-    /**
-    * Purpose: Handles the animation for the plant shrinking \n
-    * References: called by Update() if not isInLight \n
-    * Scripts Called: None \n
-    * Status: working \n
+    /*
+    * Purpose: Handles the animation for the plant shrinking 
+    * References: called by Update() if not isInLight
+    * Scripts Called: None
+    * Status: working
     * Contributor(s): Brandon L'Abbe
     */
     public override void Shrink()
@@ -126,6 +136,12 @@ class PlatformPlant : PlantType
 
         if (growingTimer < 0.0f)
         {
+            if (showGrowingModels)
+            {
+                showGrowingModels = false;
+                stalk.GetComponent<MeshRenderer>().enabled = false;
+                platform.GetComponent<MeshRenderer>().enabled = false;
+            }
 
             deathTimer += Time.deltaTime;
 
