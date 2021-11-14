@@ -22,6 +22,8 @@ class PlatformPlant : PlantType
     private float growingTimer; /**< private timer to keep track of platform structure growth*/
     private float deathTimer; /**< private timer for plant to die when not in sunlight*/
 
+    private bool showGrowingModels;
+
     public override void Update()
     {
         timer += Time.deltaTime;
@@ -59,6 +61,7 @@ class PlatformPlant : PlantType
         growScale = startingScale;
         growScale.y = growHeight;
         platScale = platform.transform.localScale;
+        showGrowingModels = false;
     }
 
     /**
@@ -87,6 +90,13 @@ class PlatformPlant : PlantType
         else
         {
             growingTimer += Time.deltaTime / timeToGrow;
+
+            if(!showGrowingModels)
+            {
+                showGrowingModels = true;
+                stalk.GetComponent<MeshRenderer>().enabled = true;
+                platform.GetComponent<MeshRenderer>().enabled = true;
+            }
         }
 
         Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
@@ -126,6 +136,12 @@ class PlatformPlant : PlantType
 
         if (growingTimer < 0.0f)
         {
+            if (showGrowingModels)
+            {
+                showGrowingModels = false;
+                stalk.GetComponent<MeshRenderer>().enabled = false;
+                platform.GetComponent<MeshRenderer>().enabled = false;
+            }
 
             deathTimer += Time.deltaTime;
 
