@@ -256,8 +256,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("HERE");
         for (int i = 0; i < plants.Length; i++)
         {
-            Destroy(plants[i].transform.parent.gameObject);
-            
+            if(plants[i].transform.parent.gameObject != null)
+                Destroy(plants[i].transform.parent.gameObject);
+            else
+                Destroy(plants[i].gameObject);
+
         }
     }
 

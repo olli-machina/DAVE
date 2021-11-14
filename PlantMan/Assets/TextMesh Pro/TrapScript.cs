@@ -25,7 +25,7 @@ public class TrapScript : MonoBehaviour
 
         if(other.gameObject.tag == "Plant" || other.gameObject.tag == "Seed")
         {
-            Destroy(other.transform.parent.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

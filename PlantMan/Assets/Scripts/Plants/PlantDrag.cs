@@ -19,7 +19,7 @@ public class PlantDrag : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Ground")
-            Debug.Log(other.gameObject.name + GetComponent<Collider>().GetType());
+            Debug.Log(other.gameObject.name + ": " + other.GetType());
         if(GetComponent<Collider>().GetType() == typeof(SphereCollider) && other.gameObject.layer == 8)
         {
             gameObject.GetComponent<Rigidbody>().drag = 30f;
@@ -27,9 +27,25 @@ public class PlantDrag : MonoBehaviour
 
         if(other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
         {
-            Debug.Log(other.gameObject.name);
-            Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other);
+            //Debug.Log(other.gameObject.name);
+            Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other); //This one definitely works
         }
 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+            Debug.Log(other.gameObject.name + ": " + other.GetType());
+        if (GetComponent<Collider>().GetType() == typeof(SphereCollider) && other.gameObject.layer == 8)
+        {
+            gameObject.GetComponent<Rigidbody>().drag = 30f;
+        }
+
+        if (other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
+        {
+            //Debug.Log(other.gameObject.name);
+            Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other.collider); //Not sure if this works
+        }
     }
 }
