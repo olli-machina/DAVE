@@ -23,6 +23,7 @@ public class PlantDrag : MonoBehaviour
         if(GetComponent<Collider>().GetType() == typeof(SphereCollider) && other.gameObject.layer == 8)
         {
             gameObject.GetComponent<Rigidbody>().drag = 30f;
+            gameObject.GetComponent<Rigidbody>().mass = 100f;
         }
 
         if(other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
@@ -40,6 +41,7 @@ public class PlantDrag : MonoBehaviour
         if (GetComponent<Collider>().GetType() == typeof(SphereCollider) && other.gameObject.layer == 8)
         {
             gameObject.GetComponent<Rigidbody>().drag = 30f;
+            gameObject.GetComponent<Rigidbody>().mass = 100f;
         }
 
         if (other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
