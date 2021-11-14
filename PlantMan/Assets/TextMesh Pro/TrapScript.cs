@@ -20,6 +20,7 @@ public class TrapScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play("Death", 1f);
             GameObject.Find("GameManager").GetComponent<GameManager>().PlayerDeath();
         }
 
