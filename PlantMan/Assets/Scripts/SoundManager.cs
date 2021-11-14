@@ -59,6 +59,7 @@ public class SoundManager : MonoBehaviour
             if (soundNames[i] == name)
             {
                 Play(i, target, volume);
+                Debug.Log("CRY");
                 break;
             }
         }
