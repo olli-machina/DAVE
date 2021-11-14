@@ -20,13 +20,13 @@ public class SoundManager : MonoBehaviour
         
     }
 
-    public void Play(string name)
+    public void Play(string name, float volume = 1.0f)
     {
         for(int i = 0; i < soundNames.Length; i++)
         {
             if (soundNames[i] == name)
             {
-                Play(i);
+                Play(i, volume);
                 break;
             }
         }
@@ -52,13 +52,42 @@ public class SoundManager : MonoBehaviour
         
     }
 
-    public void PlayLoop(string name)
+    public void Play(string name, GameObject target, float volume = 1.0f)
     {
         for (int i = 0; i < soundNames.Length; i++)
         {
             if (soundNames[i] == name)
             {
-                PlayLoop(i);
+                Play(i, target, volume);
+                break;
+            }
+        }
+    }
+
+    public void Play(int id, GameObject target, float volume = 1.0f)
+    {
+        AudioSource pas = target.GetComponent<AudioSource>();
+
+        if(pas == null)
+        {
+            Debug.LogError("Attempted to play " + soundNames[id] + " on the GameObject " + target.name + ", but it doesn't have an audio source!");
+        }
+
+        pas.clip = soundClips[id];
+        pas.loop = false;
+        pas.volume = volume;
+        pas.Play();
+
+    }
+
+
+    public void PlayLoop(string name, float volume = 1.0f)
+    {
+        for (int i = 0; i < soundNames.Length; i++)
+        {
+            if (soundNames[i] == name)
+            {
+                PlayLoop(i, volume);
                 break;
             }
         }
@@ -81,6 +110,34 @@ public class SoundManager : MonoBehaviour
             }
 
         }
+
+    }
+
+    public void PlayLoop(string name, GameObject target, float volume = 1.0f)
+    {
+        for (int i = 0; i < soundNames.Length; i++)
+        {
+            if (soundNames[i] == name)
+            {
+                PlayLoop(i, target, volume);
+                break;
+            }
+        }
+    }
+
+    public void PlayLoop(int id, GameObject target, float volume = 1.0f)
+    {
+        AudioSource pas = target.GetComponent<AudioSource>();
+
+        if (pas == null)
+        {
+            Debug.LogError("Attempted to play " + soundNames[id] + " on the GameObject " + target.name + ", but it doesn't have an audio source!");
+        }
+
+        pas.clip = soundClips[id];
+        pas.loop = true;
+        pas.volume = volume;
+        pas.Play();
 
     }
 
