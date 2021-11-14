@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerGrapple : MonoBehaviour
 {
-    public float maxAngle, maxRadius, timeToGrapple = 0.2f; /**< Public variables for designers*/
-    public Material glowMat, baseMat; /**< Materials between glowing in view and not when out of view*/
+    public float maxAngle, maxRadius, timeToGrapple = 0.2f;
+    public Material glowMat, baseMat;
     private bool isInFOV = false;
     public bool grappleToObj = false; 
-    private Vector3 startPosition; /**< For lerp, CANNOT BE A TRANSFORM*/
+    private Vector3 startPosition; //CANNOT BE A TRANSFORM
     private float grappleTime = 0f;
-    private GameObject seenGrapple; /**< player's seen grapple point*/
+    private GameObject seenGrapple;
     public GameObject grappleLine;
 
     // Start is called before the first frame update
@@ -20,10 +20,10 @@ public class PlayerGrapple : MonoBehaviour
         seenGrapple = null;
     }
 
-    /**
-    * Purpose: Draw the gizmos for in-editor \n
-    * References: --- \n
-    * Scripts Called: --- \n
+    /*
+    * Purpose: Draw the gizmos for in-editor
+    * References: ---
+    * Scripts Called: ---
     * Status: working
     */
     private void OnDrawGizmos()
@@ -51,10 +51,10 @@ public class PlayerGrapple : MonoBehaviour
         Gizmos.DrawRay(transform.position, transform.forward * maxRadius);
     }
 
-    /**
-    * Purpose: Determine if the grapple point is in the proper FOV\n
-    * References: Update Function \n
-    * Scripts Called: --- \n
+    /*
+    * Purpose: Determine if the grapple point is in the proper FOV
+    * References: Update Function 
+    * Scripts Called: --- 
     * Status: working
     */
     public bool inFOV(Transform checkingObj, float maxRadius)
@@ -62,11 +62,11 @@ public class PlayerGrapple : MonoBehaviour
         Collider[] overlaps = new Collider[100]; //everything in FOV
         int count = Physics.OverlapSphereNonAlloc(checkingObj.position, maxRadius, overlaps);
 
-        for (int i = 0; i < count; i++) //for behind the hunter
+        for (int i = 0; i < count; i++)
         {
-            if (overlaps[i] != null) //for in front of the hunter
+            if (overlaps[i] != null)
             {
-                if (overlaps[i].tag == "GrapplePoint") //if the target is in the FOV
+                if (overlaps[i].tag == "GrapplePoint") 
                 {
                     GameObject target = overlaps[i].gameObject;
                     seenGrapple = target;
@@ -86,10 +86,10 @@ public class PlayerGrapple : MonoBehaviour
         return false;
     }
 
-    /**
-    * Purpose: Grapple function in response to button input \n
-    * References: Input manager in engine \n
-    * Scripts Called: --- \n
+    /*
+    * Purpose: Grapple function in response to button input 
+    * References: Input manager in engine 
+    * Scripts Called: ---
     * Status: working
     */
     public void OnGrapple(InputAction.CallbackContext context)

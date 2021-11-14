@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 
 public class MeleeColliderCheck : MonoBehaviour
 {
-    public bool plantInRange; /**< Is there a plant for the player to destroy*/
-    public GameObject otherPlant; /**< Hold the reference to the plant parent*/
+    public bool plantInRange;
+    public GameObject otherPlant;
 
-    /**
+    /*
      * Purpose: if the player presses melee input and there is a plant, destroy it \n
      * References: in input controller attached to player obj \n
      * Scripts Called: --- \n

@@ -17,36 +17,36 @@ public class PauseMenuScript : MonoBehaviour
         options[0].Select();
     }
 
-    /**
+    /*
      * Purpose: Close the game
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     *  Contributers: Carter Ivancic
      */
     public void Quit()
     {
         Application.Quit();
     }
 
-    /**
+    /*
      * Purpose: Selects the first button
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void SetButton()
     {
         options[0].Select();
     }
 
-    /**
+    /*
      * Purpose: Resume playing the game
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void Resume()
     {
@@ -54,12 +54,12 @@ public class PauseMenuScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    /**
+    /*
      * Purpose: Closes the info panel of the pause menu
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void CloseInfo(InputAction.CallbackContext context)
     {
@@ -73,12 +73,12 @@ public class PauseMenuScript : MonoBehaviour
         options[0].Select();
     }
 
-    /**
+    /*
      * Purpose: Opens the info panel of the pause menu
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void OpenInfo(Button clicked)
     {
@@ -93,24 +93,24 @@ public class PauseMenuScript : MonoBehaviour
         info[0].Select();
     }
 
-    /**
+    /*
      * Purpose: Opens the controls image of the info panel
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void ShowControls()
     {
         controls.SetActive(true);
     }
 
-    /**
+    /*
      * Purpose: Closes the controls image of the info panel
      * References: ---
      * Scripts Called: ---
      * Status: working
-     * * Contributers: Carter Ivancic
+     * Contributers: Carter Ivancic
      */
     public void CloseControls()
     {

@@ -67,7 +67,6 @@ public class LaunchingPlant : PlantType
         {
             if (!fullGrown && !launching)
             {
-                //Debug.Log("WHY");
                 Grow();
             }
         }
@@ -112,7 +111,6 @@ public class LaunchingPlant : PlantType
     {
         //mark that the plant is full grown for after player leaves range
         //Plant should not reset- just grow back to the full size
-        //Debug.Log("Frow");
         if (growingTimer > 1f)
         {
             fullGrown = true;
@@ -181,12 +179,10 @@ public class LaunchingPlant : PlantType
     */
     private void Hide()
     {
-        //it is in hiding, waiting to launch player
         if (growingTimer < 0.0f)
         {
             hideTimer += Time.deltaTime;
 
-            //hiding done, launch player
             if (hideTimer > timeToHide)
                 Launch();
 
