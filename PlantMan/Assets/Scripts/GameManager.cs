@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     public void SelectSeed(InputAction.CallbackContext context)
     {
-        Debug.Log("CALLED");
+        //Debug.Log("CALLED");
         if (context.started && isPaused && seedSwitchUI.gameObject.activeInHierarchy && hasSelection) //If in Seed Switching mode
         {
 
@@ -246,7 +246,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("HERE");
         for (int i = 0; i < plants.Length; i++)
         {
-            Destroy(plants[i]);
+            Destroy(plants[i].transform.parent.gameObject);
+            
         }
     }
 
