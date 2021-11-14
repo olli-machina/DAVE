@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 
     private int seedChoice;
 
+    private int seedSelection;
+
     private void Start()
     {
         isPaused = false;
@@ -68,12 +70,9 @@ public class GameManager : MonoBehaviour
             if (deg < 0.0f)
                 deg += 360;
 
-            int selection = (int)(deg / 45.0f);
+            seedSelection = (int)(deg / 45.0f);
 
-            Debug.Log(selection);
-
-            updateSeed(selection);
-            
+            updateSeed(seedSelection);
         }
 
         levelTimer += Time.deltaTime;
@@ -124,19 +123,11 @@ public class GameManager : MonoBehaviour
     {
         if(context.started && !isPaused)
         {
+            player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
             isPaused = true;
             Time.timeScale = 0.0f;
             gameUI.gameObject.SetActive(false);
             seedSwitchUI.gameObject.SetActive(true);
-        }
-        else if(context.canceled && seedSwitchUI.gameObject.activeInHierarchy && isPaused)
-        {
-            Debug.Log("OFF");
-            playerAimScript.seedToShoot = seedPrefabs[seedChoice];
-            isPaused = false;
-            gameUI.gameObject.SetActive(true);
-            seedSwitchUI.gameObject.SetActive(false);
-            Time.timeScale = 1.0f;
         }
 
     }
@@ -154,6 +145,25 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void SelectSeed(InputAction.CallbackContext context)
+    {
+        Debug.Log("CALLED");
+        if (context.started && isPaused && seedSwitchUI.gameObject.activeInHierarchy) //If in Seed Switching mode
+        {
+
+            playerAimScript.seedToShoot = seedPrefabs[seedChoice];
+            seedIcon.sprite = icons[seedChoice];
+
+            player.GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerControlScheme");
+
+            isPaused = false;
+            gameUI.gameObject.SetActive(true);
+            seedSwitchUI.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
+
+        }
+    }
+
     /*
     * Purpose: Switches the seed to match the seed chosen in the update function
     * References: called by Update()
@@ -166,13 +176,12 @@ public class GameManager : MonoBehaviour
         slice[seedChoice].SetActive(true);
         highlight[seedChoice].SetActive(false);
 
-        seedChoice = newSeed;
+        seedChoice = seedSelection;
 
         slice[seedChoice].SetActive(false);
         highlight[seedChoice].SetActive(true);
         seedName.text = names[seedChoice];
         description.text = descriptions[seedChoice];
-        seedIcon.sprite = icons[seedChoice]; 
 
     }
 
