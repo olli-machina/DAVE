@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private float originalSpeed;
     private CheckTrigger groundTrigger;
 
+    Animator animator;
+
     private bool midAir;
 
     Vector2 rawInput;
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         midAir = false;
 
         groundTrigger = gameObject.GetComponentInChildren<CheckTrigger>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void FixedUpdate()
@@ -93,6 +96,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 inputVec = context.ReadValue<Vector2>();
+        
+        animator.SetFloat("targetVelocity", gameManager.animDirection);
 
         if (sapRun) //if running on sap wall, move up
         {
