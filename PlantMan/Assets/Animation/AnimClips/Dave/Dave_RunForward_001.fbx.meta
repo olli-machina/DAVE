@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 2d7b6406626817443ad2b0ab34559618
+guid: ccf82b1aff087c64196ae1c68a2f7003
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 984929847076028475
-    second: Dave_RunForward_001
+      74: 8269210699696534059
+    second: Dave_RunForward_002
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -19,22 +19,19 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'Dave_Rig_001:LeftLeg_Foot_J'
-      : rotation error = 2.225467 deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Dave_RunForward_001' has import animation warnings
+    animationImportWarnings: "\nClip 'Dave_RunForward_002' has import animation warnings
       that might lower retargeting quality:\nNote: Activate translation DOF on avatar
       to improve retargeting quality.\n\t'Dave_Rig_001:Spine_J_002' is inbetween
       humanoid transforms and has rotation animation that will be discarded.\n\t'Dave_Rig_001:Spine_J_003'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Dave_Rig_001:Head_J_002'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Dave_Rig_001:LeftLeg_Foot_J'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -43,8 +40,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Dave_RunForward_001
-      takeName: Dave_RunForward_001
+      name: Dave_RunForward_002
+      takeName: Dave_RunForward_002
       internalID: 0
       firstFrame: 1
       lastFrame: 30
@@ -57,8 +54,8 @@ ModelImporter:
       loopTime: 1
       loopBlend: 1
       loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -253,7 +250,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Dave_Rig_001:LeftLeg_Toe_J
+    - boneName: Dave_Rig_001:LeftLeg_Foot_J
       humanName: LeftToes
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -379,7 +376,7 @@ ModelImporter:
     - name: Dave_Rig_001:LeftArm_Elbow_J
       parentName: Dave_Rig_001:LeftArm_Shoulder_J
       position: {x: -0.2556108, y: -9.381669e-17, z: 3.1140258e-18}
-      rotation: {x: 0.079341784, y: 0.3850753, z: -0.05081536, w: 0.918063}
+      rotation: {x: 0.07934179, y: 0.3850753, z: -0.050815362, w: 0.918063}
       scale: {x: 1, y: 1, z: 1}
     - name: Dave_Rig_001:LeftArm_Tip_J
       parentName: Dave_Rig_001:LeftArm_Elbow_J
