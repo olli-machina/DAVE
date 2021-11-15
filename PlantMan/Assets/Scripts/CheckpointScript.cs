@@ -26,11 +26,15 @@ public class CheckpointScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             if(resetObjects.Length == 0)
-                GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority);
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority);            
+                Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().checkpointUI);
+            }
             else
+            {
                 GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority, resetObjects);
-            
-            Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().checkpointUI);
+                Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().checkpointUI);
+            }
         }
     }
 }
