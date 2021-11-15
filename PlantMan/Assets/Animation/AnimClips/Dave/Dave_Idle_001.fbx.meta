@@ -1,0 +1,467 @@
+fileFormatVersion: 2
+guid: 42ba5564785545b4c94185f7db9566a4
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 7202574886581246624
+    second: Dave_Idle_001
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: "\nClip 'Dave_Idle_001' has import animation warnings
+      that might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Dave_Rig_001:Spine_J_002' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n\t'Dave_Rig_001:Spine_J_003'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Dave_Rig_001:Head_J_002'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 1
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Dave_Idle_001
+      takeName: Dave_Idle_001
+      internalID: 0
+      firstFrame: 1
+      lastFrame: 79
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human:
+    - boneName: Dave_Rig_001:Hip_J
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftLeg_Femur_J
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightLeg_Femur_J1
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftLeg_Knee_J
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightLeg_Knee_J
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftLeg_Ankle_J
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightLeg_Ankle_J
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Spine_J_001
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Neck_J_001
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Head_J_001
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Left_Clavicle_J
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Right_Clavicle_J
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftArm_Shoulder_J
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightArm_Shoulder_J
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftArm_Elbow_J
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightArm_Elbow_J
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightArm_Tip_J
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftLeg_Foot_J
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:RightLeg_Foot_J
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:Head_J_003
+      humanName: LeftEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Dave_Rig_001:LeftArm_Tip_J
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Dave_Idle_001(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:leaf_low3
+      parentName: Dave_Idle_001(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Root_J_001
+      parentName: Dave_Idle_001(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Hip_J
+      parentName: Dave_Rig_001:Root_J_001
+      position: {x: -0.025241982, y: 0.9202029, z: 0.020102661}
+      rotation: {x: 0.4042968, y: -0.35678583, z: -0.6295419, w: 0.559397}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftLeg_Femur_J
+      parentName: Dave_Rig_001:Hip_J
+      position: {x: 0.047965243, y: -0.03227407, z: 0.084566504}
+      rotation: {x: -0.27835265, y: 0.70919687, z: 0.6460688, w: -0.046419226}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftLeg_Knee_J
+      parentName: Dave_Rig_001:LeftLeg_Femur_J
+      position: {x: -0.43360832, y: 7.126458e-17, z: 1.2048209e-16}
+      rotation: {x: -0.6365211, y: -0.2991305, z: -0.107346885, w: 0.7027365}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftLeg_Ankle_J
+      parentName: Dave_Rig_001:LeftLeg_Knee_J
+      position: {x: -0.40406826, y: 2.754869e-17, z: 3.165083e-17}
+      rotation: {x: 0.8086624, y: 0.5467693, z: -0.05437061, w: 0.21012436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftLeg_Foot_J
+      parentName: Dave_Rig_001:LeftLeg_Ankle_J
+      position: {x: -0.122389965, y: 0.001319689, z: 0.0020297947}
+      rotation: {x: 0.0029332342, y: 0.007074128, z: -0.22407651, w: 0.9745415}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftLeg_Toe_J
+      parentName: Dave_Rig_001:LeftLeg_Foot_J
+      position: {x: -0.11370567, y: 4.862442e-17, z: -4.1486833e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightLeg_Femur_J1
+      parentName: Dave_Rig_001:Hip_J
+      position: {x: 0.047965243, y: -0.03227407, z: -0.08457}
+      rotation: {x: -0.113637134, y: 0.8460035, z: -0.52021843, w: -0.027158381}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightLeg_Knee_J
+      parentName: Dave_Rig_001:RightLeg_Femur_J1
+      position: {x: -0.43360895, y: -1.6771509e-17, z: -7.6782776e-17}
+      rotation: {x: 0.62572694, y: 0.248152, z: -0.089028925, w: 0.73413914}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightLeg_Ankle_J
+      parentName: Dave_Rig_001:RightLeg_Knee_J
+      position: {x: -0.40406844, y: 1.05603105e-16, z: -1.5241819e-18}
+      rotation: {x: 0.6960995, y: 0.6414001, z: 0.11876992, w: -0.2999084}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightLeg_Foot_J
+      parentName: Dave_Rig_001:RightLeg_Ankle_J
+      position: {x: -0.12239465, y: 0.0012132772, z: -0.0018028948}
+      rotation: {x: -0.0029379283, y: -0.0070854495, z: -0.22407652, w: 0.97454137}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightLeg_Toe_J
+      parentName: Dave_Rig_001:RightLeg_Foot_J
+      position: {x: -0.11370571, y: 4.1613693e-17, z: -2.6969374e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Spine_J_001
+      parentName: Dave_Rig_001:Hip_J
+      position: {x: -0.12951356, y: 0.0000000013086446, z: 6.217249e-17}
+      rotation: {x: 0.08874165, y: 0.014781943, z: 0.045807324, w: 0.994891}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Spine_J_002
+      parentName: Dave_Rig_001:Spine_J_001
+      position: {x: -0.22243407, y: -4.269083e-10, z: 2.2426505e-16}
+      rotation: {x: -0.00036527976, y: 0.005276479, z: -0.015194966, w: 0.9998706}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Left_Clavicle_J
+      parentName: Dave_Rig_001:Spine_J_002
+      position: {x: -0.14804125, y: -0.036688827, z: 0.050828084}
+      rotation: {x: -0.48411062, y: 0.56304425, z: 0.45132005, w: 0.49490234}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftArm_Shoulder_J
+      parentName: Dave_Rig_001:Left_Clavicle_J
+      position: {x: -0.1517523, y: 3.461814e-16, z: 2.6645352e-17}
+      rotation: {x: 0.020422567, y: -0.11155484, z: 0.5923264, w: 0.79767656}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftArm_Elbow_J
+      parentName: Dave_Rig_001:LeftArm_Shoulder_J
+      position: {x: -0.2556108, y: -9.381669e-17, z: 3.1140258e-18}
+      rotation: {x: 0.07934179, y: 0.3850753, z: -0.050815362, w: 0.918063}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:LeftArm_Tip_J
+      parentName: Dave_Rig_001:LeftArm_Elbow_J
+      position: {x: -0.49948564, y: 7.147335e-17, z: 6.499087e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Right_Clavicle_J
+      parentName: Dave_Rig_001:Spine_J_002
+      position: {x: -0.14803822, y: -0.03668921, z: -0.0508281}
+      rotation: {x: 0.43283215, y: -0.5261543, z: 0.5040117, w: 0.53083915}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightArm_Shoulder_J
+      parentName: Dave_Rig_001:Right_Clavicle_J
+      position: {x: -0.15175223, y: -4.8014047e-16, z: -1.5680198e-17}
+      rotation: {x: 0.1111633, y: 0.0634568, z: 0.5842579, w: 0.80141044}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightArm_Elbow_J
+      parentName: Dave_Rig_001:RightArm_Shoulder_J
+      position: {x: -0.31043017, y: 1.05813665e-16, z: -4.1752756e-18}
+      rotation: {x: -0.10262278, y: -0.23544928, z: -0.0055235093, w: 0.96643764}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:RightArm_Tip_J
+      parentName: Dave_Rig_001:RightArm_Elbow_J
+      position: {x: -0.35354677, y: -1.57759e-16, z: 1.4897773e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Spine_J_003
+      parentName: Dave_Rig_001:Spine_J_002
+      position: {x: -0.19066839, y: 0.0000000061011227, z: 6.0729197e-16}
+      rotation: {x: 0.11254014, y: -0.03494785, z: 0.21898006, w: 0.9685872}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Neck_J_001
+      parentName: Dave_Rig_001:Spine_J_003
+      position: {x: -0.0573456, y: -0.000000046846587, z: 3.4194868e-16}
+      rotation: {x: -1.0187564e-15, y: -2.9370823e-15, z: -0.31925803, w: 0.94766784}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_001
+      parentName: Dave_Rig_001:Neck_J_001
+      position: {x: -0.047373675, y: -0.000000010435388, z: 2.797762e-16}
+      rotation: {x: 4.173951e-16, y: -3.029029e-15, z: 0.24316381, w: 0.96998525}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_002
+      parentName: Dave_Rig_001:Head_J_001
+      position: {x: -0.07282778, y: 0.000000014075959, z: 4.485301e-16}
+      rotation: {x: -4.7813983e-16, y: -2.8533268e-15, z: 0.13955937, w: 0.9902137}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_003
+      parentName: Dave_Rig_001:Head_J_002
+      position: {x: -0.061597914, y: 0.009192576, z: 0.00019919623}
+      rotation: {x: -3.4332802e-16, y: -3.0308264e-15, z: 0.15770361, w: 0.9874865}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_004
+      parentName: Dave_Rig_001:Head_J_003
+      position: {x: -0.07032367, y: -0.000000012091547, z: 3.2862602e-16}
+      rotation: {x: -7.2081874e-16, y: -2.9700475e-15, z: 0.25264406, w: 0.96755934}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_005
+      parentName: Dave_Rig_001:Head_J_004
+      position: {x: -0.068596154, y: -0.000000009005627, z: 1.4210854e-16}
+      rotation: {x: -8.740914e-16, y: -3.0415128e-15, z: 0.23790585, w: 0.9712882}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Dave_Rig_001:Head_J_006
+      parentName: Dave_Rig_001:Head_J_005
+      position: {x: -0.09137689, y: -4.4724693e-17, z: -4.965944e-33}
+      rotation: {x: -0.447321, y: 0.54763484, z: 0.447321, w: 0.54763484}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

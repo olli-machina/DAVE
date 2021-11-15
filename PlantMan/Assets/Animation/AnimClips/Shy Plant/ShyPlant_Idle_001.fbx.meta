@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: cdea95f49ade025449536809fa6d1bea
+guid: 779a4d9cadee5264d8f32ab5b7a3275b
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -1396563215131107805
+    second: ShyPlant_Idle_001
   externalObjects: {}
   materials:
     materialImportMode: 2

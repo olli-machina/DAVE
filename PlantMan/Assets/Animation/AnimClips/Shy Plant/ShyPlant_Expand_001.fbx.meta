@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 129b62cf7bb31fa47b9931489d096203
+guid: 9c65ae17121ce2f49a8bb20d0e56f2e7
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: 1329542070703896819
-    second: Animation_DAVE_Idle_001
+      74: -5972456277219017189
+    second: ShyPlant_Expand_001
   externalObjects: {}
   materials:
     materialImportMode: 2
