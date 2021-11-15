@@ -100,6 +100,7 @@ public class PlayerGrapple : MonoBehaviour
             if (seenGrapple != null)
             {
                 grappleToObj = true;
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(2, .5f);
             }
             else
             {
