@@ -278,6 +278,7 @@ public class GameManager : MonoBehaviour
         {
             checkpoint = loc;
             checkpointPriority = priority;
+            Instantiate(checkpointUI);
         }
     }
 

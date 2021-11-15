@@ -28,12 +28,10 @@ public class CheckpointScript : MonoBehaviour
             if(resetObjects.Length == 0)
             {
                 GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority);            
-                Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().checkpointUI);
             }
             else
             {
                 GameObject.Find("GameManager").GetComponent<GameManager>().SetCheckpoint(transform.position + spawnOffset, priority, resetObjects);
-                Instantiate(GameObject.Find("GameManager").GetComponent<GameManager>().checkpointUI);
             }
         }
     }
