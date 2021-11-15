@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Canvas pauseUI;
     public Canvas seedSwitchUI;
     public Canvas gameUI;
+    public Canvas checkpointUI;
 
     private Vector2 dir;
 

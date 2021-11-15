@@ -3,7 +3,16 @@ guid: 2f0ce67c4f45d1e4d923333da4f438ec
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pauseUI: {instanceID: 0}
+  - seedSwitchUI: {instanceID: 0}
+  - gameUI: {instanceID: 0}
+  - checkpointUI: {instanceID: 0}
+  - seedName: {instanceID: 0}
+  - description: {instanceID: 0}
+  - seedIcon: {instanceID: 0}
+  - playerAimScript: {instanceID: 0}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
