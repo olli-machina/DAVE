@@ -8,18 +8,14 @@ public class SoundManager : MonoBehaviour
 
     public string[] soundNames;
     public AudioClip[] soundClips;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /*
+    * Purpose: Find the sound effect using the name string
+    * References: None
+    * Scripts Called: None
+    * Status: 
+    * Contributor(s): Brandon L'Abbe
+    */
     public void Play(string name, float volume = 1.0f)
     {
         for(int i = 0; i < soundNames.Length; i++)
@@ -32,6 +28,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    /*
+    * Purpose: Play the sound effect using id
+    * References: Play(string name)
+    * Scripts Called: GameManager
+    * Status: 
+    * Contributor(s): Brandon L'Abbe
+    */
     public void Play(int id, float volume = 1.0f)
     {
         AudioSource[] pas = GameObject.Find("GameManager").GetComponent<GameManager>().player.GetComponents<AudioSource>();
@@ -81,7 +84,13 @@ public class SoundManager : MonoBehaviour
 
     }
 
-
+    /*
+    * Purpose: Find the sound loop using the name string
+    * References: None
+    * Scripts Called: None
+    * Status: 
+    * Contributor(s): Brandon L'Abbe
+    */
     public void PlayLoop(string name, float volume = 1.0f)
     {
         for (int i = 0; i < soundNames.Length; i++)
@@ -94,6 +103,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    /*
+    * Purpose: play the sound loop using the loop id
+    * References: PlayLoop(string name)
+    * Scripts Called: GameManager
+    * Status: 
+    * Contributor(s): Brandon L'Abbe
+    */
     public void PlayLoop(int id, float volume = 1.0f)
     {
         AudioSource[] pas = GameObject.Find("GameManager").GetComponent<GameManager>().player.GetComponents<AudioSource>();
@@ -154,6 +170,14 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+
+    /*
+    * Purpose: Stop the sound loop using the id
+    * References: StopLoop(int id)
+    * Scripts Called: GameManager
+    * Status: 
+    * Contributor(s): Brandon L'Abbe
+    */
     public void StopLoop(int id)
     {
         AudioSource[] pas = GameObject.Find("GameManager").GetComponent<GameManager>().player.GetComponents<AudioSource>();
