@@ -7,8 +7,11 @@ using UnityEngine.InputSystem;
 public class PauseMenuScript : MonoBehaviour
 {
     GameObject gameManager;
-    public Button[] options, info;
-    public GameObject infoPanel, controls;
+    public Button[] options, settings;
+    public GameObject[] pointers;
+    public GameObject infoPanel, controls, feats;
+    GameObject openPanel, prevPanel;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -89,8 +92,17 @@ public class PauseMenuScript : MonoBehaviour
             {
                 options[i].interactable = false;
             }
+            //Turns on the correct arrow from the corresponding button
+            else if (pointers[i] != null)
+            {
+                pointers[i].SetActive(true);
+            }
         }
-        info[0].Select();
+    }
+
+    public void OpenSettings(Button clicked)
+    {
+        settings[0].Select();
     }
 
     /*
@@ -115,5 +127,29 @@ public class PauseMenuScript : MonoBehaviour
     public void CloseControls()
     {
         controls.SetActive(false);
+    }
+
+    /*
+    * Purpose: Opens the feats page of the info panel
+    * References: ---
+    * Scripts Called: ---
+    * Status: working
+    * Contributers: Carter Ivancic
+    */
+    public void ShowFeats()
+    {
+        feats.SetActive(true);
+    }
+
+    /*
+    * Purpose: Opens the feats page of the info panel
+    * References: ---
+    * Scripts Called: ---
+    * Status: working
+    * Contributers: Carter Ivancic
+    */
+    public void CloseFeats()
+    {
+        feats.SetActive(false);
     }
 }
