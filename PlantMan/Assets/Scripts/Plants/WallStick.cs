@@ -7,6 +7,7 @@ public class WallStick : MonoBehaviour
 
     public bool startForce;
     public Animator animator;
+    public BoxCollider wallCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class WallStick : MonoBehaviour
     {
         if(collision.gameObject.tag == "Wall") //Make this object stick to a wall
         {
+            wallCollider.enabled = true;
             animator.SetBool("OnWall", true);
             Debug.Log("wall" + collision.transform.right);
             Rigidbody rb = GetComponent<Rigidbody>();
