@@ -8,19 +8,23 @@ using UnityEngine;
 */
 class PlatformPlant : PlantType
 {
-    public float timeToPlatform = 2.0f; /**< Time it takes to fully grow platform flat surface*/
-    public float growHeight = 2.0f; /**< How tall the platform should be*/
-    public Vector2 platformDimentions; /**< size of platform flat surface*/
+    public float timeToPlatform = 2.0f;
+    public float growHeight = 2.0f;
+    public Vector2 platformDimentions;
     public GameObject stalk;
     public GameObject platform;
 
-    private float platformTimer; /**<private timer to keep track of platform flat surface growth*/
-    private Vector3 growScale; /**< keep track of how big platform structure should get*/
-    private Vector3 platScale; /**< keep track of how big platform flat surface should get*/
-    private float timer; /**< keep track of when to check for light source*/
+    private float platformTimer;
+    private Vector3 growScale;
+    private Vector3 platScale;
+    private float timer;
 
-    private float growingTimer; /**< private timer to keep track of platform structure growth*/
-    private float deathTimer; /**< private timer for plant to die when not in sunlight*/
+    private float growingTimer;
+    private float deathTimer;
+
+    private Animator animator;
+    public GameObject platformObj;
+    public GameObject seed;
 
     public override void Update()
     {
@@ -59,6 +63,7 @@ class PlatformPlant : PlantType
         growScale = startingScale;
         growScale.y = growHeight;
         platScale = platform.transform.localScale;
+        animator = GetComponent<Animator>();
     }
 
     /**
@@ -70,12 +75,20 @@ class PlatformPlant : PlantType
     */
     public override void Grow()
     {
+        platformObj.SetActive(true);
+        //Vector3.Lerp(seed.transform.localScale, Vector3.zero, growingTimer);
+
+        animator.enabled = true;
         if (growingTimer > 1.0f) //If the stalk is done growing
         {
             if (platformTimer < 1.0f) //If platform is not done growing
                 platformTimer += Time.deltaTime / timeToPlatform;
             else
+            {
+                seed.GetComponent<MeshRenderer>().enabled = false;
+                animator.SetBool("FullyGrown", true);
                 return; //Growing completely done
+            }
 
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer); //Grow platform
 
