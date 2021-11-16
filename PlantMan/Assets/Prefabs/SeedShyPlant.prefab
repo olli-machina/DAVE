@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7812825638619357305
 Transform:
   m_ObjectHideFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7812825638619357302}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.074, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.01, z: 0.1}
   m_Children: []
   m_Father: {fileID: 7812825639662963003}
@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1378298206832539027}
   - component: {fileID: 8894078037776774504}
   - component: {fileID: 4885468947070567908}
+  - component: {fileID: 4535332404272208850}
   m_Layer: 10
   m_Name: SeedShyPlant
   m_TagString: Seed
@@ -226,6 +227,7 @@ Transform:
   m_Children:
   - {fileID: 7812825638619357305}
   - {fileID: 7812825638697625285}
+  - {fileID: 6435507600724395887}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1}
@@ -258,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startForce: 0
+  animator: {fileID: 0}
 --- !u!114 &6025410927215063254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,11 +287,12 @@ MonoBehaviour:
   foliageDimentions: {x: 0, y: 0}
   growMultiplier: 5
   launchCoolDown: 0
-  foliage: {fileID: 7812825638619357302}
+  foliage: {fileID: 5909941779329801685}
   shrinkFoliage: {fileID: 7812825638697625284}
   playerInRange: 0
   fullGrown: 0
   launching: 0
+  plantObj: {fileID: 5909941779329801685}
 --- !u!135 &1378298206832539027
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -327,3 +331,105 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.23, y: 2.2995286, z: 3.69}
   m_Center: {x: 7.2939366e-10, y: 1.145226, z: 0}
+--- !u!95 &4535332404272208850
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7812825639662962999}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 779a4d9cadee5264d8f32ab5b7a3275b, type: 3}
+  m_Controller: {fileID: 9100000, guid: 87fa3353b341f2c468cccf385eeb7feb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &6828931950824939652
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7812825639662963003}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_Name
+      value: ShyPlant_GameRig_001
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a21ead060490d354ab69015678167659, type: 3}
+--- !u!1 &5909941779329801685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a21ead060490d354ab69015678167659, type: 3}
+  m_PrefabInstance: {fileID: 6828931950824939652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6435507600724395887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a21ead060490d354ab69015678167659, type: 3}
+  m_PrefabInstance: {fileID: 6828931950824939652}
+  m_PrefabAsset: {fileID: 0}
