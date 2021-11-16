@@ -23,6 +23,9 @@ class PlatformPlant : PlantType
     private float deathTimer;
 
     private bool showGrowingModels;
+    private Animator animator;
+    public GameObject platformObj;
+    public GameObject seed;
 
     public override void Update()
     {
@@ -61,7 +64,9 @@ class PlatformPlant : PlantType
         growScale = startingScale;
         growScale.y = growHeight;
         platScale = platform.transform.localScale;
+
         showGrowingModels = false;
+        animator = GetComponent<Animator>();
     }
 
     /*
@@ -73,12 +78,20 @@ class PlatformPlant : PlantType
     */
     public override void Grow()
     {
-        if (growingTimer > 1.0f)
+        platformObj.SetActive(true);
+        //Vector3.Lerp(seed.transform.localScale, Vector3.zero, growingTimer);
+
+        animator.enabled = true;
+        if (growingTimer > 1.0f) //If the stalk is done growing
         {
             if (platformTimer < 1.0f)
                 platformTimer += Time.deltaTime / timeToPlatform;
             else
-                return;
+            {
+                seed.GetComponent<MeshRenderer>().enabled = false;
+                animator.SetBool("FullyGrown", true);
+                return; //Growing completely done
+            }
 
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
@@ -94,8 +107,8 @@ class PlatformPlant : PlantType
             if(!showGrowingModels)
             {
                 showGrowingModels = true;
-                stalk.GetComponent<MeshRenderer>().enabled = true;
-                platform.GetComponent<MeshRenderer>().enabled = true;
+                //stalk.GetComponent<MeshRenderer>().enabled = true;
+                //platform.GetComponent<MeshRenderer>().enabled = true;
             }
         }
 
@@ -139,8 +152,8 @@ class PlatformPlant : PlantType
             if (showGrowingModels)
             {
                 showGrowingModels = false;
-                stalk.GetComponent<MeshRenderer>().enabled = false;
-                platform.GetComponent<MeshRenderer>().enabled = false;
+               // stalk.GetComponent<MeshRenderer>().enabled = false;
+                //platform.GetComponent<MeshRenderer>().enabled = false;
             }
 
             deathTimer += Time.deltaTime;

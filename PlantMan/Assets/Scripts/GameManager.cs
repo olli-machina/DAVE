@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public Sprite[] icons;
     public Image seedIcon;
 
+    public float animDirection;
+
     public bool isPaused;
     public bool isGrappling;
 
@@ -89,7 +91,12 @@ public class GameManager : MonoBehaviour
 
         levelTimer += Time.deltaTime;
 
-        if(levelTimer > completionTimeFeatTime)
+        //if(dir.y == 0)
+        //{
+        //    isIdle = true;
+        //}
+
+        if (levelTimer > completionTimeFeatTime)
             GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
     }
 
@@ -162,11 +169,15 @@ public class GameManager : MonoBehaviour
     */
     public void Direction(InputAction.CallbackContext context)
     {
-       
+
+        animDirection = context.ReadValue<Vector2>().normalized.y;
+
         dir = context.ReadValue<Vector2>();
-        
+
         if (context.canceled)
+        {
             dir = Vector2.zero;
+        }
         
     }
 

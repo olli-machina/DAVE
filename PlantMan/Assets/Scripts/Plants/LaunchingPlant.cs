@@ -34,6 +34,9 @@ public class LaunchingPlant : PlantType
     static bool hasOneLaunched = false;
     private float resetTimer;
 
+    Animator animator;
+    public GameObject plantObj;
+
     private float timer;
 
     public override void Update()
@@ -65,6 +68,7 @@ public class LaunchingPlant : PlantType
 
         if (isInLight)
         {
+            plantObj.SetActive(true);
             if (!fullGrown && !launching)
             {
                 Grow();
@@ -86,8 +90,8 @@ public class LaunchingPlant : PlantType
 
         lightValue = 0;
 
-        growScale = new Vector3(1.5f, 0.1f, 1.5f) ;
-        hideScale = new Vector3(0.75f, 0.1f, 0.75f);
+        growScale = new Vector3(1f, 1f, 1f) ;
+        //hideScale = new Vector3(0.75f, 0.1f, 0.75f);
 
         fullGrown = false;
 
@@ -99,6 +103,7 @@ public class LaunchingPlant : PlantType
         fullGrown = false;
         maxForce = launchForce;
         resetTimer = 0.0f;
+        animator = GetComponent<Animator>();
     }
 
     /*
@@ -115,20 +120,23 @@ public class LaunchingPlant : PlantType
         {
             fullGrown = true;
             gameObject.layer = 0;
+            animator.SetBool("FullyGrown", true);
+           // animator.SetBool("ReturnToState", false);
             return;
         }
         else
             growingTimer += Time.deltaTime / timeToGrow;
 
-
+        animator.SetBool("FullyGrown", false);
+        
         Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
-        Vector3 position = foliage.transform.localPosition;
+        //Vector3 position = foliage.transform.localPosition;
 
         float height = scale.y - startingScale.y;
-        position.y = height / 2.0f;
+       // position.y = height / 2.0f;
 
         foliage.transform.localScale = scale;
-        foliage.transform.localPosition = position;
+        //foliage.transform.localPosition = position;
     }
 
     /*
@@ -158,13 +166,13 @@ public class LaunchingPlant : PlantType
         //if it's not launching, then it is shrinking from no light
         if (!launching)
         {
-            Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
+           // Vector3 scale = Vector3.Lerp(startingScale, growScale, growingTimer);
             Vector3 position = foliage.transform.localPosition;
 
-            float height = scale.y - startingScale.y;
-            position.y = height / 2.0f;
+          //  float height = scale.y - startingScale.y;
+         //   position.y = height / 2.0f;
 
-            foliage.transform.localScale = scale;
+          //  foliage.transform.localScale = scale;
             foliage.transform.localPosition = position;
 
             growingTimer -= Time.deltaTime;
@@ -181,6 +189,7 @@ public class LaunchingPlant : PlantType
     {
         if (growingTimer < 0.0f)
         {
+            animator.SetBool("Hiding", true);
             hideTimer += Time.deltaTime;
 
             if (hideTimer > timeToHide)
@@ -191,14 +200,16 @@ public class LaunchingPlant : PlantType
         else
             hideTimer = 0.0f;
 
+        animator.SetBool("Shrinking", true);
 
-        Vector3 scale = Vector3.Lerp(hideScale, growScale, growingTimer);
+
+        //Vector3 scale = Vector3.Lerp(hideScale, growScale, growingTimer);
         Vector3 position = foliage.transform.localPosition;
 
-        float height = scale.y - startingScale.y;
-        position.y = height / 2.0f;
+      //  float height = scale.y - startingScale.y;
+       // position.y = height / 2.0f;
 
-        foliage.transform.localScale = scale;
+       // foliage.transform.localScale = scale;
         foliage.transform.localPosition = position;
 
         growingTimer -= Time.deltaTime;
@@ -214,6 +225,7 @@ public class LaunchingPlant : PlantType
     {
         if (launching && !hasOneLaunched && !player.GetComponentInChildren<PlayerMovement>().IsMidAir())
         {
+            animator.SetBool("Launching", true);
             foliage.transform.localScale = growScale;
             Vector3 forceDirection = transform.up * launchForce;
             Vector3 playervel = player.GetComponentInChildren<Rigidbody>().velocity;
@@ -224,6 +236,7 @@ public class LaunchingPlant : PlantType
             playerInRange = false; //make sure player is not still in range after launching, may need to delete later**
             hideTimer = 0f;
             growingTimer = 1f;
+            animator.SetBool("ReturnToState", true);
         }
         else //failsafe for if launch is called when it shouldn't be, only launch once
             return;
@@ -240,6 +253,8 @@ public class LaunchingPlant : PlantType
         {
             playerInRange = true;
             player = other.gameObject;
+            animator.SetBool("ReturnToState", false);
+            //animator.SetBool("ReturnToState", false);
         }
     }
 
@@ -260,6 +275,11 @@ public class LaunchingPlant : PlantType
             launching = false;
             startingScale = foliage.transform.localScale;
             fullGrown = false;
+            animator.SetBool("Hiding", false);
+            animator.SetBool("Launching", false);
+            animator.SetBool("ReturnToState", true);
+            animator.SetBool("Shrinking", false);
+            animator.SetBool("FullyGrown", false);
         }
     }
 }
