@@ -7,17 +7,21 @@ using UnityEngine.InputSystem;
 public class PauseMenuScript : MonoBehaviour
 {
     GameObject gameManager;
-    public Button[] options, settings;
+    public Button[] optionButtons, settingButtons;
     public GameObject[] pointers;
-    public GameObject infoPanel, controls, feats;
+    public GameObject infoPanel, settingsPanel, controlsPanel, gamePanel, videoPanel, audioPanel, featsPanel;
     GameObject openPanel, prevPanel;
+    int numOpen;
+
+    SpriteState selected;
     
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        options[0].Select();
+        optionButtons[0].Select();
+        numOpen = 0;
     }
 
     /*
@@ -41,7 +45,8 @@ public class PauseMenuScript : MonoBehaviour
      */
     public void SetButton()
     {
-        options[0].Select();
+        optionButtons[0].Select();
+        infoPanel.SetActive(false);
     }
 
     /*
@@ -64,16 +69,42 @@ public class PauseMenuScript : MonoBehaviour
      * Status: working
      * Contributers: Carter Ivancic
      */
-    public void CloseInfo(InputAction.CallbackContext context)
+    public void CloseOpenPanel(InputAction.CallbackContext context)
     {
-        Debug.Log("Closing info panel");
-        CloseControls();
-        infoPanel.SetActive(false);
-        for(int i = 0; i < options.Length; i++)
+        if (context.performed)
         {
-            options[i].interactable = true;
+            openPanel.SetActive(false);
+            if (numOpen > 1)
+            {        
+            
+                CloseControls();
+                CloseGameplay();
+                CloseVideo();
+                CloseAudio();
+
+                openPanel = prevPanel;
+            }
+            else
+            {
+                CloseInfo();
+                prevPanel = null;
+            }
+            numOpen--;
         }
-        options[0].Select();
+    }
+
+    void CloseInfo()
+    {
+        infoPanel.SetActive(false);
+        for (int i = 0; i < optionButtons.Length; i++)
+        {
+            optionButtons[i].interactable = true;
+            if (pointers[i] != null)
+            {
+                pointers[i].SetActive(false);
+            }
+        }
+        optionButtons[0].Select();
     }
 
     /*
@@ -86,11 +117,11 @@ public class PauseMenuScript : MonoBehaviour
     public void OpenInfo(Button clicked)
     {
         infoPanel.SetActive(true);
-        for (int i = 0; i < options.Length; i++)
+        for (int i = 0; i < optionButtons.Length; i++)
         {
-            if (options[i] != clicked)
+            if (optionButtons[i] != clicked)
             {
-                options[i].interactable = false;
+                optionButtons[i].interactable = false;
             }
             //Turns on the correct arrow from the corresponding button
             else if (pointers[i] != null)
@@ -100,9 +131,24 @@ public class PauseMenuScript : MonoBehaviour
         }
     }
 
-    public void OpenSettings(Button clicked)
+    public void OpenSettings()
     {
-        settings[0].Select();
+        numOpen++;
+        settingsPanel.SetActive(true);
+        settingButtons[0].Select();
+        openPanel = settingsPanel;
+        prevPanel = settingsPanel;
+    }
+
+    public void ClickedSetting(Button clicked)
+    {
+        for (int i = 0; i < settingButtons.Length; i++)
+        {
+            if (settingButtons[i] != clicked)
+            {
+                settingButtons[i].interactable = false;
+            }
+        }
     }
 
     /*
@@ -112,9 +158,11 @@ public class PauseMenuScript : MonoBehaviour
      * Status: working
      * Contributers: Carter Ivancic
      */
-    public void ShowControls()
+    public void OpenControls()
     {
-        controls.SetActive(true);
+        numOpen++;
+        controlsPanel.SetActive(true);
+        openPanel = controlsPanel;
     }
 
     /*
@@ -124,9 +172,44 @@ public class PauseMenuScript : MonoBehaviour
      * Status: working
      * Contributers: Carter Ivancic
      */
-    public void CloseControls()
+    void CloseControls()
     {
-        controls.SetActive(false);
+        controlsPanel.SetActive(false);
+        for (int i = 0; i < settingButtons.Length; i++)
+        {
+            settingButtons[i].interactable = true;
+        }        
+        settingButtons[0].Select();
+    }
+
+    public void OpenGameplay()
+    {
+
+    }
+
+    void CloseGameplay()
+    {
+
+    }
+
+    public void OpenVideo()
+    {
+
+    }
+
+    void CloseVideo()
+    {
+
+    }
+
+    public void OpenAudio()
+    {
+
+    }
+
+    void CloseAudio()
+    {
+
     }
 
     /*
@@ -136,20 +219,10 @@ public class PauseMenuScript : MonoBehaviour
     * Status: working
     * Contributers: Carter Ivancic
     */
-    public void ShowFeats()
+    public void OpenFeats()
     {
-        feats.SetActive(true);
-    }
-
-    /*
-    * Purpose: Opens the feats page of the info panel
-    * References: ---
-    * Scripts Called: ---
-    * Status: working
-    * Contributers: Carter Ivancic
-    */
-    public void CloseFeats()
-    {
-        feats.SetActive(false);
+        numOpen++;
+        featsPanel.SetActive(true);
+        openPanel = featsPanel;
     }
 }

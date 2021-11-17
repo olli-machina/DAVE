@@ -23,6 +23,7 @@ public class FeatWindow : MonoBehaviour
             featInfo[i].GetComponent<FeatInfo>().description.text = featManager.achievementDescriptions[i];
         }
         parent.SetActive(false);
+        transform.parent.transform.parent.transform.parent.gameObject.SetActive(false);
     }
 
     public void UpdateSticker(int num)
