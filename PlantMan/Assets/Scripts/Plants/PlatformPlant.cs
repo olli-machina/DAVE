@@ -98,7 +98,7 @@ class PlatformPlant : PlantType
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
             platform.layer = 0;
-            platform.transform.localScale = pScale;
+           // platform.transform.localScale = pScale;
             platform.transform.rotation = Quaternion.LookRotation(Vector3.forward, Vector3.up);
 
         }
@@ -122,8 +122,8 @@ class PlatformPlant : PlantType
         position.y = height / 2.0f;
         platPosition.y = height;
 
-        stalk.transform.localScale = scale;
-        stalk.transform.localPosition = position;
+        //stalk.transform.localScale = scale;
+       // stalk.transform.localPosition = position;
 
         platform.transform.localPosition = platPosition;
     }
