@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     private bool hasSelection;
 
     public GameObject backgroundMusicPlayer;
-    public GameObject IntroMusicPlayer;
     private bool onLoopingMusic;
 
     private void Start()
