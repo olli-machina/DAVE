@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FeatManager : MonoBehaviour
 {
 
     public string[] achievementNames;
     public string[] achievementDescriptions;
+    public Sprite[] stickers;
+    public Canvas featPopUp;
+    public GameObject featWindow;
 
     private bool[] achievementComplete;
     private bool[] achievementDisabled;
@@ -49,10 +53,12 @@ public class FeatManager : MonoBehaviour
         else
             achievementComplete[index] = true;
 
-        //Add code here that will fire for ALL achievements
+        //Add code here that will fire for an achievement that is fired 
         //I added curly braces for organizational purposes
         {
             Debug.Log("An achievement was fired:" + achievementNames[index]);
+            featWindow.GetComponent<FeatWindow>().UpdateSticker(index);
+            Instantiate(featPopUp);
         }
 
         //Add code here to call other functions that execute what should happen when the achievement gets fired.
