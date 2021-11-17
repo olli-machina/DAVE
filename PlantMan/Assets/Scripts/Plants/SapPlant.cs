@@ -79,9 +79,10 @@ public class SapPlant : PlantType
   
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Seed")
+        if (other.gameObject.transform.parent.tag == "PiercingSeed")
         {
             isDripping = true;
+            Destroy(other);
         }
     }
 }

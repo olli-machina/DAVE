@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] resetObjects;
     private Transform[] resetTransforms;
 
+    [SerializeField]
     private float levelTimer;
     public float completionTimeFeatTime;
 
@@ -49,6 +50,10 @@ public class GameManager : MonoBehaviour
 
     private bool hasSelection;
 
+    public GameObject backgroundMusicPlayer;
+    public GameObject IntroMusicPlayer;
+    private bool onLoopingMusic;
+
     private void Start()
     {
         isPaused = false;
@@ -57,6 +62,8 @@ public class GameManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         levelTimer = 0.0f;
         hasSelection = false;
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(4, backgroundMusicPlayer,.2f);
+        onLoopingMusic = false;
     }
 
 
@@ -91,14 +98,20 @@ public class GameManager : MonoBehaviour
         }
 
         levelTimer += Time.deltaTime;
+        if (!backgroundMusicPlayer.GetComponent<AudioSource>().isPlaying && !onLoopingMusic)
+        {
+            Debug.Log("Song finisjed");
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayLoop(5, backgroundMusicPlayer, .2f);
+            onLoopingMusic = true;
+        }
 
         //if(dir.y == 0)
         //{
         //    isIdle = true;
         //}
 
-        if (levelTimer > completionTimeFeatTime)
-            GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
+        //if (levelTimer > completionTimeFeatTime)
+        //    GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
     }
 
     /*

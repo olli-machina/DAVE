@@ -77,6 +77,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogError("Attempted to play " + soundNames[id] + " on the GameObject " + target.name + ", but it doesn't have an audio source!");
         }
 
+        pas.Stop();
         pas.clip = soundClips[id];
         pas.loop = false;
         pas.volume = volume;
@@ -151,6 +152,7 @@ public class SoundManager : MonoBehaviour
             Debug.LogError("Attempted to play " + soundNames[id] + " on the GameObject " + target.name + ", but it doesn't have an audio source!");
         }
 
+        pas.Stop();
         pas.clip = soundClips[id];
         pas.loop = true;
         pas.volume = volume;
