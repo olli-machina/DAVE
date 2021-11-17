@@ -9,6 +9,8 @@ public class WallStick : MonoBehaviour
     public Animator animator;
     public BoxCollider wallCollider;
     bool IsGrowing;
+    public GameObject platformCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,16 +33,18 @@ public class WallStick : MonoBehaviour
         {
             wallCollider.enabled = true;
             animator.SetBool("OnWall", true);
-            Debug.Log("wall" + other.transform.right);
+
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
             rb.useGravity = false;
             rb.mass = 999999999; //If the mass is relatively huge, it will not be able to be moved by forces.
+
             float multiplier = other.transform.right.z * -90;
             transform.rotation = Quaternion.Euler(other.transform.up * multiplier);
+
+            platformCollider.GetComponent<BoxCollider>().center = new Vector3(-0.0337826f, 1.12f, 1.21f);
+
             IsGrowing = true;
-            //Vector3 vel = collision.contacts[0].normal * -90; //Makes the seed face the normal vector to the wall.
-            //rb.rotation = Quaternion.Euler(vel.y, vel.z, vel.x);//Makes the seed face the normal vector to the wall.
         }
     }
 }

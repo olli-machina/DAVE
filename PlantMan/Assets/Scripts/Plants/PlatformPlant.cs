@@ -93,7 +93,7 @@ class PlatformPlant : PlantType
                 return; //Growing completely done
             }
 
-            GetComponent<WallStick>().enabled = false;
+            //GetComponent<WallStick>().enabled = false;
 
             Vector3 pScale = Vector3.Lerp(platScale, new Vector3(platformDimentions.x, platScale.y, platformDimentions.y), platformTimer);
 
