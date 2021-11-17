@@ -89,7 +89,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2390531606342541520
 RectTransform:
   m_ObjectHideFlags: 0
@@ -395,6 +395,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 2800000, guid: 8f4a66744b1010246adce079df229be9, type: 3}
   - {fileID: 2800000, guid: 407f052e8ebb0644f9e8825fe79b4c2e, type: 3}
+  length: 0
 --- !u!1 &2390531606720614882
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2390531606720614883
 RectTransform:
   m_ObjectHideFlags: 0
