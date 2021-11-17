@@ -109,8 +109,8 @@ public class GameManager : MonoBehaviour
         //    isIdle = true;
         //}
 
-        //if (levelTimer > completionTimeFeatTime)
-        //    GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
+        if (levelTimer > completionTimeFeatTime)
+            GameObject.Find("FeatManager").GetComponent<FeatManager>().DisableFeat("Completion Time");
     }
 
     /*
