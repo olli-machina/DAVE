@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
         {
             if(dir == Vector2.zero)
             {
-                updateSeed(-1);
+                //This would be if we want the radial menu to deselect when the Joystick is not being used
+                //updateSeed(-1);
             }
             else
             {
