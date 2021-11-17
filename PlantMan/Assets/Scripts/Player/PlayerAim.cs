@@ -34,6 +34,7 @@ public class PlayerAim : MonoBehaviour
 
     public float aimLineStartPointAlpha = 0.6f;
     public float aimLineEndPointAlpha = 0f;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +101,7 @@ public class PlayerAim : MonoBehaviour
         {
             if (isAiming)
             {
+
                 if (context.performed)
                 {
                     isCharging = true;
@@ -107,6 +109,7 @@ public class PlayerAim : MonoBehaviour
 
                 if (context.canceled)
                 {
+                    animator.SetBool("Shoot", true);
                     GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(1, .5f);
                     Vector3 dir = new Vector3(transform.forward.x * Mathf.Cos(theta * Mathf.Deg2Rad), Mathf.Sin(theta * Mathf.Deg2Rad), transform.forward.z * Mathf.Cos(theta * Mathf.Deg2Rad));
                     dir.Normalize();
@@ -119,6 +122,7 @@ public class PlayerAim : MonoBehaviour
 
                     isCharging = false;
                     timer = 0f;
+
                 }
             }
         }
@@ -138,12 +142,15 @@ public class PlayerAim : MonoBehaviour
         {
             if (GetComponent<PlayerMovement>().IsGrounded())
             {
+                animator.SetBool("IsAiming", true);
                 isAiming = true;
                 TurnOnLine();
             }
 
             if (context.canceled)
             {
+                animator.SetBool("IsAiming", false);
+                animator.SetBool("Shooting", false);
                 isAiming = false;
                 isCharging = false;
                 timer = 0f;
