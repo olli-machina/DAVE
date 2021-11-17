@@ -119,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded && !GetComponent<PlayerAim>().getIsAiming() && !(GameObject.Find("GameManager").GetComponent<GameManager>().getIsPaused()))
         {
+            //animator.SetBool("IsJumping", true);
             midAir = true;
             rb.AddForce(new Vector3(0, jumpForce, 0));
             GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(0);
@@ -182,11 +183,15 @@ public class PlayerMovement : MonoBehaviour
         if (groundTrigger.getTriggerState() && groundTrigger.getGroundCheck())
         {
             //groundTrigger.resetGround();
+            animator.SetBool("IsJumping", false);
             isGrounded = true;
             midAir = false;
         }
         else
+        {
+            animator.SetBool("IsJumping", true);
             isGrounded = false;
+        }
     }
 
     /*
