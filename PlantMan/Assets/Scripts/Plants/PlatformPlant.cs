@@ -27,6 +27,8 @@ class PlatformPlant : PlantType
     public GameObject platformObj;
     public GameObject seed;
 
+    private bool growSound = true;
+
     public override void Update()
     {
         timer += Time.deltaTime;
@@ -90,6 +92,7 @@ class PlatformPlant : PlantType
             {
                 seed.GetComponent<MeshRenderer>().enabled = false;
                 animator.SetBool("FullyGrown", true);
+                growSound = true;
                 return; //Growing completely done
             }
 
@@ -104,6 +107,12 @@ class PlatformPlant : PlantType
         }
         else
         {
+            if (growSound)
+            {
+                growSound = false;
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(14);
+            }
+
             growingTimer += Time.deltaTime / timeToGrow;
 
             if(!showGrowingModels)

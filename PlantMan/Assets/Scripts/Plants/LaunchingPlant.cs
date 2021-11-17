@@ -39,6 +39,8 @@ public class LaunchingPlant : PlantType
 
     private float timer;
 
+    private bool shrinkSound = true;
+
     public override void Update()
     {
         timer += Time.deltaTime;
@@ -187,6 +189,12 @@ public class LaunchingPlant : PlantType
     */
     private void Hide()
     {
+        if(shrinkSound)
+        {
+            shrinkSound = false;
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(12);
+        }
+
         if (growingTimer < 0.0f)
         {
             animator.SetBool("Hiding", true);
@@ -223,8 +231,11 @@ public class LaunchingPlant : PlantType
     */
     private void Launch()
     {
+        shrinkSound = true;
         if (launching && !hasOneLaunched && !player.GetComponentInChildren<PlayerMovement>().IsMidAir())
         {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(13);
+
             animator.SetBool("Launching", true);
             foliage.transform.localScale = growScale;
             Vector3 forceDirection = transform.up * launchForce;
