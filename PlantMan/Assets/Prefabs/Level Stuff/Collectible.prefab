@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2603492851992834937}
   - component: {fileID: 4101041386595980690}
   - component: {fileID: 7811232657065071985}
+  - component: {fileID: 479296122403693315}
   m_Layer: 0
   m_Name: Collectible
   m_TagString: Collectible
@@ -108,3 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cc7d53e0500d84c848c57057d29704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectiblePopUp: {fileID: 2390531606687296399, guid: 600f86ca0d227d241ac5a069467eaa94, type: 3}
+  audioClipName: 
+--- !u!114 &479296122403693315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2608323911617015663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37eb90de873838649a8ffff1d60577c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
