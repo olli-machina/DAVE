@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: poison1
-    second: {fileID: 2100000, guid: 5c978f431d4e4a746be944cc3f656111, type: 2}
+    second: {fileID: 2100000, guid: 20ab620148f438940968f3af746e66dd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
