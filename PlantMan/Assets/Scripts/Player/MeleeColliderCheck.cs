@@ -7,6 +7,22 @@ public class MeleeColliderCheck : MonoBehaviour
 {
     public bool plantInRange;
     public GameObject otherPlant;
+    private float deathTimer;
+    public float timeToDeath = 3f;
+
+
+    private void Start()
+    {
+        deathTimer = 0f;
+    }
+    private void Update()
+    {
+        deathTimer += Time.deltaTime;
+        if (deathTimer > timeToDeath)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     /*
      * Purpose: if the player presses melee input and there is a plant, destroy it \n
@@ -35,8 +51,13 @@ public class MeleeColliderCheck : MonoBehaviour
             if(plantInRange)
             {
                 Destroy(otherPlant);
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
+
+        }
+        else
+        {
+            plantInRange = false;
         }
     }
 
