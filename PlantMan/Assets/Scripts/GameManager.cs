@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
         }
 
         levelTimer += Time.deltaTime;
-        if (levelTimer > GameObject.Find("SoundManager").GetComponent<SoundManager>().soundClips[4].length - 0.64f && !onLoopingMusic)
+        if (!backgroundMusicPlayer.GetComponent<AudioSource>().isPlaying && !onLoopingMusic)
         {
             Debug.Log("Song finisjed");
             GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayLoop(5, backgroundMusicPlayer, .2f);
