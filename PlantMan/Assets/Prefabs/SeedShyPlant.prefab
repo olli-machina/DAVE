@@ -261,6 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startForce: 0
   animator: {fileID: 0}
+  wallCollider: {fileID: 0}
+  platformCollider: {fileID: 0}
 --- !u!114 &6025410927215063254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +415,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8573474215191789764, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb454b4154fb2304eb76cfc7b14ef527, type: 2}
+    - target: {fileID: -3559045582361738025, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb454b4154fb2304eb76cfc7b14ef527, type: 2}
+    - target: {fileID: -2839791834690728653, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 63378a8367df5024eaed2adcf5345467, type: 2}
     - target: {fileID: 919132149155446097, guid: a21ead060490d354ab69015678167659, type: 3}
       propertyPath: m_Name
       value: ShyPlant_GameRig_001
@@ -421,6 +435,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3591253110676163554, guid: a21ead060490d354ab69015678167659, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb454b4154fb2304eb76cfc7b14ef527, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a21ead060490d354ab69015678167659, type: 3}
 --- !u!1 &5909941779329801685 stripped

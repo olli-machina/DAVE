@@ -597,6 +597,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7812825639662963003}
     m_Modifications:
+    - target: {fileID: -8989296513226290605, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
+    - target: {fileID: -8877944570613296133, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
     - target: {fileID: -8679921383154817045, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -641,6 +649,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8244362167748214803, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
+    - target: {fileID: -3085533185529279367, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 141d036c343f65346beab5615e1d5e1e, type: 2}
     - target: {fileID: 919132149155446097, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
       propertyPath: m_Name
       value: Platform_GameRig_001
@@ -653,6 +669,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 3788190327736711646, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dc6d0b9f3621d54292cd64e779a1ac7, type: 3}
 --- !u!1 &4037191096612908015 stripped
@@ -677,6 +697,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7812825639662963003}
     m_Modifications:
+    - target: {fileID: -8989296513226290605, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
+    - target: {fileID: -8877944570613296133, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
     - target: {fileID: -8679921383154817045, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -721,6 +749,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8244362167748214803, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
+    - target: {fileID: -3085533185529279367, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 141d036c343f65346beab5615e1d5e1e, type: 2}
     - target: {fileID: 919132149155446097, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
       propertyPath: m_Name
       value: Platform45_Idle_001
@@ -733,6 +769,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 3788190327736711646, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 787956dac9e078148a89a5ebbd741297, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d22d8ed3c3c4c14fbfcffbb402328b5, type: 3}
 --- !u!1 &5680035087814931685 stripped
