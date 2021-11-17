@@ -113,6 +113,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d7f671a-ae9a-4c8c-a2dd-2191b96c0821"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -399,6 +407,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6bf5dac7-dbbb-46b9-b97d-e9c16de69372"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Reset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -901,6 +920,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerControlScheme_SeedSwitch = m_PlayerControlScheme.FindAction("SeedSwitch", throwIfNotFound: true);
         m_PlayerControlScheme_Grapple = m_PlayerControlScheme.FindAction("Grapple", throwIfNotFound: true);
         m_PlayerControlScheme_Close = m_PlayerControlScheme.FindAction("Close", throwIfNotFound: true);
+        m_PlayerControlScheme_Reset = m_PlayerControlScheme.FindAction("Reset", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -970,6 +990,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerControlScheme_SeedSwitch;
     private readonly InputAction m_PlayerControlScheme_Grapple;
     private readonly InputAction m_PlayerControlScheme_Close;
+    private readonly InputAction m_PlayerControlScheme_Reset;
     public struct PlayerControlSchemeActions
     {
         private @PlayerControls m_Wrapper;
@@ -986,6 +1007,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @SeedSwitch => m_Wrapper.m_PlayerControlScheme_SeedSwitch;
         public InputAction @Grapple => m_Wrapper.m_PlayerControlScheme_Grapple;
         public InputAction @Close => m_Wrapper.m_PlayerControlScheme_Close;
+        public InputAction @Reset => m_Wrapper.m_PlayerControlScheme_Reset;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControlScheme; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1031,6 +1053,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Close.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnClose;
                 @Close.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnClose;
                 @Close.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnClose;
+                @Reset.started -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface.OnReset;
             }
             m_Wrapper.m_PlayerControlSchemeActionsCallbackInterface = instance;
             if (instance != null)
@@ -1071,6 +1096,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Close.started += instance.OnClose;
                 @Close.performed += instance.OnClose;
                 @Close.canceled += instance.OnClose;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
             }
         }
     }
@@ -1180,6 +1208,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSeedSwitch(InputAction.CallbackContext context);
         void OnGrapple(InputAction.CallbackContext context);
         void OnClose(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

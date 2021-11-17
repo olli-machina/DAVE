@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Plants\PlatformPlant.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Plants\LaunchingPlant.cs" />
+    <Compile Include="Assets\Scripts\UI\CheckpointPopUp.cs" />
     <Compile Include="Assets\Scripts\Player\MeleeColliderCheck.cs" />
     <Compile Include="Assets\Scripts\Plants\WallStick.cs" />
     <Compile Include="Assets\Scripts\Player\FovSetting.cs" />
