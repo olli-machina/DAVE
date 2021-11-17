@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Playables;
+using DG.Tweening;
 
 public class TutorialScript : MonoBehaviour
 {    
@@ -13,7 +14,8 @@ public class TutorialScript : MonoBehaviour
     public string titleText, descrText;
     static GameObject obj;
     GameObject gamemanager;
-    public GameObject timelineObj1, timelineObj2;
+    public GameObject timelineObj1, timelineObj2, hint;
+    bool canClose;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +45,9 @@ public class TutorialScript : MonoBehaviour
             Time.timeScale = 0.0f;
             title.text = titleText;
             description.text = descrText;
+            hint.SetActive(false);
+            canClose = false;
+            StartCoroutine("Delay");
         }
         
     }
@@ -56,7 +61,7 @@ public class TutorialScript : MonoBehaviour
     */
     public void CloseTutorial(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0.0f)
+        if (Time.timeScale == 0.0f && canClose)
         {
             if (timelineObj2 != null)
             {
@@ -68,5 +73,13 @@ public class TutorialScript : MonoBehaviour
             Time.timeScale = 1.0f;
             Destroy(obj);
         }
+    }
+
+    IEnumerator Delay()
+    {
+        Debug.Log("Start delay");
+        yield return new WaitForSecondsRealtime(3);
+        hint.SetActive(true);
+        canClose = true;
     }
 }
