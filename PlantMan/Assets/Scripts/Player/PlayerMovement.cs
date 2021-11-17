@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10, maxVelocityChange = 10.0f, jumpForce = 800f, fallMultiplier = 2.5f;
     private Vector3 direction;
     [SerializeField]
-    private bool isGrounded;
+    private bool isGrounded, walkTime;
     public bool sapRun, sapSlow;
     private GameManager gameManager;
     private float originalSpeed;
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         sapRun = false;
         originalSpeed = speed;
         midAir = false;
+        walkTime = true;
 
         groundTrigger = gameObject.GetComponentInChildren<CheckTrigger>();
         animator = GetComponentInChildren<Animator>();
@@ -137,6 +138,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (!aiming)
         {
+            if (walkTime && rb.velocity.magnitude > 1 && isGrounded)
+            {
+                walkTime = false;
+                int walkSound = Random.Range(6, 12);
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(walkSound, .05f);
+                StartCoroutine("WalkTimeReset");
+            }
+
             //get target velocity for player based on movement direction in Direction()
             Vector3 targetVelocity = direction;
             targetVelocity = transform.TransformDirection(targetVelocity);
@@ -198,6 +207,12 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Ground")
             isGrounded = true;
     }*/
+
+    IEnumerator WalkTimeReset()
+    {
+        yield return new WaitForSeconds(.5f);
+        walkTime = true;
+    }
 
     public bool IsGrounded()
     {
