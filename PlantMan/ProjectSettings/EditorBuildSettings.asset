@@ -11,8 +11,17 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RockstarTest.unity
     guid: 22614dcdf134f9e4d96f48e1c747f53c
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 51626a8e2e357c646b65f89e3e5e3ed6
+  - enabled: 1
+    path: Assets/Scenes/DAVE_L1_Final.unity
+    guid: d91904bc3f930604eae2fa9f66d7f64d
+  - enabled: 1
+    path: Assets/Scenes/DAVE_L2_Final.unity
+    guid: 2d4485504434f4440808887ed8453b7f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 286417a936ce0484895f184ead26dd35, type: 2}
