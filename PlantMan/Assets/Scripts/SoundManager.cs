@@ -199,4 +199,17 @@ public class SoundManager : MonoBehaviour
         }
 
     }
+
+    public void SetVolume(GameObject target, float volume)
+    {
+        AudioSource pas = target.GetComponent<AudioSource>();
+
+        if (pas == null)
+        {
+            Debug.LogError("Attempted to set volume on the GameObject " + target.name + ", but it doesn't have an audio source!");
+        }
+
+        pas.volume = volume;
+
+    }
 }
