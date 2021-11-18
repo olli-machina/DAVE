@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/RockstarTest.unity
     guid: 22614dcdf134f9e4d96f48e1c747f53c
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 51626a8e2e357c646b65f89e3e5e3ed6
+  - enabled: 1
     path: Assets/Scenes/DAVE_L1_Final.unity
     guid: d91904bc3f930604eae2fa9f66d7f64d
   - enabled: 1
