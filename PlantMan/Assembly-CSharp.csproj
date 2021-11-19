@@ -61,6 +61,7 @@
     <Compile Include="Assets\DOTween_1_2_632\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Scripts\Plants\IgnoreCollision.cs" />
     <Compile Include="Assets\Scripts\Plants\PlantDrag.cs" />
+    <Compile Include="Assets\Scripts\SecretAreaFeat.cs" />
     <Compile Include="Assets\DOTween_1_2_632\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\UI\FeatInfo.cs" />
     <Compile Include="Assets\Scripts\CheckpointScript.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Scripts\Player\MeleeColliderCheck.cs" />
     <Compile Include="Assets\Scripts\Plants\WallStick.cs" />
     <Compile Include="Assets\Scripts\Player\FovSetting.cs" />
+    <Compile Include="Assets\Scripts\SecretAreaData.cs" />
     <Compile Include="Assets\Scripts\CheckTrigger.cs" />
     <Compile Include="Assets\Scripts\UI\FeatWindow.cs" />
     <Compile Include="Assets\Scripts\CollectibleData.cs" />
@@ -103,8 +105,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\DOTween_1_2_632\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\SecretArea.cs" />
-    <Compile Include="Assets\Scripts\SecretAreaFeat.cs" />
-    <Compile Include="Assets\Scripts\SecretAreaData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

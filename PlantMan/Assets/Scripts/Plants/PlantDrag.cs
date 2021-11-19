@@ -26,7 +26,7 @@ public class PlantDrag : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().mass = 100f;
         }
 
-        if(other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
+        if(/*other.gameObject.tag == "Seed" || */other.gameObject.tag == "Plant")
         {
             //Debug.Log(other.gameObject.name);
             Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other); //This one definitely works
@@ -44,7 +44,7 @@ public class PlantDrag : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().mass = 100f;
         }
 
-        if (other.gameObject.tag == "Seed" || other.gameObject.tag == "Plant")
+        if (/*other.gameObject.tag == "Seed" ||*/ other.gameObject.tag == "Plant")
         {
             //Debug.Log(other.gameObject.name);
             Physics.IgnoreCollision(gameObject.GetComponentInChildren<MeshCollider>(), other.collider); //Not sure if this works
