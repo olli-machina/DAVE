@@ -33,15 +33,15 @@ public class MeleeColliderCheck : MonoBehaviour
      */
     public void DestroyPlant(InputAction.CallbackContext context)
     {
-        if(plantInRange)
-        {
-            Destroy(otherPlant);
-        }
+        //if(plantInRange)
+        //{
+        //    Destroy(otherPlant);
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Plant")
+        if(other.tag == "PoisonCheck")
         {
             plantInRange = true;
             otherPlant = other.transform.parent.gameObject; //get the parent to destroy the whole plant

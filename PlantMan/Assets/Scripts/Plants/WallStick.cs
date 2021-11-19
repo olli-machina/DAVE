@@ -10,6 +10,7 @@ public class WallStick : MonoBehaviour
     public BoxCollider wallCollider;
     bool IsGrowing;
     public GameObject platformCollider;
+    public GameObject wallPoisonCollider, groundPoisonCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,9 @@ public class WallStick : MonoBehaviour
         {
             wallCollider.enabled = true;
             animator.SetBool("OnWall", true);
+
+            wallPoisonCollider.GetComponent<BoxCollider>().enabled = true;
+            groundPoisonCollider.GetComponent<BoxCollider>().enabled = false;
 
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.zero;
