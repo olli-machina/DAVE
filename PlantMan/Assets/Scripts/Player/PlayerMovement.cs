@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
             //animator.SetBool("IsJumping", true);
             midAir = true;
             rb.AddForce(new Vector3(0, jumpForce, 0));
-            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(0);
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().Play(0, 0.25f);
         }
     }
 

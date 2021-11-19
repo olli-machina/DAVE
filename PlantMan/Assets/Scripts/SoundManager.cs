@@ -211,5 +211,31 @@ public class SoundManager : MonoBehaviour
 
         pas.volume = volume;
 
+    }    
+    
+    public void SetVolumeDelay(GameObject target, float volume, float delayTime, float returnVolume)
+    {
+        AudioSource pas = target.GetComponent<AudioSource>();
+
+        if (pas == null)
+        {
+            Debug.LogError("Attempted to set volume on the GameObject " + target.name + ", but it doesn't have an audio source!");
+        }
+
+        pas.volume = volume;
+
+
+        IEnumerator coroutine = VolumeDelay(delayTime, pas, returnVolume);
+        StartCoroutine(coroutine);
+
+
+
     }
+
+    IEnumerator VolumeDelay(float delayTime, AudioSource audio, float returnVolume)
+    {
+        yield return new WaitForSeconds(delayTime + 0.5f); //0.5 is a small buffer
+        audio.volume = returnVolume;
+    }
+
 }
