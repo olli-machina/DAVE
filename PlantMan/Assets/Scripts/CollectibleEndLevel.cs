@@ -12,8 +12,16 @@ public class CollectibleEndLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+        if (collision.gameObject.tag == "Player")
+        {
+            GameObject.Find("FeatManager").GetComponent<FeatManager>().fireFeat("Sniper");
+            GameObject.Find("FeatManager").GetComponent<FeatManager>().fireFeat("Survivalist");
+            GameObject.Find("FeatManager").GetComponent<FeatManager>().fireFeat("Completion Time");
+            Instantiate(sceneUI);
+
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
         triggered = true;
     }
 

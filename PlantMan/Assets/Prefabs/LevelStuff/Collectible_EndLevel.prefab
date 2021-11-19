@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2674675410412303112}
   m_Layer: 0
   m_Name: Collectible_EndLevel
-  m_TagString: Collectible
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,4 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: 
-  sceneUI: {fileID: 0}
+  sceneUI: {fileID: 3781403013116008763, guid: dc5e135eead317d4cb5015624ceaa925, type: 3}
